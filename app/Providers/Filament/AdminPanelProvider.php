@@ -62,14 +62,6 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->plugin(
-                AuthDesignerPlugin::make()
-                    ->login(
-                        fn(AuthPageConfig $config) => $config
-                            ->media(asset('ycbg.jpg'))
-                            ->mediaPosition(MediaPosition::Left)
-                            ->blur(0)
-                    )
-            );;
+            ;
     }
 }
