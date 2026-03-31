@@ -20,7 +20,7 @@ use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
+use Awcodes\LightSwitch\LightSwitchPlugin;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -69,8 +69,8 @@ class AdminPanelProvider extends PanelProvider
                 AuthUIEnhancerPlugin::make()
                 ->emptyPanelBackgroundColor(Color::hex('#f0f0f0'))
                 ->showEmptyPanelOnMobile(false)
-                ->formPanelWidth('40%')
                 ->emptyPanelBackgroundImageUrl(asset('biglogo.jpg')),
+                 LightSwitchPlugin::make()
             ]);
     }
 }
