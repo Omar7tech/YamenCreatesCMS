@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use DiogoGPinto\AuthUIEnhancer\AuthUIEnhancerPlugin;
 use Filament\FontProviders\GoogleFontProvider;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -29,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->spa()
             ->id('admin')
             ->path('admin')
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
             ->colors([
                 'primary' => Color::Violet,
@@ -59,9 +61,16 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ;
+            ->plugins([
+                AuthUIEnhancerPlugin::make()
+                ->emptyPanelBackgroundColor(Color::hex('#f0f0f0'))
+                ->showEmptyPanelOnMobile(false)
+                ->formPanelWidth('40%')
+                ->emptyPanelBackgroundImageUrl(asset('biglogo.jpg')),
+            ]);
     }
 }
