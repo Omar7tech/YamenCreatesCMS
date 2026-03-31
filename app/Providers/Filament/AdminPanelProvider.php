@@ -21,6 +21,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Awcodes\LightSwitch\LightSwitchPlugin;
+use Octopy\Filament\Palette\PaletteSwitcherPlugin;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -70,7 +71,8 @@ class AdminPanelProvider extends PanelProvider
                 ->emptyPanelBackgroundColor(Color::hex('#f0f0f0'))
                 ->showEmptyPanelOnMobile(false)
                 ->emptyPanelBackgroundImageUrl(asset('biglogo.jpg')),
-                 LightSwitchPlugin::make()
+                 LightSwitchPlugin::make(),
+                 PaletteSwitcherPlugin::make()->applyThemeGlobally(true)
             ]);
     }
 }
