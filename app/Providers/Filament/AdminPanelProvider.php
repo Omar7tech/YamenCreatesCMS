@@ -72,7 +72,7 @@ class AdminPanelProvider extends PanelProvider
                 ->showEmptyPanelOnMobile(false)
                 ->emptyPanelBackgroundImageUrl(asset('biglogo.jpg')),
                  LightSwitchPlugin::make(),
-                 PaletteSwitcherPlugin::make()->applyThemeGlobally(true)
+                 PaletteSwitcherPlugin::make()
             ]);
     }
 }
