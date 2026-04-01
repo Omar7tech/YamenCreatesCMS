@@ -15,10 +15,14 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        /* User::factory()->create([
             'name' => 'Yamen',
             'email' => 'admin@yamencreates.com',
             'password' => 'password'
+        ]); */
+
+        $this->call([
+            ProgramSeeder::class,
         ]);
     }
 }

@@ -15,9 +15,14 @@ class Program extends Model
     use HasFactory;
     use HasSlug;
 
-    /**
-     * Get the options for generating the slug.
-     */
+   protected function casts(): array
+    {
+        return [
+            'bullets' => 'array',
+            'features' => 'array',
+            'have_cta' => 'boolean',
+        ];
+    }
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()

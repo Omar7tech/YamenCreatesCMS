@@ -2,14 +2,15 @@
 
 namespace App\Filament\Resources\Programs;
 
-use App\Filament\Resources\Programs\Pages\ManagePrograms;
+use App\Filament\Resources\Programs\Pages\CreateProgram;
+use App\Filament\Resources\Programs\Pages\EditProgram;
+use App\Filament\Resources\Programs\Pages\ListPrograms;
+use App\Filament\Resources\Programs\Pages\ViewProgram;
+use App\Filament\Resources\Programs\Schemas\ProgramForm;
+use App\Filament\Resources\Programs\Schemas\ProgramInfolist;
+use App\Filament\Resources\Programs\Tables\ProgramsTable;
 use App\Models\Program;
 use BackedEnum;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -17,51 +18,40 @@ use Filament\Tables\Table;
 
 class ProgramResource extends Resource
 {
+    protected static ?string $recordTitleAttribute = 'title';
     protected static ?string $model = Program::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     public static function form(Schema $schema): Schema
     {
-        return $schema
-            ->components([
-                //
-            ]);
+        return ProgramForm::configure($schema);
     }
 
     public static function infolist(Schema $schema): Schema
     {
-        return $schema
-            ->components([
-                //
-            ]);
+        return ProgramInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                //
-            ])
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-                DeleteAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+        return ProgramsTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ManagePrograms::route('/'),
+            'index' => ListPrograms::route('/'),
+            'create' => CreateProgram::route('/create'),
+            'view' => ViewProgram::route('/{record}'),
+            'edit' => EditProgram::route('/{record}/edit'),
         ];
     }
 }
