@@ -12,8 +12,10 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\Width;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
+use Hammadzafar05\MobileBottomNav\MobileBottomNav;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -21,14 +23,14 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Awcodes\LightSwitch\LightSwitchPlugin;
-use Octopy\Filament\Palette\PaletteSwitcherPlugin;
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
             ->default()
-            ->spa()
+            ->spa(hasPrefetching: true)
             ->id('admin')
             ->path('admin')
             ->viteTheme('resources/css/filament/admin/theme.css')
@@ -36,6 +38,17 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Violet,
             ])
+            ->sidebarCollapsibleOnDesktop()
+            ->registerErrorNotification(
+                title: 'Record not found',
+                body: 'A record you are looking for does not exist.',
+                statusCode: 404,
+            )
+            ->profile(isSimple:true)
+            ->broadcasting(false)
+            ->unsavedChangesAlerts()
+            ->databaseTransactions()
+            ->maxContentWidth(Width::Full)
             ->font('Bricolage Grotesque', provider: GoogleFontProvider::class)
             ->brandLogo(asset('logo/yamenlogodark.svg'))
             ->darkModeBrandLogo(asset('logo/yamenlogo.svg'))
@@ -68,11 +81,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 AuthUIEnhancerPlugin::make()
-                ->emptyPanelBackgroundColor(Color::hex('#f0f0f0'))
-                ->showEmptyPanelOnMobile(false)
-                ->emptyPanelBackgroundImageUrl(asset('biglogo.jpg')),
-                 LightSwitchPlugin::make(),
-                 PaletteSwitcherPlugin::make()
+                    ->emptyPanelBackgroundColor(Color::hex('#f0f0f0'))
+                    ->showEmptyPanelOnMobile(false)
+                    ->emptyPanelBackgroundImageUrl(asset('biglogo.jpg')),
+                LightSwitchPlugin::make(),
+                MobileBottomNav::make()
             ]);
     }
 }
