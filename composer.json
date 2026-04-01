@@ -10,6 +10,7 @@
         "awcodes/light-switch": "^3.0",
         "diogogpinto/filament-auth-ui-enhancer": "^2.0",
         "filament/filament": "~5.0",
+        "filament/spatie-laravel-media-library-plugin": "~5.0",
         "hammadzafar05/mobile-bottom-nav": "^1.1",
         "inertiajs/inertia-laravel": "^3.0",
         "laravel/framework": "^13.0",
