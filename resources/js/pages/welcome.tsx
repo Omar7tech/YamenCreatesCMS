@@ -1,4 +1,5 @@
 import OurBrandEquationSection from '@/sections/home/OurBrandEquationSection';
+import WeCoCreateSection from '@/sections/home/WeCoCreateSection';
 import HeroSection from '@/sections/home/HeroSection';
 import WeBelieveSection from '@/sections/home/WeBelieveSection';
 import { Head } from '@inertiajs/react';
@@ -12,6 +13,7 @@ export default function Welcome() {
                 <HeroSection />
                 <WeBelieveSection />
                 <OurBrandEquationSection />
+                <WeCoCreateSection />
             </div>
         </>
     );
