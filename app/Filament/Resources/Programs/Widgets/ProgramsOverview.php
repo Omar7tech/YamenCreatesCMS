@@ -21,7 +21,7 @@ class ProgramsOverview extends BaseWidget
             Stat::make('Total Programs', (string) $totalPrograms)
                 ->description('All program records')
                 ->chart([7, 2, 10, 3, 15, 4, 17])
-                ->color('success')->icon('heroicon-o-rectangle-stack')->columnSpanFull(),
+                ->color('success')->icon('heroicon-o-rectangle-stack')->columnSpan(2),
         ];
     }
 }
