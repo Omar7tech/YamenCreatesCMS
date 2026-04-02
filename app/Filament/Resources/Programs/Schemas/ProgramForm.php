@@ -117,6 +117,9 @@ class ProgramForm
                                         '1:1',
                                         '3:4',
                                     ])
+                                     ->rules([
+                                        'dimensions:max_width=2000,max_height=2000'
+                                    ])
                                     ->reorderable()
                                     ->panelLayout('grid')
                                     ->maxSize(6144)
