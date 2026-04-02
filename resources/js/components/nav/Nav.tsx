@@ -310,14 +310,6 @@ export default function Nav() {
                     </div>
 
                     <div className="relative rounded-[1.5rem] border border-white/8 bg-black/14 p-2">
-                        <div className="mb-2 flex items-center justify-between px-3 pt-2">
-                            <span className="h-px w-8 bg-white/12" />
-                            <p className="text-[0.62rem] font-medium tracking-[0.45em] text-white/32 uppercase">
-                                Menu
-                            </p>
-                            <span className="h-px w-8 bg-white/12" />
-                        </div>
-
                         <ul className="space-y-2">
                             {navigationItems.map((item, index) => (
                                 <li
@@ -333,7 +325,7 @@ export default function Nav() {
                                 >
                                     <Link
                                         href={item.route}
-                                        className={`group relative flex items-center overflow-hidden rounded-[1.35rem] border px-5 py-4 text-left transition-all duration-300 ${
+                                        className={`group relative flex items-center overflow-hidden rounded-[1.5rem] border px-6 py-5 text-left transition-all duration-300 ${
                                             isActive(item.route.url)
                                                 ? 'border-fuchsia-300/22 bg-[linear-gradient(135deg,rgba(168,85,247,0.16),rgba(255,255,255,0.04))] text-white shadow-[0_0_0_1px_rgba(216,180,254,0.08),0_0_22px_rgba(168,85,247,0.14)]'
                                                 : 'border-white/8 bg-white/[0.02] text-white/92 hover:border-white/14 hover:bg-white/[0.045]'
@@ -342,10 +334,10 @@ export default function Nav() {
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         <div
-                                            className={`text-[1.45rem] font-light tracking-[0.08em] uppercase transition-all duration-300 ${
+                                            className={`text-[clamp(2.2rem,9vw,4rem)] leading-[0.95] font-light tracking-[0.04em] uppercase transition-all duration-300 ${
                                                 isActive(item.route.url)
                                                     ? 'text-white'
-                                                    : 'text-white/88 group-hover:translate-x-1 group-hover:text-white'
+                                                    : 'text-white/88 group-hover:translate-x-1.5 group-hover:text-white'
                                             }`}
                                         >
                                             {item.name}

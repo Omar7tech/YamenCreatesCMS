@@ -24,12 +24,18 @@ class Program extends Model implements HasMedia
 
     public const IMAGE_COLLECTION = 'program-images';
 
+    protected $attributes = [
+        'sort' => 0,
+        'is_active' => true,
+    ];
+
     protected function casts(): array
     {
         return [
             'bullets' => 'array',
             'features' => 'array',
             'have_cta' => 'boolean',
+            'is_active' => 'boolean',
         ];
     }
 
@@ -42,7 +48,14 @@ class Program extends Model implements HasMedia
 
     public function scopeOrdered(Builder $query): Builder
     {
-        return $query->orderBy('id');
+        return $query
+            ->orderBy('sort')
+            ->orderBy('id');
+    }
+
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->where('is_active', true);
     }
 
     public function getRouteKeyName(): string

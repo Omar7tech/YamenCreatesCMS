@@ -6,7 +6,6 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Repeater\TableColumn;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -24,6 +23,11 @@ class ProgramForm
                             ->label('Basic Information')
                             ->icon('heroicon-o-information-circle')
                             ->schema([
+                                Toggle::make('is_active')
+                                    ->label('Published')
+                                    ->default(true)
+                                    ->inline(false),
+
                                 TextInput::make('title')
                                     ->label('Program Title')
                                     ->required()
@@ -47,7 +51,7 @@ class ProgramForm
                                         TextInput::make('bullet')
                                             ->required()
                                             ->label('Key Point')
-                                            ->placeholder('Enter a key point')
+                                            ->placeholder('Enter a key point'),
                                     ])
                                     ->compact()
                                     ->columnSpanFull(),
@@ -61,7 +65,7 @@ class ProgramForm
                                         TextInput::make('feature')
                                             ->required()
                                             ->label('Feature')
-                                            ->placeholder('Enter a program feature')
+                                            ->placeholder('Enter a program feature'),
                                     ])
                                     ->compact()
                                     ->columnSpanFull(),
@@ -86,7 +90,7 @@ class ProgramForm
 
                                 TextInput::make('cta_url')
                                     ->label('CTA Button URL')
-                                    
+
                                     ->placeholder('https://example.com')
                                     ->visibleJs(<<<'JS'
                                         $get('have_cta')
@@ -117,8 +121,8 @@ class ProgramForm
                                         '1:1',
                                         '3:4',
                                     ])
-                                     ->rules([
-                                        'dimensions:max_width=2000,max_height=2000'
+                                    ->rules([
+                                        'dimensions:max_width=2000,max_height=2000',
                                     ])
                                     ->reorderable()
                                     ->panelLayout('grid')

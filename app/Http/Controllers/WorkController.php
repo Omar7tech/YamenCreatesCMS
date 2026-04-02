@@ -23,8 +23,11 @@ class WorkController extends Controller
                 'have_cta',
                 'cta_text',
                 'cta_url',
+                'sort',
+                'is_active',
             ])
             ->with(['media' => fn ($query) => $query->orderBy('order_column')])
+            ->published()
             ->ordered()
             ->get();
 

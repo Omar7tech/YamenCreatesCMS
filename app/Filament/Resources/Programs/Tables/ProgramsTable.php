@@ -8,6 +8,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class ProgramsTable
@@ -15,13 +16,20 @@ class ProgramsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->defaultSort('sort')
+            ->reorderable('sort')
             ->columns([
+                TextColumn::make('sort')
+                    ->numeric()
+                    ->sortable(),
                 TextColumn::make('title')
                     ->searchable(),
                 TextColumn::make('slug')
                     ->searchable(),
                 TextColumn::make('subtitle')
                     ->searchable(),
+                ToggleColumn::make('is_active')
+                    ->label('Published'),
                 IconColumn::make('have_cta')
                     ->boolean(),
                 TextColumn::make('cta_text')
