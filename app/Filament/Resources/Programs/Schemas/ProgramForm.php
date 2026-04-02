@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Programs\Schemas;
 
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Repeater\TableColumn;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -27,12 +28,12 @@ class ProgramForm
                                     ->label('Program Title')
                                     ->required()
                                     ->placeholder('Enter the program title'),
-                                    
+
                                 TextInput::make('subtitle')
                                     ->label('Program Subtitle')
                                     ->placeholder('Enter a brief subtitle'),
                             ]),
-                            
+
                         Tab::make('content_details')
                             ->label('Content Details')
                             ->icon('heroicon-o-document-text')
@@ -50,7 +51,7 @@ class ProgramForm
                                     ])
                                     ->compact()
                                     ->columnSpanFull(),
-                                    
+
                                 Repeater::make('features')
                                     ->label('Program Features')
                                     ->table([
@@ -65,7 +66,7 @@ class ProgramForm
                                     ->compact()
                                     ->columnSpanFull(),
                             ]),
-                            
+
                         Tab::make('call_to_action')
                             ->label('Call to Action')
                             ->icon('heroicon-o-paper-airplane')
@@ -74,7 +75,7 @@ class ProgramForm
                                     ->label('Enable Call to Action')
                                     ->required()
                                     ->live(),
-                                    
+
                                 TextInput::make('cta_text')
                                     ->label('CTA Button Text')
                                     ->placeholder('e.g., Learn More, Get Started')
@@ -82,15 +83,47 @@ class ProgramForm
                                         $get('have_cta')
                                         JS)
                                     ->requiredIf('have_cta', true),
-                                    
+
                                 TextInput::make('cta_url')
                                     ->label('CTA Button URL')
-                                    ->url()
+                                    
                                     ->placeholder('https://example.com')
                                     ->visibleJs(<<<'JS'
                                         $get('have_cta')
                                         JS)
                                     ->requiredIf('have_cta', true),
+                            ]),
+
+                        Tab::make('media')
+                            ->label('Media')
+                            ->icon('heroicon-o-photo')
+                            ->schema([
+                                SpatieMediaLibraryFileUpload::make('images')
+                                    ->label('Program Images')
+                                    ->image()
+                                    ->downloadable()
+                                    ->openable()
+                                    ->imageEditor()
+                                    ->previewable()
+                                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])
+                                    ->collection('program-images')
+                                    ->conversion('webp')
+                                    ->directory('program-images')
+                                    ->visibility('public')
+                                    ->imageEditorAspectRatios([
+                                        null,
+                                        '16:9',
+                                        '4:3',
+                                        '1:1',
+                                        '3:4',
+                                    ])
+                                    ->reorderable()
+                                    ->panelLayout('grid')
+                                    ->maxSize(6144)
+                                    ->disk('public')
+                                    ->multiple(true)
+                                    ->helperText('📸 Upload images (max 6MB)')
+                                    ->columnSpanFull(),
                             ]),
                     ])
                     ->columnSpanFull(),

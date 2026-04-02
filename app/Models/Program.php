@@ -5,15 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 #[Guarded(['id', 'created_at', 'updated_at'])]
-class Program extends Model
+class Program extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\ProgramFactory> */
     use HasFactory;
     use HasSlug;
+    use InteractsWithMedia;
 
    protected function casts(): array
     {
@@ -34,5 +38,14 @@ class Program extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('webp')
+            ->format('webp')
+            ->quality(20)
+            ->nonQueued();
     }
 }

@@ -39,11 +39,7 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Violet,
             ])
             ->sidebarCollapsibleOnDesktop()
-            ->registerErrorNotification(
-                title: 'Record not found',
-                body: 'A record you are looking for does not exist.',
-                statusCode: 404,
-            )
+            
             ->profile(isSimple:true)
             ->broadcasting(false)
             ->unsavedChangesAlerts()
