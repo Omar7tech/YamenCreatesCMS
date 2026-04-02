@@ -6,13 +6,26 @@ import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+    server: {
+        host: '0.0.0.0', // important for Herd
+        port: 5173,
+        strictPort: true,
+        hmr: {
+            host: 'yamencreatescms.test',
+        },
+    },
+
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.tsx' , 'resources/css/filament/admin/theme.css'],
+            input: [
+                'resources/css/app.css',
+                'resources/js/app.tsx',
+                'resources/css/filament/admin/theme.css'
+            ],
             refresh: true,
         }),
         inertia({
-            ssr:false
+            ssr: false
         }),
         react({
             babel: {
