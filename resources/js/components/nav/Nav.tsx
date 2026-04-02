@@ -1,7 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
 import { gsap } from 'gsap';
 import { Menu, X } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import { index as contact } from '@/actions/App/Http/Controllers/ContactController';
 import { index as home } from '@/actions/App/Http/Controllers/HomeController';
@@ -19,7 +19,6 @@ const navigationItems = [
 
 export default function Nav() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
     const { url } = usePage();
     const overlayRef = useRef<HTMLDivElement | null>(null);
     const mobilePanelRef = useRef<HTMLDivElement | null>(null);
@@ -40,17 +39,7 @@ export default function Nav() {
         };
     }, []);
 
-    useEffect(() => {
-        if (mobileMenuOpen) {
-            setMobileMenuVisible(true);
-        }
-    }, [mobileMenuOpen]);
-
-    useEffect(() => {
-        if (!mobileMenuVisible) {
-            return;
-        }
-
+    useLayoutEffect(() => {
         const overlayElement = overlayRef.current;
         const panelElement = mobilePanelRef.current;
         const itemElements = mobileMenuItemRefs.current.filter(Boolean);
@@ -59,88 +48,109 @@ export default function Nav() {
             return;
         }
 
+        gsap.killTweensOf([overlayElement, panelElement, ...itemElements]);
+
         const timeline = gsap.timeline({
             defaults: {
                 ease: 'power3.out',
             },
-            onComplete: () => {
-                if (!mobileMenuOpen) {
-                    setMobileMenuVisible(false);
-                }
-            },
         });
 
         if (mobileMenuOpen) {
-            gsap.set(overlayElement, {
-                opacity: 0,
-            });
-            gsap.set(panelElement, {
-                opacity: 0,
-                y: -20,
-                scale: 0.96,
-            });
-            gsap.set(itemElements, {
-                opacity: 0,
-                y: 18,
-            });
+            gsap.set(overlayElement, { pointerEvents: 'auto' });
+            gsap.set(panelElement, { pointerEvents: 'auto' });
 
             timeline
-                .to(overlayElement, {
-                    opacity: 1,
-                    duration: 0.22,
-                })
-                .to(
+                .fromTo(
+                    overlayElement,
+                    {
+                        autoAlpha: 0,
+                    },
+                    {
+                        autoAlpha: 1,
+                        duration: 0.22,
+                        ease: 'power2.out',
+                    },
+                    0,
+                )
+                .fromTo(
                     panelElement,
                     {
-                        opacity: 1,
+                        autoAlpha: 0,
+                        y: -48,
+                        scale: 0.88,
+                        transformOrigin: 'top center',
+                        clipPath: 'inset(0 0 100% 0 round 2rem)',
+                        filter: 'blur(16px)',
+                    },
+                    {
+                        autoAlpha: 1,
                         y: 0,
                         scale: 1,
-                        duration: 0.36,
+                        clipPath: 'inset(0 0 0% 0 round 2rem)',
+                        filter: 'blur(0px)',
+                        duration: 0.56,
+                        ease: 'expo.out',
                     },
-                    '-=0.08',
+                    0,
                 )
-                .to(
+                .fromTo(
                     itemElements,
                     {
-                        opacity: 1,
-                        y: 0,
-                        stagger: 0.06,
-                        duration: 0.28,
+                        autoAlpha: 0,
+                        y: 26,
+                        x: 0,
                     },
-                    '-=0.18',
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        x: 0,
+                        stagger: 0.075,
+                        duration: 0.42,
+                        ease: 'power3.out',
+                    },
+                    0.18,
                 );
         } else {
             timeline
                 .to(itemElements.slice().reverse(), {
-                    opacity: 0,
+                    autoAlpha: 0,
                     y: 12,
-                    stagger: 0.04,
-                    duration: 0.16,
+                    stagger: 0.03,
+                    duration: 0.12,
+                    ease: 'power2.in',
                 })
                 .to(
                     panelElement,
                     {
-                        opacity: 0,
-                        y: -16,
-                        scale: 0.98,
+                        autoAlpha: 0,
+                        y: -28,
+                        scale: 0.92,
+                        clipPath: 'inset(0 0 100% 0 round 2rem)',
+                        filter: 'blur(12px)',
                         duration: 0.2,
+                        ease: 'power2.inOut',
                     },
-                    '-=0.08',
+                    '-=0.04',
                 )
                 .to(
                     overlayElement,
                     {
-                        opacity: 0,
+                        autoAlpha: 0,
+                        pointerEvents: 'none',
                         duration: 0.14,
                     },
-                    '-=0.1',
-                );
+                    '-=0.06',
+                )
+                .set(panelElement, {
+                    pointerEvents: 'none',
+                });
         }
 
         return () => {
             timeline.kill();
         };
-    }, [mobileMenuOpen, mobileMenuVisible]);
+    }, [mobileMenuOpen]);
 
     useEffect(() => {
         if (!mobileButtonIconRef.current) {
@@ -171,7 +181,6 @@ export default function Nav() {
             }
 
             setMobileMenuOpen(false);
-            setMobileMenuVisible(false);
             document.body.style.overflow = '';
         };
 
@@ -272,82 +281,82 @@ export default function Nav() {
                 </span>
             </button>
 
-            {mobileMenuVisible ? (
-                <>
-                    <div
-                        ref={overlayRef}
-                        className="fixed inset-0 z-40 bg-black/45 backdrop-blur-[2px] sm:hidden"
-                        onClick={() => setMobileMenuOpen(false)}
-                    />
+            <>
+                <div
+                    ref={overlayRef}
+                    className="pointer-events-none fixed inset-0 z-40 bg-black/45 backdrop-blur-[2px] sm:hidden"
+                    style={{ opacity: 0, visibility: 'hidden' }}
+                    onClick={() => setMobileMenuOpen(false)}
+                />
 
-                    <div
-                        id="mobile-menu"
-                        ref={mobilePanelRef}
-                        className="fixed inset-x-4 top-22 z-50 overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.06))] p-3 shadow-[0_24px_80px_rgba(0,0,0,0.34)] backdrop-blur-2xl sm:hidden"
-                        onClick={(event) => event.stopPropagation()}
-                    >
-                        <div className="rounded-[1.5rem] border border-white/8 bg-black/12 p-2">
-                            <div className="mb-3 flex items-center justify-between px-3 pt-2">
-                                <p className="text-[0.72rem] font-medium tracking-[0.35em] text-white/45 uppercase">
-                                    Menu
-                                </p>
-                                <span className="h-px w-10 bg-white/12" />
-                            </div>
-
-                            <ul className="space-y-2">
-                                {navigationItems.map((item, index) => (
-                                    <li
-                                        key={item.route.url}
-                                        ref={(element) =>
-                                            setMobileMenuItemRef(element, index)
-                                        }
-                                    >
-                                        <Link
-                                            href={item.route}
-                                            className={`group flex items-center justify-between rounded-[1.35rem] border px-5 py-4 text-left transition-all duration-300 ${
-                                                isActive(item.route.url)
-                                                    ? 'border-white/18 bg-white text-black'
-                                                    : 'border-white/10 bg-white/[0.03] text-white hover:border-white/20 hover:bg-white/[0.08]'
-                                            }`}
-                                            viewTransition
-                                            onClick={() =>
-                                                setMobileMenuOpen(false)
-                                            }
-                                        >
-                                            <div className="flex flex-col">
-                                                <span className="text-[1.15rem] font-medium tracking-[0.08em] uppercase">
-                                                    {item.name}
-                                                </span>
-                                                <span
-                                                    className={`text-[0.72rem] tracking-[0.28em] uppercase ${
-                                                        isActive(item.route.url)
-                                                            ? 'text-black/55'
-                                                            : 'text-white/35'
-                                                    }`}
-                                                >
-                                                    {isActive(item.route.url)
-                                                        ? 'Current Page'
-                                                        : 'Open Section'}
-                                                </span>
-                                            </div>
-
-                                            <div
-                                                className={`rounded-full border px-3 py-1 text-[0.68rem] tracking-[0.28em] uppercase transition-colors ${
-                                                    isActive(item.route.url)
-                                                        ? 'border-black/10 bg-black/5 text-black/70'
-                                                        : 'border-white/10 text-white/45 group-hover:border-white/20 group-hover:text-white/75'
-                                                }`}
-                                            >
-                                                0{index + 1}
-                                            </div>
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                <div
+                    id="mobile-menu"
+                    ref={mobilePanelRef}
+                    className="pointer-events-none fixed inset-x-4 top-22 z-50 overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0.04))] p-3 shadow-[0_24px_80px_rgba(0,0,0,0.34)] backdrop-blur-2xl sm:hidden"
+                    style={{
+                        opacity: 0,
+                        visibility: 'hidden',
+                        transform: 'translateY(-48px) scale(0.88)',
+                        transformOrigin: 'top center',
+                        clipPath: 'inset(0 0 100% 0 round 2rem)',
+                        filter: 'blur(16px)',
+                    }}
+                    onClick={(event) => event.stopPropagation()}
+                >
+                    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                        <div className="absolute -left-8 top-8 h-28 w-28 rounded-full bg-fuchsia-500/18 blur-3xl" />
+                        <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-violet-400/12 blur-3xl" />
+                        <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                     </div>
-                </>
-            ) : null}
+
+                    <div className="relative rounded-[1.5rem] border border-white/8 bg-black/14 p-2">
+                        <div className="mb-2 flex items-center justify-between px-3 pt-2">
+                            <span className="h-px w-8 bg-white/12" />
+                            <p className="text-[0.62rem] font-medium tracking-[0.45em] text-white/32 uppercase">
+                                Menu
+                            </p>
+                            <span className="h-px w-8 bg-white/12" />
+                        </div>
+
+                        <ul className="space-y-2">
+                            {navigationItems.map((item, index) => (
+                                <li
+                                    key={item.route.url}
+                                    ref={(element) =>
+                                        setMobileMenuItemRef(element, index)
+                                    }
+                                    style={{
+                                        opacity: 0,
+                                        visibility: 'hidden',
+                                        transform: 'translateY(26px)',
+                                    }}
+                                >
+                                    <Link
+                                        href={item.route}
+                                        className={`group relative flex items-center overflow-hidden rounded-[1.35rem] border px-5 py-4 text-left transition-all duration-300 ${
+                                            isActive(item.route.url)
+                                                ? 'border-fuchsia-300/22 bg-[linear-gradient(135deg,rgba(168,85,247,0.16),rgba(255,255,255,0.04))] text-white shadow-[0_0_0_1px_rgba(216,180,254,0.08),0_0_22px_rgba(168,85,247,0.14)]'
+                                                : 'border-white/8 bg-white/[0.02] text-white/92 hover:border-white/14 hover:bg-white/[0.045]'
+                                        }`}
+                                        viewTransition
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        <div
+                                            className={`text-[1.45rem] font-light tracking-[0.08em] uppercase transition-all duration-300 ${
+                                                isActive(item.route.url)
+                                                    ? 'text-white'
+                                                    : 'text-white/88 group-hover:translate-x-1 group-hover:text-white'
+                                            }`}
+                                        >
+                                            {item.name}
+                                        </div>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </>
         </nav>
     );
 }
