@@ -1,4 +1,6 @@
 import OurBrandEquationSection from '@/sections/home/OurBrandEquationSection';
+import HowWeWorkSection from '@/sections/home/HowWeWorkSection';
+import ServicesSection from '@/sections/home/ServicesSection';
 import WeCoCreateSection from '@/sections/home/WeCoCreateSection';
 import HeroSection from '@/sections/home/HeroSection';
 import WeBelieveSection from '@/sections/home/WeBelieveSection';
@@ -14,6 +16,8 @@ export default function Welcome() {
                 <WeBelieveSection />
                 <OurBrandEquationSection />
                 <WeCoCreateSection />
+                <HowWeWorkSection />
+                <ServicesSection />
             </div>
         </>
     );

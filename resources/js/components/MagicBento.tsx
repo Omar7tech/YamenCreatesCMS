@@ -534,7 +534,7 @@ const BentoCardGrid: React.FC<{
     gridRef?: React.RefObject<HTMLDivElement | null>;
 }> = ({ children, gridRef }) => (
     <div
-        className="bento-section relative grid max-w-[54rem] gap-2 p-3 select-none"
+        className="bento-section relative grid w-full gap-2 select-none"
         style={{ fontSize: 'clamp(1rem, 0.9rem + 0.5vw, 1.5rem)' }}
         ref={gridRef}
     >
@@ -594,7 +594,9 @@ const MagicBento: React.FC<BentoProps> = ({
           }
           
           .card-responsive {
-            grid-template-columns: repeat(6, minmax(0, 1fr));
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            min-width: '600px';
           }
           
           .card-responsive .card:nth-child(1) {
@@ -621,17 +623,6 @@ const MagicBento: React.FC<BentoProps> = ({
             grid-column: span 4;
           }
 
-          @media (max-width: 767px) {
-            .card-responsive {
-              grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .card-responsive .card {
-              grid-column: span 1 !important;
-              min-height: 140px;
-            }
-          }
-          
           .card--border-glow::after {
             content: '';
             position: absolute;
@@ -710,20 +701,20 @@ const MagicBento: React.FC<BentoProps> = ({
             <BentoCardGrid gridRef={gridRef}>
                 <div className="card-responsive grid gap-2 md:gap-5">
                     {cardData.map((card, index) => {
-                        const baseClassName = `card relative h-[140px] w-full max-w-full overflow-hidden rounded-[20px] border border-solid font-light transition-colors duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] ${
+                        const baseClassName = `card relative flex min-w-[100px] w-full max-w-full overflow-hidden rounded-[20px] border border-solid font-light transition-colors duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] ${
                             enableBorderGlow ? 'card--border-glow' : ''
                         }`;
 
                         const cardStyle = {
-                            backgroundColor: card.image
-                                ? 'transparent'
-                                : card.color || 'var(--background-dark)',
+                            backgroundColor: card.image ? 'transparent' : 'red',
                             borderColor: 'var(--border-color)',
                             color: 'var(--white)',
                             '--glow-x': '50%',
                             '--glow-y': '50%',
                             '--glow-intensity': '0',
                             '--glow-radius': '200px',
+                            height: '140px',
+                            minWidth: '100px',
                         } as React.CSSProperties;
 
                         if (enableStars) {
