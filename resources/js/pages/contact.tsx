@@ -1,21 +1,109 @@
+import AnimatedDescription from '@/components/AnimatedDescription';
 import { Head } from '@inertiajs/react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 
 export default function Contact() {
     return (
         <>
             <Head title="Contact" />
 
-            <section className="flex min-h-[calc(100vh-7rem)] items-center px-5 md:px-10 lg:px-20">
-                <div className="max-w-3xl">
-                    <p className="text-sm uppercase tracking-[0.4em] text-white/55">
-                        Contact
-                    </p>
-                    <h1 className="mt-4 text-[clamp(3rem,8vw,6rem)] font-light leading-none text-white">
-                        The contact page now sits inside the same branded frame
-                        as the old site.
-                    </h1>
+            <div className=" space-y-20 px-5 md:px-10 lg:px-20">
+                <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+                    <div className="space-y-5">
+                        <h1 className="text-[clamp(2rem,4vw,4rem)] leading-none font-bold">
+                            Let&apos;s Create
+                            <br />
+                            Something Amazing
+                        </h1>
+
+                        <div className="max-w-[600px] space-y-5">
+                            <AnimatedDescription
+                                text="Ready to bring your vision to life? Whether you're a founder, CEO, or leadership team looking to build your brand, we're here to help."
+                                delay={0.2}
+                            />
+                            <AnimatedDescription
+                                text="Reach out to start a conversation about your project."
+                                delay={0.4}
+                            />
+                        </div>
+
+                        <div className="space-y-4 pt-5">
+                            <div className="flex items-center space-x-3">
+                                <Mail className="h-5 w-5 text-white/70" />
+                                <p className="text-white/80">
+                                    info@yamencreates.com
+                                </p>
+                            </div>
+                            <div className="flex items-center space-x-3">
+                                <Phone className="h-5 w-5 text-white/70" />
+                                <p className="text-white/80">+961 7007 5077</p>
+                            </div>
+                            <div className="flex items-center space-x-3">
+                                <MapPin className="h-5 w-5 text-white/70" />
+                                <p className="text-white/80">
+                                    Aley, Mount Lebanon, Lebanon
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="space-y-5">
+                        <form className="space-y-5">
+                            <div>
+                                <label
+                                    htmlFor="name"
+                                    className="mb-2 block text-sm font-medium text-white/80"
+                                >
+                                    Name
+                                </label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    className="w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-white/50 transition-colors focus:border-white/40 focus:outline-none"
+                                    placeholder="Your name"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    htmlFor="email"
+                                    className="mb-2 block text-sm font-medium text-white/80"
+                                >
+                                    Email
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    className="w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-white/50 transition-colors focus:border-white/40 focus:outline-none"
+                                    placeholder="your@email.com"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    htmlFor="message"
+                                    className="mb-2 block text-sm font-medium text-white/80"
+                                >
+                                    Message
+                                </label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    rows={6}
+                                    className="w-full resize-none rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-white/50 transition-colors focus:border-white/40 focus:outline-none"
+                                    placeholder="Tell us about your project..."
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                className="flex w-full items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3 font-light text-white transition-all duration-300 hover:bg-white/20"
+                            >
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </section>
+            </div>
         </>
     );
 }
