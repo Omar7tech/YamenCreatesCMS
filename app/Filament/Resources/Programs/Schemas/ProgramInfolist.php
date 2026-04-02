@@ -47,6 +47,7 @@ class ProgramInfolist
                             ->schema([
                                 TextEntry::make('feature')
                                     ->hiddenLabel()
+                                    ->badge()
                                     ->icon(Heroicon::OutlinedSparkles),
                             ])
                             ->contained(false)
