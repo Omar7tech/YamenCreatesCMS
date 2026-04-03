@@ -292,7 +292,7 @@ export default function Nav() {
                 <div
                     id="mobile-menu"
                     ref={mobilePanelRef}
-                    className="pointer-events-none fixed inset-x-4 top-22 z-50 overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0.04))] p-3 shadow-[0_24px_80px_rgba(0,0,0,0.34)] backdrop-blur-2xl sm:hidden"
+                    className="pointer-events-none fixed inset-x-4 top-22 z-50 overflow-hidden rounded-[1.75rem] border border-white/15 bg-white/10 p-3 shadow-[0_20px_60px_rgba(0,0,0,0.18)] backdrop-blur-xl sm:hidden"
                     style={{
                         opacity: 0,
                         visibility: 'hidden',
@@ -303,50 +303,52 @@ export default function Nav() {
                     }}
                     onClick={(event) => event.stopPropagation()}
                 >
-                    <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                        <div className="absolute -left-8 top-8 h-28 w-28 rounded-full bg-fuchsia-500/18 blur-3xl" />
-                        <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-violet-400/12 blur-3xl" />
-                        <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                    </div>
-
-                    <div className="relative rounded-[1.5rem] border border-white/8 bg-black/14 p-2">
-                        <ul className="space-y-2">
-                            {navigationItems.map((item, index) => (
-                                <li
-                                    key={item.route.url}
-                                    ref={(element) =>
-                                        setMobileMenuItemRef(element, index)
-                                    }
-                                    style={{
-                                        opacity: 0,
-                                        visibility: 'hidden',
-                                        transform: 'translateY(26px)',
-                                    }}
+                    <ul className="divide-y divide-white/8">
+                        {navigationItems.map((item, index) => (
+                            <li
+                                key={item.route.url}
+                                ref={(element) =>
+                                    setMobileMenuItemRef(element, index)
+                                }
+                                style={{
+                                    opacity: 0,
+                                    visibility: 'hidden',
+                                    transform: 'translateY(26px)',
+                                }}
+                            >
+                                <Link
+                                    href={item.route}
+                                    className={`group flex items-center justify-between py-5 text-left transition-all duration-300 ${
+                                        isActive(item.route.url)
+                                            ? 'text-white'
+                                            : 'text-white/70 hover:text-white'
+                                    }`}
+                                    viewTransition
+                                    onClick={() => setMobileMenuOpen(false)}
                                 >
-                                    <Link
-                                        href={item.route}
-                                        className={`group relative flex items-center overflow-hidden rounded-[1.5rem] border px-6 py-5 text-left transition-all duration-300 ${
+                                    <div
+                                        className={`text-[clamp(2rem,8vw,3.25rem)] leading-none font-light uppercase transition-all duration-300 ${
                                             isActive(item.route.url)
-                                                ? 'border-fuchsia-300/22 bg-[linear-gradient(135deg,rgba(168,85,247,0.16),rgba(255,255,255,0.04))] text-white shadow-[0_0_0_1px_rgba(216,180,254,0.08),0_0_22px_rgba(168,85,247,0.14)]'
-                                                : 'border-white/8 bg-white/[0.02] text-white/92 hover:border-white/14 hover:bg-white/[0.045]'
+                                                ? 'tracking-[0.16em]'
+                                                : 'tracking-[0.12em] group-hover:tracking-[0.16em]'
                                         }`}
-                                        viewTransition
-                                        onClick={() => setMobileMenuOpen(false)}
                                     >
-                                        <div
-                                            className={`text-[clamp(2.2rem,9vw,4rem)] leading-[0.95] font-light tracking-[0.04em] uppercase transition-all duration-300 ${
-                                                isActive(item.route.url)
-                                                    ? 'text-white'
-                                                    : 'text-white/88 group-hover:translate-x-1.5 group-hover:text-white'
-                                            }`}
-                                        >
-                                            {item.name}
-                                        </div>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                                        {item.name}
+                                    </div>
+
+                                    <span
+                                        className={`text-xs uppercase transition-all duration-300 ${
+                                            isActive(item.route.url)
+                                                ? 'translate-x-0 text-white/70 tracking-[0.28em]'
+                                                : 'translate-x-0.5 text-white/35 tracking-[0.22em] group-hover:translate-x-0 group-hover:text-white/55'
+                                        }`}
+                                    >
+                                        0{index + 1}
+                                    </span>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </>
         </nav>
