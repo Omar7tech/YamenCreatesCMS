@@ -225,7 +225,7 @@ export default function Nav() {
             <Link
                 href={home()}
                 aria-label="Go to homepage"
-                className="group rounded-full border-2 border-white/[.145] bg-white/10 px-4 py-3 text-2xl font-light backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-gray-300 hover:bg-gray-100"
+                className="group relative z-[60] rounded-full border-2 border-white/[.145] bg-white/10 px-4 py-3 text-2xl font-light backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-gray-300 hover:bg-gray-100"
                 viewTransition
             >
                 <img
@@ -267,7 +267,7 @@ export default function Nav() {
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-menu"
                 onClick={() => setMobileMenuOpen((open) => !open)}
-                className="sm:hidden rounded-full border border-white/15 bg-white/10 px-4 py-3 text-2xl font-light shadow-[0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-xl transition-all duration-300 hover:scale-[1.03] hover:border-white/30 hover:bg-white/14 hover:text-white"
+                className="relative z-[60] sm:hidden rounded-full border border-white/15 bg-white/10 px-4 py-3 text-2xl font-light shadow-[0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-xl transition-all duration-300 hover:scale-[1.03] hover:border-white/30 hover:bg-white/14 hover:text-white"
             >
                 <span
                     ref={mobileButtonIconRef}
