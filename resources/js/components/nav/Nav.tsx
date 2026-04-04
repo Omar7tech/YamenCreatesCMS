@@ -17,6 +17,8 @@ const navigationItems = [
     { name: 'Contact', route: contact() },
 ];
 
+const mobilePanelRadius = '1.75rem';
+
 export default function Nav() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const { url } = usePage();
@@ -80,14 +82,14 @@ export default function Nav() {
                         y: -48,
                         scale: 0.88,
                         transformOrigin: 'top center',
-                        clipPath: 'inset(0 0 100% 0 round 2rem)',
+                        clipPath: `inset(0 0 100% 0 round ${mobilePanelRadius})`,
                         filter: 'blur(16px)',
                     },
                     {
                         autoAlpha: 1,
                         y: 0,
                         scale: 1,
-                        clipPath: 'inset(0 0 0% 0 round 2rem)',
+                        clipPath: `inset(0 0 0% 0 round ${mobilePanelRadius})`,
                         filter: 'blur(0px)',
                         duration: 0.56,
                         ease: 'expo.out',
@@ -126,7 +128,7 @@ export default function Nav() {
                         autoAlpha: 0,
                         y: -28,
                         scale: 0.92,
-                        clipPath: 'inset(0 0 100% 0 round 2rem)',
+                        clipPath: `inset(0 0 100% 0 round ${mobilePanelRadius})`,
                         filter: 'blur(12px)',
                         duration: 0.2,
                         ease: 'power2.inOut',
@@ -267,7 +269,7 @@ export default function Nav() {
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-menu"
                 onClick={() => setMobileMenuOpen((open) => !open)}
-                className="relative z-[60] sm:hidden rounded-full border border-white/15 bg-white/10 px-4 py-3 text-2xl font-light shadow-[0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-xl transition-all duration-300 hover:scale-[1.03] hover:border-white/30 hover:bg-white/14 hover:text-white"
+                className="relative z-60 sm:hidden rounded-full border border-white/15 bg-white/10 px-2 py-2 text-2xl font-light shadow-[0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-xl transition-all duration-300 hover:scale-[1.03] hover:border-white/30 hover:bg-white/14 hover:text-white"
             >
                 <span
                     ref={mobileButtonIconRef}
@@ -292,13 +294,13 @@ export default function Nav() {
                 <div
                     id="mobile-menu"
                     ref={mobilePanelRef}
-                    className="pointer-events-none fixed inset-x-4 top-22 z-50 overflow-hidden rounded-[1.75rem] border border-white/15 bg-white/10 p-3 shadow-[0_20px_60px_rgba(0,0,0,0.18)] backdrop-blur-xl sm:hidden"
+                    className="pointer-events-none fixed inset-x-4 top-22 z-50 overflow-hidden rounded-[1.75rem] border-2 border-white/[.145] bg-white/10 p-3 shadow-[0_20px_60px_rgba(0,0,0,0.18)] backdrop-blur-xl sm:hidden"
                     style={{
                         opacity: 0,
                         visibility: 'hidden',
                         transform: 'translateY(-48px) scale(0.88)',
                         transformOrigin: 'top center',
-                        clipPath: 'inset(0 0 100% 0 round 2rem)',
+                        clipPath: `inset(0 0 100% 0 round ${mobilePanelRadius})`,
                         filter: 'blur(16px)',
                     }}
                     onClick={(event) => event.stopPropagation()}

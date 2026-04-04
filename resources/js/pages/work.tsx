@@ -14,7 +14,7 @@ export default function Work({ programsSection }: WorkProps) {
         <>
             <Head title="Work" />
 
-            <div className="mt-32 space-y-8">
+            <div className=" space-y-8">
                 <section id="hero" className="scroll-mt-32">
                     <HeroSection />
                 </section>

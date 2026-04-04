@@ -107,11 +107,11 @@ export default function ProgramsSection({
                     {programsSection.programs.map((program) => (
                         <AccordionItem key={program.id} value={program.id}>
                             <AccordionTrigger
-                                className="font-special-gothic-expanded !text-[clamp(2rem,6vw,6rem)] !leading-none !font-extrabold uppercase"
+                                className="font-special-gothic-expanded text-[clamp(1.2rem,4.2vw,4rem)] leading-none  uppercase"
                                 style={{
-                                    fontSize: 'clamp(2rem, 6vw, 6rem)',
+                                    fontSize: 'clamp(1.2rem, 4.2vw, 4rem)',
                                     lineHeight: 0.95,
-                                    fontWeight: 800,
+                                    fontWeight: 500,
                                 }}
                             >
                                 {program.title}
