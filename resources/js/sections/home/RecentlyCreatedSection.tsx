@@ -16,17 +16,17 @@ const projectData = [
     },
     {
         id: 4,
-        image: 'https://picsum.photos/seed/recent-4/1200/800',
+        image: 'https://picsum.photos/seed/business/1200/800',
         alt: 'Recently created placeholder 4',
     },
     {
         id: 5,
-        image: 'https://picsum.photos/seed/recent-5/1200/800',
+        image: 'https://picsum.photos/seed/recent-7/1200/800',
         alt: 'Recently created placeholder 5',
     },
     {
         id: 6,
-        image: 'https://picsum.photos/seed/recent-6/1200/800',
+        image: 'https://picsum.photos/seed/busins/1200/800',
         alt: 'Recently created placeholder 6',
     },
 ];
