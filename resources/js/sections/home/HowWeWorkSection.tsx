@@ -17,74 +17,70 @@ export default function HowWeWorkSection() {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 75%",
-                    once: true,
-                },
-            });
-
-            // Title: split by chars, clip-path reveal upward
+            // Title
             if (titleRef.current) {
-                const split = new SplitText(titleRef.current, {
-                    type: "chars,words",
-                });
+                const split = new SplitText(titleRef.current, { type: "chars,words" });
                 gsap.set(split.chars, {
                     yPercent: 110,
                     opacity: 0,
                     rotateX: -40,
                     transformOrigin: "50% 100%",
                 });
-                tl.to(
-                    split.chars,
-                    {
-                        yPercent: 0,
-                        opacity: 1,
-                        rotateX: 0,
-                        duration: 0.9,
-                        ease: "expo.out",
-                        stagger: 0.03,
+                gsap.to(split.chars, {
+                    yPercent: 0,
+                    opacity: 1,
+                    rotateX: 0,
+                    ease: "none",
+                    stagger: 0.05,
+                    scrollTrigger: {
+                        trigger: titleRef.current,
+                        start: "top 90%",
+                        end: "top 30%",
+                        scrub: 1,
                     },
-                    0
-                );
+                });
             }
 
-            // Image: fade + scale from below
-            tl.fromTo(
+            // Image
+            gsap.fromTo(
                 imgRef.current,
-                { autoAlpha: 0, y: 40, scale: 0.94 },
-                { autoAlpha: 1, y: 0, scale: 1, duration: 1.1, ease: "expo.out" },
-                0.3
+                { autoAlpha: 0, y: 50, scale: 0.92 },
+                {
+                    autoAlpha: 1,
+                    y: 0,
+                    scale: 1,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: imgRef.current,
+                        start: "top 90%",
+                        end: "top 30%",
+                        scrub: 1,
+                    },
+                }
             );
 
-            // Paragraphs: line-by-line mask reveal
+            // Paragraphs
             const paras = [para1Ref.current, para2Ref.current, para3Ref.current];
-            paras.forEach((para, i) => {
+            paras.forEach((para) => {
                 if (!para) return;
 
-                // Wrap lines first so overflow:hidden clips them
-                const wrapper = new SplitText(para, {
-                    type: "lines",
-                    linesClass: "line-wrapper",
-                });
-
-                // Re-split to get the inner line elements to animate
+                new SplitText(para, { type: "lines", linesClass: "line-wrapper" });
                 const split = new SplitText(para, { type: "lines" });
 
                 gsap.set(split.lines, { yPercent: 105, opacity: 0 });
 
-                tl.to(
-                    split.lines,
-                    {
-                        yPercent: 0,
-                        opacity: 1,
-                        duration: 0.85,
-                        ease: "expo.out",
-                        stagger: 0.055,
+                gsap.to(split.lines, {
+                    yPercent: 0,
+                    opacity: 1,
+                    ease: "none",
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: para,
+                        start: "top 90%",
+                        end: "bottom 60%",
+                        scrub: 1,
                     },
-                    0.15 + i * 0.12
-                );
+                });
             });
         }, sectionRef);
 
