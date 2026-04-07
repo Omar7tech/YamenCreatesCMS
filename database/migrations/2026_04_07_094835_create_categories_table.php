@@ -14,6 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->string('slug');
+            $table->boolean('is_active')->default(true);
+            $table->integer('sort')->default(0);
             $table->timestamps();
         });
     }
