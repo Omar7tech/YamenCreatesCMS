@@ -1,5 +1,5 @@
-import Antigravity from '@/components/Antigravity';
 import { motion } from 'motion/react';
+import Antigravity from '@/components/Antigravity';
 
 export default function WeCoCreateSection() {
     return (

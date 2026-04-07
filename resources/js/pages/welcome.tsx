@@ -1,11 +1,11 @@
+import { Head } from '@inertiajs/react';
+import HeroSection from '@/sections/home/HeroSection';
+import HowWeWorkSection from '@/sections/home/HowWeWorkSection';
 import OurBrandEquationSection from '@/sections/home/OurBrandEquationSection';
 import RecentlyCreatedSection from '@/sections/home/RecentlyCreatedSection';
-import HowWeWorkSection from '@/sections/home/HowWeWorkSection';
 import ServicesSection from '@/sections/home/ServicesSection';
-import WeCoCreateSection from '@/sections/home/WeCoCreateSection';
-import HeroSection from '@/sections/home/HeroSection';
 import WeBelieveSection from '@/sections/home/WeBelieveSection';
-import { Head } from '@inertiajs/react';
+import WeCoCreateSection from '@/sections/home/WeCoCreateSection';
 
 export default function Welcome() {
     return (

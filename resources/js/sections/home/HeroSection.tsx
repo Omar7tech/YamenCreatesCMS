@@ -1,10 +1,10 @@
+import { Link } from '@inertiajs/react';
+import { ArrowRight } from 'lucide-react';
 import { index as contact } from '@/actions/App/Http/Controllers/ContactController';
 import { index as work } from '@/actions/App/Http/Controllers/WorkController';
 import AnimatedDescription from '@/components/AnimatedDescription';
 import DecryptedText from '@/components/DecryptedText';
 import MagicBento from '@/components/MagicBento';
-import { Link } from '@inertiajs/react';
-import { ArrowRight } from 'lucide-react';
 
 const heroLines = ['We Work With', 'Founders, CEOs,', '& Leadership Teams'];
 

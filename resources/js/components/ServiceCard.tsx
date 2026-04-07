@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
 import gsap from "gsap";
+import { useRef } from "react";
 
 type ServiceCardProps = {
     index: string;
@@ -25,7 +25,10 @@ export default function ServiceCard({ index, title, items }: ServiceCardProps) {
         );
 
         itemRefs.current.forEach((item, i) => {
-            if (!item) return;
+            if (!item) {
+return;
+}
+
             gsap.fromTo(
                 item,
                 { x: 0, opacity: 0.8 },
@@ -48,7 +51,10 @@ export default function ServiceCard({ index, title, items }: ServiceCardProps) {
         });
 
         itemRefs.current.forEach((item, i) => {
-            if (!item) return;
+            if (!item) {
+return;
+}
+
             gsap.to(item, {
                 x: 0,
                 opacity: 0.8,
@@ -85,7 +91,9 @@ export default function ServiceCard({ index, title, items }: ServiceCardProps) {
                     {items.map((item, i) => (
                         <li
                             key={item}
-                            ref={(el) => { itemRefs.current[i] = el; }}
+                            ref={(el) => {
+ itemRefs.current[i] = el; 
+}}
                         >
                             {item}
                         </li>

@@ -1,6 +1,6 @@
-import AnimatedDescription from '@/components/AnimatedDescription';
 import { Head } from '@inertiajs/react';
 import { Mail, MapPin, Phone } from 'lucide-react';
+import AnimatedDescription from '@/components/AnimatedDescription';
 
 export default function Contact() {
     return (

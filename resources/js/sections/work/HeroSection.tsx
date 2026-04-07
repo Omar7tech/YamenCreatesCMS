@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
+import { useEffect, useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -45,7 +45,10 @@ export default function HeroSection() {
             // --- Description lines: each word fades up with stagger ---
             const descLines = [line1Ref.current, line2Ref.current, line3Ref.current];
             descLines.forEach((line, li) => {
-                if (!line) return;
+                if (!line) {
+return;
+}
+
                 const split = new SplitText(line, { type: "words" });
                 gsap.fromTo(
                     split.words,

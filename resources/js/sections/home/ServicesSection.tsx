@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
 import ServiceCard from "@/components/ServiceCard";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -55,7 +55,10 @@ export default function ServicesSection() {
                 );
 
                 cardsRef.current.forEach((card, i) => {
-                    if (!card) return;
+                    if (!card) {
+return;
+}
+
                     const isEven = i % 2 === 0;
 
                     gsap.fromTo(card,
@@ -108,7 +111,9 @@ export default function ServicesSection() {
                     {services.map((service, index) => (
                         <div
                             key={service.title}
-                            ref={(el) => { cardsRef.current[index] = el; }}
+                            ref={(el) => {
+ cardsRef.current[index] = el; 
+}}
                             style={{ willChange: "transform, opacity" }}
                         >
                             <ServiceCard

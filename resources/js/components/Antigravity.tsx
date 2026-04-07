@@ -84,12 +84,16 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
         randomRadiusOffset
       });
     }
+
     return temp;
   }, [count, viewport.width, viewport.height]);
 
   useFrame(state => {
     const mesh = meshRef.current;
-    if (!mesh) return;
+
+    if (!mesh) {
+return;
+}
 
     const { viewport: v, pointer: m } = state;
 
@@ -131,7 +135,7 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
       const dy = my - projectedTargetY;
       const dist = Math.sqrt(dx * dx + dy * dy);
 
-      let targetPos = { x: mx, y: my, z: mz * depthFactor };
+      const targetPos = { x: mx, y: my, z: mz * depthFactor };
 
       if (dist < magnetRadius) {
         const angle = Math.atan2(dy, dx) + globalRotation;

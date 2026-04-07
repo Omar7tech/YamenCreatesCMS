@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 
 export interface BentoCardProps {
     color?: string;
@@ -76,6 +76,7 @@ const createParticleElement = (
     left: ${x}px;
     top: ${y}px;
   `;
+
     return el;
 };
 
@@ -131,7 +132,9 @@ const ParticleCard: React.FC<{
     const magnetismAnimationRef = useRef<gsap.core.Tween | null>(null);
 
     const initializeParticles = useCallback(() => {
-        if (particlesInitialized.current || !cardRef.current) return;
+        if (particlesInitialized.current || !cardRef.current) {
+return;
+}
 
         const { width, height } = cardRef.current.getBoundingClientRect();
         memoizedParticles.current = Array.from({ length: particleCount }, () =>
@@ -164,7 +167,9 @@ const ParticleCard: React.FC<{
     }, []);
 
     const animateParticles = useCallback(() => {
-        if (!cardRef.current || !isHoveredRef.current) return;
+        if (!cardRef.current || !isHoveredRef.current) {
+return;
+}
 
         if (!particlesInitialized.current) {
             initializeParticles();
@@ -172,7 +177,9 @@ const ParticleCard: React.FC<{
 
         memoizedParticles.current.forEach((particle, index) => {
             const timeoutId = setTimeout(() => {
-                if (!isHoveredRef.current || !cardRef.current) return;
+                if (!isHoveredRef.current || !cardRef.current) {
+return;
+}
 
                 const clone = particle.cloneNode(true) as HTMLDivElement;
                 cardRef.current.appendChild(clone);
@@ -213,7 +220,9 @@ const ParticleCard: React.FC<{
     }, [initializeParticles]);
 
     useEffect(() => {
-        if (disableAnimations || !cardRef.current) return;
+        if (disableAnimations || !cardRef.current) {
+return;
+}
 
         const element = cardRef.current;
 
@@ -256,7 +265,9 @@ const ParticleCard: React.FC<{
         };
 
         const handleMouseMove = (e: MouseEvent) => {
-            if (!enableTilt && !enableMagnetism) return;
+            if (!enableTilt && !enableMagnetism) {
+return;
+}
 
             const rect = element.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -291,7 +302,9 @@ const ParticleCard: React.FC<{
         };
 
         const handleClick = (e: MouseEvent) => {
-            if (!clickEffect) return;
+            if (!clickEffect) {
+return;
+}
 
             const rect = element.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -386,7 +399,9 @@ const GlobalSpotlight: React.FC<{
     const isInsideSection = useRef(false);
 
     useEffect(() => {
-        if (disableAnimations || !gridRef?.current || !enabled) return;
+        if (disableAnimations || !gridRef?.current || !enabled) {
+return;
+}
 
         const spotlight = document.createElement('div');
         spotlight.className = 'global-spotlight';
@@ -413,7 +428,9 @@ const GlobalSpotlight: React.FC<{
         spotlightRef.current = spotlight;
 
         const handleMouseMove = (e: MouseEvent) => {
-            if (!spotlightRef.current || !gridRef.current) return;
+            if (!spotlightRef.current || !gridRef.current) {
+return;
+}
 
             const section = gridRef.current.closest('.bento-section');
             const rect = section?.getBoundingClientRect();
@@ -439,6 +456,7 @@ const GlobalSpotlight: React.FC<{
                         '0',
                     );
                 });
+
                 return;
             }
 
@@ -459,6 +477,7 @@ const GlobalSpotlight: React.FC<{
                 minDistance = Math.min(minDistance, effectiveDistance);
 
                 let glowIntensity = 0;
+
                 if (effectiveDistance <= proximity) {
                     glowIntensity = 1;
                 } else if (effectiveDistance <= fadeDistance) {
@@ -507,6 +526,7 @@ const GlobalSpotlight: React.FC<{
                     '0',
                 );
             });
+
             if (spotlightRef.current) {
                 gsap.to(spotlightRef.current, {
                     opacity: 0,
@@ -752,10 +772,14 @@ const MagicBento: React.FC<BentoProps> = ({
                                 className={baseClassName}
                                 style={cardStyle}
                                 ref={(el) => {
-                                    if (!el) return;
+                                    if (!el) {
+return;
+}
 
                                     const handleMouseMove = (e: MouseEvent) => {
-                                        if (shouldDisableAnimations) return;
+                                        if (shouldDisableAnimations) {
+return;
+}
 
                                         const rect = el.getBoundingClientRect();
                                         const x = e.clientX - rect.left;
@@ -794,7 +818,9 @@ const MagicBento: React.FC<BentoProps> = ({
                                     };
 
                                     const handleMouseLeave = () => {
-                                        if (shouldDisableAnimations) return;
+                                        if (shouldDisableAnimations) {
+return;
+}
 
                                         if (enableTilt) {
                                             gsap.to(el, {
@@ -819,8 +845,9 @@ const MagicBento: React.FC<BentoProps> = ({
                                         if (
                                             !clickEffect ||
                                             shouldDisableAnimations
-                                        )
-                                            return;
+                                        ) {
+return;
+}
 
                                         const rect = el.getBoundingClientRect();
                                         const x = e.clientX - rect.left;
