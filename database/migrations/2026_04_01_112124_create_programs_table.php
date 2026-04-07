@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -21,6 +20,9 @@ return new class extends Migration
             $table->boolean('have_cta')->default(false);
             $table->string('cta_text')->nullable();
             $table->string('cta_url')->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->unsignedInteger('sort')->default(0)->index();
+
             $table->timestamps();
         });
     }
