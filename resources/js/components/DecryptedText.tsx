@@ -194,7 +194,6 @@ s.add(i);
 return;
 }
 
-        let interval: ReturnType<typeof setInterval>;
         let currentIteration = 0;
 
         const getNextIndex = (revealedSet: Set<number>): number => {
@@ -234,7 +233,7 @@ return i;
             }
         };
 
-        interval = setInterval(() => {
+        const interval = setInterval(() => {
             setRevealedIndices((prevRevealed) => {
                 if (sequential) {
                     // Forward

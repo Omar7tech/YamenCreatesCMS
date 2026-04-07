@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import React, { useMemo, useRef } from 'react';
@@ -52,17 +53,27 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
     const height = viewport.height || 100;
 
     for (let i = 0; i < count; i++) {
+      // eslint-disable-next-line react-hooks/purity
       const t = Math.random() * 100;
+      // eslint-disable-next-line react-hooks/purity
       const factor = 20 + Math.random() * 100;
+      // eslint-disable-next-line react-hooks/purity
       const speed = 0.01 + Math.random() / 200;
+      // eslint-disable-next-line react-hooks/purity
       const xFactor = -50 + Math.random() * 100;
+      // eslint-disable-next-line react-hooks/purity
       const yFactor = -50 + Math.random() * 100;
+      // eslint-disable-next-line react-hooks/purity
       const zFactor = -50 + Math.random() * 100;
 
+      // eslint-disable-next-line react-hooks/purity
       const x = (Math.random() - 0.5) * width;
+      // eslint-disable-next-line react-hooks/purity
       const y = (Math.random() - 0.5) * height;
+      // eslint-disable-next-line react-hooks/purity
       const z = (Math.random() - 0.5) * 20;
 
+      // eslint-disable-next-line react-hooks/purity
       const randomRadiusOffset = (Math.random() - 0.5) * 2;
 
       temp.push({
@@ -123,7 +134,8 @@ return;
     const globalRotation = state.clock.getElapsedTime() * rotationSpeed;
 
     particles.forEach((particle, i) => {
-      let { t, speed, mx, my, mz, cz, randomRadiusOffset } = particle;
+      let { t } = particle;
+      const { speed, mx, my, mz, cz, randomRadiusOffset } = particle;
 
       t = particle.t += speed / 2;
 
