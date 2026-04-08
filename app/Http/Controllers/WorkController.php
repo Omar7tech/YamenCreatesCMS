@@ -40,7 +40,8 @@ class WorkController extends Controller
             }])
             ->orderBy('sort')
             ->orderBy('id')
-            ->get();
+            ->get()
+            ->filter(fn (Category $category) => $category->projects->isNotEmpty());
 
         return Inertia::render('work', [
             'programsSection' => [
