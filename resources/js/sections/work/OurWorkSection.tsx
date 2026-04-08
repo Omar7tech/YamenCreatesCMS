@@ -6,7 +6,7 @@ import type { WorkCategory, WorkProject } from '@/types/project';
 
 interface OurWorkSectionProps {
     categories: WorkCategory[];
-    activeCategory: number;
+    activeCategory: string;
     projects: WorkProject[];
 }
 
@@ -20,14 +20,15 @@ export default function OurWorkSection({
 
     if (categories.length === 0) return null;
 
-    const handleCategoryChange = (id: number) => {
-        if (id === activeCategory || isLoading) return;
+    const handleCategoryChange = (slug: string) => {
+        if (slug === activeCategory || isLoading) return;
 
         setIsLoading(true);
-        router.visit(index.url({ query: { category: id } }), {
+        router.visit(index.url({ query: { category: slug } }), {
             only: ['workProjects', 'workActiveCategory'],
             preserveState: true,
             preserveScroll: true,
+            showProgress: false,
             onFinish: () => setIsLoading(false),
         });
     };
@@ -45,11 +46,11 @@ export default function OurWorkSection({
             <div className="flex flex-wrap gap-2">
                 {categories.map((category) => (
                     <button
-                        key={category.id}
+                        key={category.slug}
                         type="button"
-                        onClick={() => handleCategoryChange(category.id)}
+                        onClick={() => handleCategoryChange(category.slug)}
                         className={`cursor-pointer rounded-full border px-3 py-1.5 text-xs font-light transition-all duration-300 hover:bg-white/10 md:px-4 md:py-2 md:text-sm ${
-                            activeCategory === category.id
+                            activeCategory === category.slug
                                 ? 'border-gray-300 bg-gray-200 text-black'
                                 : 'border-white/30 text-white'
                         }`}

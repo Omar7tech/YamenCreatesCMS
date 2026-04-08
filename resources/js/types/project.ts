@@ -6,6 +6,6 @@ export interface WorkProject {
 }
 
 export interface WorkCategory {
-    id: number;
+    slug: string;
     name: string;
 }

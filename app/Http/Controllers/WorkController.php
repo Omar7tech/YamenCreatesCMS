@@ -20,12 +20,12 @@ class WorkController extends Controller
             ->whereHas('projects', fn ($q) => $q->where('is_active', true))
             ->orderBy('sort')
             ->orderBy('id')
-            ->get(['id', 'title']);
+            ->get(['id', 'title', 'slug']);
 
-        $requestedId = $request->integer('category');
-        $categoryId = $categories->contains('id', $requestedId)
-            ? $requestedId
-            : ($categories->first()?->id ?? 0);
+        $requestedSlug = $request->string('category')->toString();
+        $activeSlug = $categories->contains('slug', $requestedSlug)
+            ? $requestedSlug
+            : ($categories->first()?->slug ?? '');
 
         return Inertia::render('work', [
             'programsSection' => fn () => [
@@ -42,15 +42,15 @@ class WorkController extends Controller
 
             'workCategories' => Inertia::always(
                 $categories
-                    ->map(fn (Category $c) => ['id' => $c->id, 'name' => $c->title])
+                    ->map(fn (Category $c) => ['slug' => $c->slug, 'name' => $c->title])
                     ->values()
             ),
 
-            'workActiveCategory' => $categoryId,
+            'workActiveCategory' => $activeSlug,
 
             'workProjects' => fn () => WorkProjectResource::collection(
                 Project::query()
-                    ->where('category_id', $categoryId)
+                    ->whereHas('category', fn ($q) => $q->where('slug', $activeSlug))
                     ->published()
                     ->ordered()
                     ->with('media')

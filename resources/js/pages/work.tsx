@@ -10,7 +10,7 @@ import type { WorkProgramsSectionData } from '@/types/program';
 interface WorkProps {
     programsSection: WorkProgramsSectionData;
     workCategories: WorkCategory[];
-    workActiveCategory: number;
+    workActiveCategory: string;
     workProjects: WorkProject[];
 }
 
