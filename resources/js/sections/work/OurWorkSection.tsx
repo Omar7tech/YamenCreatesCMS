@@ -61,13 +61,8 @@ export default function OurWorkSection({
             </div>
 
             {isLoading ? (
-                <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-5 lg:gap-10">
-                    {Array.from({ length: 6 }).map((_, i) => (
-                        <div
-                            key={i}
-                            className="aspect-square animate-pulse rounded-lg bg-white/5 md:rounded-3xl"
-                        />
-                    ))}
+                <div className="flex h-64 items-center justify-center">
+                    <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/20 border-t-white" />
                 </div>
             ) : projects.length > 0 ? (
                 <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-5 lg:gap-10">
