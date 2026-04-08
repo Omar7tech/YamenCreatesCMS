@@ -26,7 +26,6 @@ export default function OurWorkSection({ ourWork }: OurWorkSectionProps) {
     };
 
     const handleCategoryChange = (id: number) => {
-        setLoadedMedia(new Set());
         setActiveCategory(id);
     };
 
