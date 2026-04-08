@@ -12,16 +12,15 @@ class CategoryForm
     {
         return $schema
             ->components([
-                TextInput::make('title')
-                    ->required(),
-                TextInput::make('slug')
-                    ->required(),
                 Toggle::make('is_active')
-                    ->required(),
-                TextInput::make('sort')
+                    ->label('Published')
+                    ->default(true)
+                    ->inline(false),
+
+                TextInput::make('title')
                     ->required()
-                    ->numeric()
-                    ->default(0),
+                    ->live(onBlur: true)
+                    ->placeholder('Enter category title'),
             ]);
     }
 }

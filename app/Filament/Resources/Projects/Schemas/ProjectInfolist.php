@@ -14,13 +14,17 @@ class ProjectInfolist
             ->components([
                 TextEntry::make('title'),
                 TextEntry::make('slug'),
+                TextEntry::make('category.title')
+                    ->label('Category'),
+                TextEntry::make('media_type')
+                    ->label('Media Type')
+                    ->badge(),
                 IconEntry::make('is_active')
+                    ->label('Published')
                     ->boolean(),
                 TextEntry::make('sort')
                     ->numeric(),
-                TextEntry::make('category_id')
-                    ->numeric(),
-                TextEntry::make('created_at')
+TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),
                 TextEntry::make('updated_at')

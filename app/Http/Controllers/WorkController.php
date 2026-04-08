@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\WorkProgramResource;
+use App\Http\Resources\WorkProjectResource;
+use App\Models\Category;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -31,10 +33,26 @@ class WorkController extends Controller
             ->ordered()
             ->get();
 
+        $categories = Category::query()
+            ->where('is_active', true)
+            ->with(['projects' => function ($query) {
+                $query->published()->ordered()->with('media');
+            }])
+            ->orderBy('sort')
+            ->orderBy('id')
+            ->get();
+
         return Inertia::render('work', [
             'programsSection' => [
                 'sectionTitle' => 'Our Signature Programs',
                 'programs' => WorkProgramResource::collection($programs)->toArray($request),
+            ],
+            'ourWork' => [
+                'categories' => $categories->map(fn (Category $category) => [
+                    'id' => $category->id,
+                    'name' => $category->title,
+                    'projects' => WorkProjectResource::collection($category->projects)->toArray($request),
+                ])->values(),
             ],
         ]);
     }

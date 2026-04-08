@@ -21,7 +21,11 @@ class ProgramResource extends Resource
     protected static ?string $recordTitleAttribute = 'title';
     protected static ?string $model = Program::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookOpen;
+
+    protected static \UnitEnum|string|null $navigationGroup = 'Programs';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema
     {

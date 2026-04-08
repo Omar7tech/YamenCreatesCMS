@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->boolean('is_active')->default(true);
             $table->unsignedInteger('sort')->default(0)->index();
             $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete();
+            $table->enum('media_type', ['image', 'video'])->default('image');
             $table->timestamps();
         });
     }

@@ -4,13 +4,15 @@ import HeroSection from '@/sections/work/HeroSection';
 import OurWorkSection from '@/sections/work/OurWorkSection';
 import ProgramsSection from '@/sections/work/ProgramsSection';
 import VideoSection from '@/sections/work/VideoSection';
+import type { OurWorkData } from '@/types/project';
 import type { WorkProgramsSectionData } from '@/types/program';
 
 interface WorkProps {
     programsSection: WorkProgramsSectionData;
+    ourWork: OurWorkData;
 }
 
-export default function Work({ programsSection }: WorkProps) {
+export default function Work({ programsSection, ourWork }: WorkProps) {
     return (
         <>
             <Head title="Work" />
@@ -26,7 +28,7 @@ export default function Work({ programsSection }: WorkProps) {
                     <ProgramsSection programsSection={programsSection} />
                 </section>
                 <section id="our-work" className="scroll-mt-32">
-                    <OurWorkSection />
+                    <OurWorkSection ourWork={ourWork} />
                 </section>
             </div>
         </>

@@ -13,11 +13,9 @@ class CategoryInfolist
         return $schema
             ->components([
                 TextEntry::make('title'),
-                TextEntry::make('slug'),
                 IconEntry::make('is_active')
+                    ->label('Published')
                     ->boolean(),
-                TextEntry::make('sort')
-                    ->numeric(),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

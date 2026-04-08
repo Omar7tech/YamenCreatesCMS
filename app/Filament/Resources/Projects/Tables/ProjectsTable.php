@@ -15,17 +15,24 @@ class ProjectsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->defaultSort('sort')
+            ->reorderable('sort')
             ->columns([
                 TextColumn::make('title')
                     ->searchable(),
                 TextColumn::make('slug')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('category.title')
+                    ->label('Category')
+                    ->sortable(),
+                TextColumn::make('media_type')
+                    ->label('Media Type')
+                    ->badge(),
                 IconColumn::make('is_active')
+                    ->label('Published')
                     ->boolean(),
                 TextColumn::make('sort')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('category_id')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
