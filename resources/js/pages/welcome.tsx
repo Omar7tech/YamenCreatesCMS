@@ -1,4 +1,5 @@
 import { Head } from '@inertiajs/react';
+
 import HeroSection from '@/sections/home/HeroSection';
 import HowWeWorkSection from '@/sections/home/HowWeWorkSection';
 import OurBrandEquationSection from '@/sections/home/OurBrandEquationSection';
@@ -13,13 +14,27 @@ export default function Welcome() {
             <Head title="Home" />
 
             <div className="space-y-20 md:space-y-32 lg:space-y-40">
-                <HeroSection />
-                <WeBelieveSection />
-                <OurBrandEquationSection />
-                <WeCoCreateSection />
-                <HowWeWorkSection />
-                <ServicesSection />
-                <RecentlyCreatedSection />
+                <section id="hero">
+                    <HeroSection />
+                </section>
+                <section id="we-believe">
+                    <WeBelieveSection />
+                </section>
+                <section id="brand-equation">
+                    <OurBrandEquationSection />
+                </section>
+                <section id="co-create">
+                    <WeCoCreateSection />
+                </section>
+                <section id="how-we-work">
+                    <HowWeWorkSection />
+                </section>
+                <section id="services">
+                    <ServicesSection />
+                </section>
+                <section id="clients">
+                    <RecentlyCreatedSection />
+                </section>
             </div>
         </>
     );

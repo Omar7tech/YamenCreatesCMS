@@ -21,44 +21,40 @@ export default function Footer() {
                 <FooterCard title="Home" href="/">
                     <ul className="overflow-auto pt-5 text-[clamp(1.5rem,2vw,2rem)] font-extralight leading-[1.2]">
                         <li>
-                            <Link
+                            <a
                                 href="/#hero"
                                 aria-label="Go to About Us section on Home page"
                                 className="transition-colors hover:text-white/80"
                             >
                                 About Us
-                                <LoadingIndicator />
-                            </Link>
+                            </a>
                         </li>
                         <li>
-                            <Link
+                            <a
                                 href="/#we-believe"
                                 aria-label="Go to Our Philosophy section on Home page"
                                 className="transition-colors hover:text-white/80"
                             >
                                 Our Philosophy
-                                <LoadingIndicator />
-                            </Link>
+                            </a>
                         </li>
                         <li>
-                            <Link
+                            <a
                                 href="/#services"
                                 aria-label="Go to Our Services section on Home page"
                                 className="transition-colors hover:text-white/80"
                             >
                                 Our Services
-                                <LoadingIndicator />
-                            </Link>
+                            </a>
                         </li>
                         <li>
-                            <Link
+                            <a
                                 href="/#clients"
                                 aria-label="Go to Our Clients section on Home page"
                                 className="transition-colors hover:text-white/80"
                             >
                                 Our Clients
-                                <LoadingIndicator />
-                            </Link>
+                            </a>
                         </li>
                     </ul>
                 </FooterCard>
