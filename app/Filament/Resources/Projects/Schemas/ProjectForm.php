@@ -71,6 +71,7 @@ class ProjectForm
                                     ->disk('public')
                                     ->helperText('Upload a project image (max 6MB)')
                                     ->columnSpanFull()
+                                    ->requiredIf('media_type', 'image')
                                     ->visibleJs(<<<'JS'
                                         $get('media_type') === 'image'
                                         JS),
@@ -87,6 +88,7 @@ class ProjectForm
                                     ->disk('public')
                                     ->helperText('Upload a project video (max 100MB)')
                                     ->columnSpanFull()
+                                    ->requiredIf('media_type', 'video')
                                     ->visibleJs(<<<'JS'
                                         $get('media_type') === 'video'
                                         JS),
