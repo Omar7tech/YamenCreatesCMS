@@ -6,8 +6,8 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class CategoriesTable
@@ -19,15 +19,16 @@ class CategoriesTable
             ->reorderable('sort')
             ->columns([
                 TextColumn::make('title')
-                    ->searchable(),
-                IconColumn::make('is_active')
-                    ->label('Published')
-                    ->boolean(),
+                    ->searchable()
+                    ->weight('semibold'),
+                TextColumn::make('projects_count')
+                    ->label('Projects')
+                    ->counts('projects')
+                    ->badge()
+                    ->color('gray'),
+                ToggleColumn::make('is_active')
+                    ->label('Published'),
                 TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

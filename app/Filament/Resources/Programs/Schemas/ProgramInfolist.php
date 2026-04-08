@@ -21,16 +21,16 @@ class ProgramInfolist
                         TextEntry::make('title')
                             ->label('Program Title')
                             ->weight('bold'),
-                        TextEntry::make('slug')
-                            ->copyable()
-                            ->badge()
-                            ->color('gray'),
                         TextEntry::make('subtitle')
-                            ->placeholder('No subtitle added')
+                            ->placeholder('—')
                             ->columnSpanFull(),
+                        IconEntry::make('is_active')
+                            ->label('Published')
+                            ->boolean(),
                     ])
                     ->columns(2),
-                Section::make('Program Content')
+
+                Section::make('Content')
                     ->icon(Heroicon::OutlinedDocumentText)
                     ->schema([
                         RepeatableEntry::make('bullets')
@@ -43,33 +43,35 @@ class ProgramInfolist
                             ->contained(false)
                             ->columnSpanFull(),
                         RepeatableEntry::make('features')
-                            ->label('Program Features')
+                            ->label('Tags / Features')
                             ->schema([
                                 TextEntry::make('feature')
                                     ->hiddenLabel()
                                     ->badge()
-                                    ->icon(Heroicon::OutlinedSparkles),
+                                    ->color('gray'),
                             ])
                             ->contained(false)
                             ->columnSpanFull(),
                     ])
                     ->columns(1),
-                Section::make('Call To Action')
+
+                Section::make('Call to Action')
                     ->icon(Heroicon::OutlinedMegaphone)
                     ->schema([
                         IconEntry::make('have_cta')
                             ->label('CTA Enabled')
                             ->boolean(),
                         TextEntry::make('cta_text')
-                            ->label('CTA Button Text')
-                            ->placeholder('No CTA text configured'),
+                            ->label('Button Text')
+                            ->placeholder('—'),
                         TextEntry::make('cta_url')
-                            ->label('CTA Destination')
-                            ->placeholder('No CTA URL configured')
+                            ->label('Destination URL')
+                            ->placeholder('—')
                             ->url(fn (?string $state): ?string => filled($state) ? $state : null)
                             ->openUrlInNewTab(),
                     ])
                     ->columns(2),
+
                 Section::make('Timestamps')
                     ->icon(Heroicon::OutlinedClock)
                     ->schema([

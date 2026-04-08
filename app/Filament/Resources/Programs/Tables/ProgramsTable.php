@@ -19,28 +19,19 @@ class ProgramsTable
             ->defaultSort('sort')
             ->reorderable('sort')
             ->columns([
-                TextColumn::make('sort')
-                    ->numeric()
-                    ->sortable(),
                 TextColumn::make('title')
-                    ->searchable(),
-                TextColumn::make('slug')
-                    ->searchable(),
+                    ->searchable()
+                    ->weight('semibold'),
                 TextColumn::make('subtitle')
-                    ->searchable(),
+                    ->searchable()
+                    ->placeholder('—')
+                    ->limit(50),
+                IconColumn::make('have_cta')
+                    ->label('CTA')
+                    ->boolean(),
                 ToggleColumn::make('is_active')
                     ->label('Published'),
-                IconColumn::make('have_cta')
-                    ->boolean(),
-                TextColumn::make('cta_text')
-                    ->searchable(),
-                TextColumn::make('cta_url')
-                    ->searchable(),
                 TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

@@ -6,8 +6,8 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class ProjectsTable
@@ -19,27 +19,19 @@ class ProjectsTable
             ->reorderable('sort')
             ->columns([
                 TextColumn::make('title')
-                    ->searchable(),
-                TextColumn::make('slug')
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->weight('semibold'),
                 TextColumn::make('category.title')
                     ->label('Category')
+                    ->badge()
+                    ->color('gray')
                     ->sortable(),
                 TextColumn::make('media_type')
-                    ->label('Media Type')
+                    ->label('Media')
                     ->badge(),
-                IconColumn::make('is_active')
-                    ->label('Published')
-                    ->boolean(),
-                TextColumn::make('sort')
-                    ->numeric()
-                    ->sortable(),
+                ToggleColumn::make('is_active')
+                    ->label('Published'),
                 TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
