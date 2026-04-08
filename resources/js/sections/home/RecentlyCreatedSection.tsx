@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 interface RecentlyCreatedItem {
     id: number;
     image_1: string;
@@ -19,25 +21,46 @@ function ProjectTile({
     src,
     colSpan,
     alt,
+    imageKey,
+    loadedImages,
+    handleImageLoad,
 }: {
     src: string;
     colSpan: string;
     alt: string;
+    imageKey: string;
+    loadedImages: Set<string>;
+    handleImageLoad: (key: string) => void;
 }) {
+    const isLoaded = loadedImages.has(imageKey);
+
     return (
         <div
             className={`${colSpan} relative h-[150px] overflow-hidden rounded-lg border border-white/[.145] transition-all duration-300 hover:-translate-y-0.5 hover:border-purple-500/50 hover:shadow-[0_8px_25px_rgba(147,51,234,0.3)] md:h-[320px] md:rounded-4xl`}
         >
+            {!isLoaded && (
+                <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/10 backdrop-blur-sm">
+                    <div className="h-8 w-8 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                </div>
+            )}
             <img
                 src={src}
                 alt={alt}
                 className="h-full w-full object-cover"
+                loading="lazy"
+                onLoad={() => handleImageLoad(imageKey)}
             />
         </div>
     );
 }
 
 export default function RecentlyCreatedSection({ items }: RecentlyCreatedSectionProps) {
+    const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+
+    const handleImageLoad = (key: string) => {
+        setLoadedImages((previous) => new Set(previous).add(key));
+    };
+
     if (items.length === 0) {
         return null;
     }
@@ -56,6 +79,9 @@ export default function RecentlyCreatedSection({ items }: RecentlyCreatedSection
                             src={item[imageKey]}
                             colSpan={colSpan}
                             alt={`Recently created ${item.id}`}
+                            imageKey={`${item.id}-${imageKey}`}
+                            loadedImages={loadedImages}
+                            handleImageLoad={handleImageLoad}
                         />
                     ))
                 ))}
