@@ -1,32 +1,39 @@
+import { router } from '@inertiajs/react';
 import { useState } from 'react';
 
-import type { OurWorkData, WorkProject } from '@/types/project';
+import { index } from '@/actions/App/Http/Controllers/WorkController';
+import type { WorkCategory, WorkProject } from '@/types/project';
 
 interface OurWorkSectionProps {
-    ourWork: OurWorkData;
+    categories: WorkCategory[];
+    activeCategory: number;
+    projects: WorkProject[];
 }
 
-export default function OurWorkSection({ ourWork }: OurWorkSectionProps) {
-    const [activeCategory, setActiveCategory] = useState<number>(
-        ourWork.categories[0]?.id ?? 0,
-    );
+export default function OurWorkSection({
+    categories,
+    activeCategory,
+    projects,
+}: OurWorkSectionProps) {
+    const [isLoading, setIsLoading] = useState(false);
     const [loadedMedia, setLoadedMedia] = useState<Set<string>>(new Set());
 
-    if (ourWork.categories.length === 0) {
-        return null;
-    }
+    if (categories.length === 0) return null;
 
-    const activeCategoryData = ourWork.categories.find(
-        (cat) => cat.id === activeCategory,
-    );
-    const projects = activeCategoryData?.projects ?? [];
+    const handleCategoryChange = (id: number) => {
+        if (id === activeCategory || isLoading) return;
+
+        setIsLoading(true);
+        router.visit(index.url({ query: { category: id } }), {
+            only: ['workProjects', 'workActiveCategory'],
+            preserveState: true,
+            preserveScroll: true,
+            onFinish: () => setIsLoading(false),
+        });
+    };
 
     const handleMediaLoad = (id: string) => {
         setLoadedMedia((prev) => new Set(prev).add(id));
-    };
-
-    const handleCategoryChange = (id: number) => {
-        setActiveCategory(id);
     };
 
     return (
@@ -36,7 +43,7 @@ export default function OurWorkSection({ ourWork }: OurWorkSectionProps) {
             </h1>
 
             <div className="flex flex-wrap gap-2">
-                {ourWork.categories.map((category) => (
+                {categories.map((category) => (
                     <button
                         key={category.id}
                         type="button"
@@ -52,9 +59,18 @@ export default function OurWorkSection({ ourWork }: OurWorkSectionProps) {
                 ))}
             </div>
 
-            {projects.length > 0 && (
+            {isLoading ? (
                 <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-5 lg:gap-10">
-                    {projects.map((project: WorkProject) => (
+                    {Array.from({ length: 6 }).map((_, i) => (
+                        <div
+                            key={i}
+                            className="aspect-square animate-pulse rounded-lg bg-white/5 md:rounded-3xl"
+                        />
+                    ))}
+                </div>
+            ) : projects.length > 0 ? (
+                <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-5 lg:gap-10">
+                    {projects.map((project) => (
                         <ProjectCard
                             key={project.id}
                             project={project}
@@ -63,7 +79,7 @@ export default function OurWorkSection({ ourWork }: OurWorkSectionProps) {
                         />
                     ))}
                 </div>
-            )}
+            ) : null}
         </div>
     );
 }
@@ -84,7 +100,6 @@ function ProjectCard({ project, loaded, onLoad }: ProjectCardProps) {
                             <div className="h-8 w-8 animate-spin rounded-full border-2 border-white/30 border-t-white" />
                         </div>
                     )}
-
                     {project.mediaType === 'video' ? (
                         <video
                             src={project.mediaSrc}
@@ -109,7 +124,7 @@ function ProjectCard({ project, loaded, onLoad }: ProjectCardProps) {
                 <div className="h-full w-full bg-white/5" />
             )}
 
-<div className="pointer-events-none absolute inset-0 flex items-end bg-linear-to-t from-black/60 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div className="pointer-events-none absolute inset-0 flex items-end bg-linear-to-t from-black/60 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <h3 className="text-lg font-semibold text-white">
                     {project.title}
                 </h3>

@@ -8,9 +8,4 @@ export interface WorkProject {
 export interface WorkCategory {
     id: number;
     name: string;
-    projects: WorkProject[];
-}
-
-export interface OurWorkData {
-    categories: WorkCategory[];
 }
