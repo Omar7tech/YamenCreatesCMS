@@ -1,10 +1,30 @@
-import type { ReactNode } from 'react';
+import { router } from '@inertiajs/react';
+import { useEffect, type ReactNode } from 'react';
 
 import Footer from '@/components/Footer';
 import FooterIntro from '@/components/FooterIntro';
 import Nav from '@/components/nav/Nav';
 
+function scrollToHash() {
+    const hash = window.location.hash;
+    if (!hash) return;
+
+    const el = document.querySelector(hash);
+    if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 50);
+    }
+}
+
 export default function Layout({ children }: { children: ReactNode }) {
+    useEffect(() => {
+        // Handle hash on initial page load
+        scrollToHash();
+
+        // Handle hash after every Inertia navigation
+        const remove = router.on('navigate', scrollToHash);
+        return () => remove();
+    }, []);
+
     return (
         <>
             <a

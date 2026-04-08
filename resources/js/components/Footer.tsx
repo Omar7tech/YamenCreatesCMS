@@ -1,11 +1,16 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 
 import FooterCard from '@/components/FooterCard';
-import LoadingIndicator from '@/components/LoadingIndicator';
+
+interface FooterCategory {
+    name: string;
+    slug: string;
+}
 
 const currentYear = new Date().getFullYear();
 
 export default function Footer() {
+    const { footerCategories } = usePage<{ footerCategories: FooterCategory[] }>().props;
     return (
         <footer className="flex flex-col items-center justify-center space-y-5 px-5 text-center md:px-10 lg:px-40">
             <div>
@@ -21,40 +26,40 @@ export default function Footer() {
                 <FooterCard title="Home" href="/">
                     <ul className="overflow-auto pt-5 text-[clamp(1.5rem,2vw,2rem)] font-extralight leading-[1.2]">
                         <li>
-                            <a
+                            <Link
                                 href="/#hero"
                                 aria-label="Go to About Us section on Home page"
                                 className="transition-colors hover:text-white/80"
                             >
                                 About Us
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
+                            <Link
                                 href="/#we-believe"
                                 aria-label="Go to Our Philosophy section on Home page"
                                 className="transition-colors hover:text-white/80"
                             >
                                 Our Philosophy
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
+                            <Link
                                 href="/#services"
                                 aria-label="Go to Our Services section on Home page"
                                 className="transition-colors hover:text-white/80"
                             >
                                 Our Services
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
+                            <Link
                                 href="/#clients"
                                 aria-label="Go to Our Clients section on Home page"
                                 className="transition-colors hover:text-white/80"
                             >
                                 Our Clients
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </FooterCard>
@@ -68,39 +73,19 @@ export default function Footer() {
                                 className="transition-colors hover:text-white/80"
                             >
                                 Programs
-                                <LoadingIndicator />
                             </Link>
                         </li>
-                        <li>
-                            <Link
-                                href="/work?category=Branding#our-work"
-                                aria-label="Go to Branding Projects on Work page"
-                                className="transition-colors hover:text-white/80"
-                            >
-                                Branding
-                                <LoadingIndicator />
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href="/work?category=Websites#our-work"
-                                aria-label="Go to Website Projects on Work page"
-                                className="transition-colors hover:text-white/80"
-                            >
-                                Websites
-                                <LoadingIndicator />
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href="/work?category=Content#our-work"
-                                aria-label="Go to Content Projects on Work page"
-                                className="transition-colors hover:text-white/80"
-                            >
-                                Content
-                                <LoadingIndicator />
-                            </Link>
-                        </li>
+                        {footerCategories.map((category) => (
+                            <li key={category.slug}>
+                                <Link
+                                    href={`/work?category=${category.slug}#our-work`}
+                                    aria-label={`Go to ${category.name} projects on Work page`}
+                                    className="transition-colors hover:text-white/80"
+                                >
+                                    {category.name}
+                                </Link>
+                            </li>
+                        ))}
                     </ul>
                 </FooterCard>
 
