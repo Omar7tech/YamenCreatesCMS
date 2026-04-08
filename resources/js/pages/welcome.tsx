@@ -8,7 +8,18 @@ import ServicesSection from '@/sections/home/ServicesSection';
 import WeBelieveSection from '@/sections/home/WeBelieveSection';
 import WeCoCreateSection from '@/sections/home/WeCoCreateSection';
 
-export default function Welcome() {
+interface RecentlyCreatedItem {
+    id: number;
+    image_1: string;
+    image_2: string;
+    image_3: string;
+}
+
+interface WelcomeProps {
+    recentlyCreated: RecentlyCreatedItem[];
+}
+
+export default function Welcome({ recentlyCreated }: WelcomeProps) {
     return (
         <>
             <Head title="Home" />
@@ -33,7 +44,7 @@ export default function Welcome() {
                     <ServicesSection />
                 </section>
                 <section id="clients">
-                    <RecentlyCreatedSection />
+                    <RecentlyCreatedSection items={recentlyCreated} />
                 </section>
             </div>
         </>
