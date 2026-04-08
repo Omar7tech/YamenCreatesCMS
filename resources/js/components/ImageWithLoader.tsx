@@ -13,17 +13,11 @@ export default function ImageWithLoader({ images }: ImageWithLoaderProps) {
         setLoadedImages((previous) => new Set(previous).add(index));
     };
 
-    const displayImages =
-        images.length > 0
-            ? images
-            : Array.from({ length: 4 }, (_, index) => ({
-                  src: '',
-                  alt: `Program placeholder ${index + 1}`,
-              }));
+    if (images.length === 0) return null;
 
     return (
         <div className="mt-6 grid grid-cols-2 gap-3 md:mt-8 md:grid-cols-4 md:gap-10">
-            {displayImages.map((image, index) => (
+            {images.map((image, index) => (
                 <div
                     key={`${image.alt}-${index}`}
                     className="relative aspect-square overflow-hidden rounded-lg border border-white/20 md:rounded-3xl"
