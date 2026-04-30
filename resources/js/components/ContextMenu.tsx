@@ -97,39 +97,48 @@ export default function ContextMenu() {
 
     return (
         <div
-            className="context-menu fixed z-9999 min-w-[160px] rounded-2xl border border-white/15 bg-white/10 p-2 shadow-xl backdrop-blur-xl"
-            style={{ left: position.x, top: position.y }}
+            className="context-menu group relative"
         >
-            <Link
-                href="/"
-                onClick={() => setIsVisible(false)}
-                className="mb-2 block rounded-xl border border-white/10 bg-white/5 p-2 transition-colors hover:bg-white/10"
+            <div
+                aria-hidden
+                className="absolute inset-0 rounded-[2.5rem] bg-purple-500/20 opacity-0 blur-xl transition-opacity duration-200 group-hover:opacity-60"
+            />
+            <div
+                className="relative flex min-w-[200px] flex-col justify-between rounded-[2.5rem] border-2 border-transparent bg-[#262626] px-6 py-6 shadow-[0_0_40px_rgba(168,85,247,0.45)] transition-all duration-200 ease-out [background:linear-gradient(#262626,#262626)_padding-box,linear-gradient(135deg,#d8b4fe_0%,#d8b4fe_25%,#a855f7_75%,#a855f7_100%)_border-box] group-hover:shadow-[0_4px_60px_rgba(168,85,247,0.55)]"
+                style={{ left: position.x, top: position.y, position: 'fixed', zIndex: 9999 }}
             >
-                <img src={logoPath} alt="Yamen Creates" className="h-8 w-auto" />
-            </Link>
-
-            <p className="mb-2 px-1 text-sm font-light italic leading-relaxed text-white/50">
-                {creativeLine}
-            </p>
-
-            <div className="mb-2 h-px bg-white/10" />
-
-            <nav className="space-y-1">
-                {[
-                    { href: '/', label: 'Home' },
-                    { href: '/work', label: 'Work' },
-                    { href: '/contact', label: 'Contact' },
-                ].map((item) => (
+                <div className="mb-4">
                     <Link
-                        key={item.href}
-                        href={item.href}
+                        href="/"
                         onClick={() => setIsVisible(false)}
-                        className="block rounded-lg px-3 py-2 text-sm font-light text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                        className="transition-opacity hover:opacity-80"
                     >
-                        {item.label}
+                        <img src={logoPath} alt="Yamen Creates" className="h-6 w-auto" />
                     </Link>
-                ))}
-            </nav>
+                </div>
+
+                <p className="mb-4 text-sm font-extralight italic leading-relaxed text-white/60">
+                    {creativeLine}
+                </p>
+
+                <ul className="space-y-2 text-xl leading-none font-extralight text-white/80 uppercase">
+                    {[
+                        { href: '/', label: 'Home' },
+                        { href: '/work', label: 'Work' },
+                        { href: '/contact', label: 'Contact' },
+                    ].map((item) => (
+                        <li key={item.href}>
+                            <Link
+                                href={item.href}
+                                onClick={() => setIsVisible(false)}
+                                className="block transition-colors hover:text-white"
+                            >
+                                {item.label}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 }
