@@ -120,6 +120,13 @@ function ProjectCard({ project, loaded, onLoad }: ProjectCardProps) {
                 <div className="h-full w-full bg-white/5" />
             )}
 
+            <button
+                type="button"
+                className="absolute right-3 top-3 z-30 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs font-light text-white backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:border-white/50 md:right-4 md:top-4 md:px-4 md:py-2 md:text-sm"
+            >
+                View More
+            </button>
+
             <div className="pointer-events-none absolute inset-0 flex items-end bg-linear-to-t from-black/60 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <h3 className="text-lg font-semibold text-white">
                     {project.title}
