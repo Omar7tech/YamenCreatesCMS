@@ -57,10 +57,19 @@
     <x-inertia::head>
         <title data-inertia>{{ config('app.name', 'YC') }}</title>
     </x-inertia::head>
+    <link rel="stylesheet" href="https://unpkg.com/kursor/dist/kursor.css">
 </head>
 
 <body class="antialiased" style="background:#2b2b2b;color:#ededed;">
     <x-inertia::app />
 </body>
+<script src="https://cdn.jsdelivr.net/npm/kursor@0.0.14/dist/kursor.js"></script>
+<script>
+    new kursor({
+        type: 1,
+        removeDefaultCursor: true,
+        color: '#FFFFFF'
+    })
+</script>
 
 </html>
