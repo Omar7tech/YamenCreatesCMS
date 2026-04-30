@@ -12,7 +12,7 @@ const currentYear = new Date().getFullYear();
 export default function Footer() {
     const { footerCategories } = usePage<{ footerCategories: FooterCategory[] }>().props;
     return (
-        <footer className="flex flex-col items-center justify-center space-y-5 px-5 text-center md:px-10 lg:px-40">
+        <footer className="relative flex flex-col items-center justify-center space-y-5 px-5 text-center md:px-10 lg:px-40">
             <div>
                 <p className="text-[clamp(2rem,4vw,5rem)] font-extralight">
                     WeCo-Create
@@ -137,6 +137,10 @@ export default function Footer() {
                 <p>
                     Copyright {currentYear} Yamen Creates. All rights reserved.
                 </p>
+            </div>
+
+            <div className="absolute bottom-0 left-0 right-0 h-32 overflow-hidden pointer-events-none">
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-size-[20px_20px] mask-[linear-gradient(to_top,rgba(0,0,0,1)_0%,rgba(0,0,0,0)_100%)]"></div>
             </div>
         </footer>
     );
