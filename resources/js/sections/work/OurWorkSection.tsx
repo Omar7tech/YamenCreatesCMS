@@ -88,7 +88,7 @@ interface ProjectCardProps {
 
 function ProjectCard({ project, loaded, onLoad }: ProjectCardProps) {
     return (
-        <div className="group relative aspect-square overflow-hidden rounded-lg border border-white/20 md:rounded-3xl">
+        <div className="group relative aspect-square overflow-hidden rounded-lg border border-white/20 transition-all duration-500 hover:-translate-y-1 hover:border-purple-500/50 hover:shadow-[0_12px_35px_rgba(147,51,234,0.4)] md:rounded-3xl">
             {project.mediaSrc ? (
                 <>
                     {!loaded && (
@@ -99,7 +99,7 @@ function ProjectCard({ project, loaded, onLoad }: ProjectCardProps) {
                     {project.mediaType === 'video' ? (
                         <video
                             src={project.mediaSrc}
-                            className={`h-full w-full object-cover transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+                            className={`h-full w-full object-cover transition-all duration-500 ${loaded ? 'opacity-100' : 'opacity-0'} group-hover:scale-110`}
                             autoPlay
                             loop
                             muted
@@ -110,7 +110,7 @@ function ProjectCard({ project, loaded, onLoad }: ProjectCardProps) {
                         <img
                             src={project.mediaSrc}
                             alt={project.title}
-                            className={`h-full w-full object-cover transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+                            className={`h-full w-full object-cover transition-all duration-500 ${loaded ? 'opacity-100' : 'opacity-0'} group-hover:scale-110`}
                             loading="lazy"
                             onLoad={onLoad}
                         />
@@ -127,7 +127,7 @@ function ProjectCard({ project, loaded, onLoad }: ProjectCardProps) {
                 View More
             </button>
 
-            <div className="pointer-events-none absolute inset-0 flex items-end bg-linear-to-t from-black/60 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div className="pointer-events-none absolute inset-0 flex items-end bg-linear-to-t from-purple-900/40 via-black/30 to-transparent p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                 <h3 className="text-lg font-semibold text-white">
                     {project.title}
                 </h3>

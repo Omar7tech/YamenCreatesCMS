@@ -50,7 +50,7 @@ function ProjectTile({
                 loading="lazy"
                 onLoad={() => handleImageLoad(imageKey)}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="absolute inset-0 bg-linear-to-t from-purple-900/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         </div>
     );
 }
