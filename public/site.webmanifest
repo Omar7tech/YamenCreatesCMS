@@ -1,6 +1,10 @@
 {
   "name": "Yamen Creates",
   "short_name": "YC®",
+  "start_url": "/",
+  "id": "/",
+  "scope": "/",
+  "description": "Strategic brand and creative partner helping founders and leadership teams build brands, marketing systems, and digital experiences that scale.",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
