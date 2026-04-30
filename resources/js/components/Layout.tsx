@@ -1,6 +1,7 @@
 import { router } from '@inertiajs/react';
 import { useEffect, type ReactNode } from 'react';
 
+import ContextMenu from '@/components/ContextMenu';
 import Footer from '@/components/Footer';
 import FooterIntro from '@/components/FooterIntro';
 import Nav from '@/components/nav/Nav';
@@ -44,6 +45,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
             <FooterIntro />
             <Footer />
+            <ContextMenu />
         </>
     );
 }
