@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" @class(['dark' => ($appearance ?? 'system') == 'dark'])
-    style="background:#2b2b2b;color:#ededed;">
+<html lang="en" @class(['dark' => ($appearance ?? 'system') == 'dark']) style="background:#2b2b2b;color:#ededed;">
 
 <head>
     <meta charset="utf-8">
@@ -17,38 +16,46 @@
     <meta name="robots" content="index, follow">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Special+Gothic+Expanded+One&display=swap"
         rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@yamencreates">
+    <meta name="twitter:creator" content="@yamencreates">
     <link rel="canonical" href="{{ url()->current() }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <x-seo />
+
     <meta property="og:image:alt" content="Yamen Creates — Strategic Brand & Creative Partner">
     <meta name="twitter:image:alt" content="Yamen Creates — Strategic Brand & Creative Partner">
     <meta property="og:locale" content="en_US">
     <script type="application/ld+json">
       @verbatim  
-                {
-                  "@context" : "https://schema.org",
-                  "@type" : "Organization",
-                  "name" : "Yamen Creates",
-                  "alternateName": ["YC", "Yamen Creates", "Yamen Creates Official", "Yamen Creates Website", "Y-C" , "Yamen Jurdi"],
-                  "url" : "https://yamencreates.com/",
-                  "logo": "https://yamencreates.com/biglogo.jpg",
-                  "sameAs": [
-                    "https://www.instagram.com/yamencreates",
-                    "https://www.linkedin.com/company/yamen-creates"
-                  ]
-                }
+                       {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Yamen Creates",
+          "alternateName": ["YC", "Yamen Jurdi"],
+          "url": "https://yamencreates.com/",
+          "logo": "https://yamencreates.com/biglogo.jpg",
+          "areaServed": ["LB", "AE", "SA"],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "email": "info@yamencreates.com"
+          },
+          "sameAs": [
+            "https://www.instagram.com/yamencreates",
+            "https://www.linkedin.com/company/yamen-creates"
+          ]
+        }
     @endverbatim
   </script>
     @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
     <x-inertia::head>
-        <title data-inertia>{{ config('app.name', 'Laravel') }}</title>
+        <title data-inertia>{{ config('app.name', 'YC') }}</title>
     </x-inertia::head>
 </head>
 
