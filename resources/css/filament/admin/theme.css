@@ -7,6 +7,10 @@
 
 
 .fi-header-heading{
-  @apply text-3xl md:text-4xl lg:text-5xl font-light leading-tight tracking-tight;
+  @apply text-3xl md:text-4xl  font-light leading-tight tracking-tight;
 }
 
+
+ .fi-sidebar-nav-groups {
+    row-gap: calc(var(--spacing) * 2);
+  }
