@@ -122,7 +122,7 @@ function ProjectCard({ project, loaded, onLoad }: ProjectCardProps) {
 
             <button
                 type="button"
-                className="absolute right-3 top-3 z-30 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs font-light text-white backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:border-white/50 md:right-4 md:top-4 md:px-4 md:py-2 md:text-sm"
+                className="absolute right-2 top-2 z-30 cursor-pointer rounded-full border border-white/30 bg-white/10 px-2 py-1 text-[10px] font-light text-white backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:border-white/50 md:right-3 md:top-3 md:px-2.5 md:py-1.5 md:text-xs"
             >
                 View More
             </button>
