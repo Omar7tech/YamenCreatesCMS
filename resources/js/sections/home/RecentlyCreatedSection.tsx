@@ -36,7 +36,7 @@ function ProjectTile({
 
     return (
         <div
-            className={`${colSpan} relative h-[150px] overflow-hidden rounded-lg border border-white/[.145] transition-all duration-300 hover:-translate-y-0.5 hover:border-purple-500/50 hover:shadow-[0_8px_25px_rgba(147,51,234,0.3)] md:h-[320px] md:rounded-4xl`}
+            className={`${colSpan} relative h-[150px] overflow-hidden rounded-lg border border-white/[.145] transition-all duration-500 hover:-translate-y-1 hover:border-purple-500/50 hover:shadow-[0_12px_35px_rgba(147,51,234,0.4)] md:h-[320px] md:rounded-4xl group`}
         >
             {!isLoaded && (
                 <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/10 backdrop-blur-sm">
@@ -46,10 +46,11 @@ function ProjectTile({
             <img
                 src={src}
                 alt={alt}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 loading="lazy"
                 onLoad={() => handleImageLoad(imageKey)}
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         </div>
     );
 }
