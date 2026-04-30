@@ -4,6 +4,7 @@ import { index as contact } from '@/actions/App/Http/Controllers/ContactControll
 import { index as work } from '@/actions/App/Http/Controllers/WorkController';
 import AnimatedDescription from '@/components/AnimatedDescription';
 import DecryptedText from '@/components/DecryptedText';
+import MagneticButton from '@/components/MagneticButton';
 import MagicBento from '@/components/MagicBento';
 
 const heroLines = ['We Work With', 'Founders, CEOs,', '& Leadership Teams'];
@@ -68,6 +69,7 @@ export default function HeroSection() {
                                 <ArrowRight className="h-4 w-4" />
                             </Link>
 
+                            <MagneticButton strength={0.4} className="inline-block">
                             <Link
                                 href={contact()}
                                 className="flex items-center justify-between gap-2 rounded-full border border-white/30 px-3 py-3 font-light text-white transition-all duration-300 hover:bg-white/10 md:px-6"
@@ -75,6 +77,7 @@ export default function HeroSection() {
                                 Let&apos;s Talk
                                 <ArrowRight className="h-4 w-4" />
                             </Link>
+                        </MagneticButton>
                         </div>
                     </div>
                 </div>
