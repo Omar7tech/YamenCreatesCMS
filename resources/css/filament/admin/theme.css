@@ -4,6 +4,7 @@
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
 @source '../../vendor/mmes-design/filament-file-manager';
+@source "../../../../vendor/relaticle/flowforge/resources/views/**/*.blade.php";
 
 
 .fi-header-heading {
