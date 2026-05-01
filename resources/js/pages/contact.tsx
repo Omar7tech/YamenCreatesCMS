@@ -1,8 +1,12 @@
-import { Head } from '@inertiajs/react';
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Head, usePage } from '@inertiajs/react';
+import { Mail, Phone } from 'lucide-react';
 import AnimatedDescription from '@/components/AnimatedDescription';
 
 export default function Contact() {
+    const { contactEmail, contactPhone } = usePage<{ 
+        contactEmail: { email: string }[];
+        contactPhone: { phone: string }[];
+    }>().props;
     return (
         <>
             <Head title="Contact" />
@@ -28,22 +32,28 @@ export default function Contact() {
                         </div>
 
                         <div className="space-y-4 pt-5">
-                            <div className="flex items-center space-x-3">
-                                <Mail className="h-5 w-5 text-white/70" />
-                                <p className="text-white/80">
-                                    info@yamencreates.com
-                                </p>
-                            </div>
-                            <div className="flex items-center space-x-3">
-                                <Phone className="h-5 w-5 text-white/70" />
-                                <p className="text-white/80">+961 7007 5077</p>
-                            </div>
-                            <div className="flex items-center space-x-3">
-                                <MapPin className="h-5 w-5 text-white/70" />
-                                <p className="text-white/80">
-                                    Aley, Mount Lebanon, Lebanon
-                                </p>
-                            </div>
+                            {contactEmail.map((item) => (
+                                <div key={item.email} className="flex items-center space-x-3">
+                                    <Mail className="h-5 w-5 text-white/70" />
+                                    <a
+                                        href={`mailto:${item.email}`}
+                                        className="text-white/80 transition-colors hover:text-white"
+                                    >
+                                        {item.email}
+                                    </a>
+                                </div>
+                            ))}
+                            {contactPhone.map((item) => (
+                                <div key={item.phone} className="flex items-center space-x-3">
+                                    <Phone className="h-5 w-5 text-white/70" />
+                                    <a
+                                        href={`tel:${item.phone.replace(/\s/g, '')}`}
+                                        className="text-white/80 transition-colors hover:text-white"
+                                    >
+                                        {item.phone}
+                                    </a>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
