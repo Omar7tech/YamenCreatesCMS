@@ -229,6 +229,7 @@ export default function Nav() {
                 aria-label="Go to homepage"
                 className="group relative z-[60] rounded-full border-2 border-white/[.145] bg-white/10 px-4 py-3 text-2xl font-light backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-gray-300 hover:bg-gray-100"
                 viewTransition
+                prefetch
             >
                 <img
                     src={logoPath}
@@ -248,6 +249,7 @@ export default function Nav() {
                                     : 'border-white/[.145] bg-white/5 text-white/90'
                             }`}
                             viewTransition
+                            prefetch
                         >
                             <DecryptedText
                                 text={item.name}
