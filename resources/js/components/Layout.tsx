@@ -1,10 +1,14 @@
 import { router } from '@inertiajs/react';
 import { useEffect, type ReactNode } from 'react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import gsap from 'gsap';
 
 import ContextMenu from '@/components/ContextMenu';
 import Footer from '@/components/Footer';
 import FooterIntro from '@/components/FooterIntro';
 import Nav from '@/components/nav/Nav';
+
+gsap.registerPlugin(ScrollTrigger);
 
 function scrollToHash() {
     const hash = window.location.hash;
@@ -24,6 +28,36 @@ export default function Layout({ children }: { children: ReactNode }) {
         // Handle hash after every Inertia navigation
         const remove = router.on('navigate', scrollToHash);
         return () => remove();
+    }, []);
+
+    useEffect(() => {
+        // Refresh ScrollTrigger after fonts/images load
+        const refreshScrollTrigger = () => {
+            ScrollTrigger.refresh();
+        };
+
+        // Wait for fonts
+        document.fonts.ready.then(refreshScrollTrigger);
+
+        // Wait for images/full page load
+        if (document.readyState === 'complete') {
+            refreshScrollTrigger();
+        } else {
+            window.addEventListener('load', refreshScrollTrigger);
+        }
+
+        // Refresh after Inertia navigation
+        const removeNavigate = router.on('navigate', () => {
+            // Small delay to let new content render
+            requestAnimationFrame(() => {
+                requestAnimationFrame(refreshScrollTrigger);
+            });
+        });
+
+        return () => {
+            window.removeEventListener('load', refreshScrollTrigger);
+            removeNavigate();
+        };
     }, []);
 
     return (
