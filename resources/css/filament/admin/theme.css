@@ -3,7 +3,7 @@
 @source '../../../../vendor/awcodes/light-switch/resources/**/*.blade.php';
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
-
+@source '../../vendor/mmes-design/filament-file-manager';
 
 
 .fi-header-heading {

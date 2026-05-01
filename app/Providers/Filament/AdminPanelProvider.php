@@ -23,6 +23,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Awcodes\LightSwitch\LightSwitchPlugin;
+use MmesDesign\FilamentFileManager\FileManagerPlugin;
 use Qalainau\UniverSheet\UniverSheetPlugin;
 
 class AdminPanelProvider extends PanelProvider
@@ -83,7 +84,8 @@ class AdminPanelProvider extends PanelProvider
                     ->emptyPanelBackgroundImageUrl(asset('biglogo.jpg')),
                 LightSwitchPlugin::make(),
                 MobileBottomNav::make(),
-                UniverSheetPlugin::make()
+                UniverSheetPlugin::make(),
+                FileManagerPlugin::make()
             ]);
     }
 }
