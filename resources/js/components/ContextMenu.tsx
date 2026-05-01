@@ -107,13 +107,13 @@ export default function ContextMenu() {
                 className="relative flex min-w-[200px] flex-col justify-between rounded-[2.5rem] border-2 border-transparent bg-[#262626] px-6 py-6 shadow-[0_0_40px_rgba(168,85,247,0.45)] transition-all duration-200 ease-out [background:linear-gradient(#262626,#262626)_padding-box,linear-gradient(135deg,#d8b4fe_0%,#d8b4fe_25%,#a855f7_75%,#a855f7_100%)_border-box] group-hover:shadow-[0_4px_60px_rgba(168,85,247,0.55)]"
                 style={{ left: position.x, top: position.y, position: 'fixed', zIndex: 9999 }}
             >
-                <div className="mb-4">
+                <div className="mb-4 w-full">
                     <Link
                         href="/"
                         onClick={() => setIsVisible(false)}
-                        className="transition-opacity hover:opacity-80"
+                        className="transition-opacity hover:opacity-80 block w-full"
                     >
-                        <img src={logoPath} alt="Yamen Creates" className="h-6 w-auto" />
+                        <img src={logoPath} alt="Yamen Creates" className="w-fit h-8" />
                     </Link>
                 </div>
 
@@ -121,7 +121,7 @@ export default function ContextMenu() {
                     {creativeLine}
                 </p>
 
-                <ul className="space-y-2 text-xl leading-none font-extralight text-white/80 uppercase">
+                <ul className="space-y-2 text-2xl leading-none font-extralight text-white/80 uppercase">
                     {[
                         { href: '/', label: 'Home' },
                         { href: '/work', label: 'Work' },
