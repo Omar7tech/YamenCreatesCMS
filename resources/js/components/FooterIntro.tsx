@@ -1,16 +1,18 @@
 'use client';
 
-import { usePage } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { ArrowRight } from 'lucide-react';
+import MagneticButton from '@/components/MagneticButton';
 import { useEffect, useRef } from 'react';
+import { index as contact } from '@/actions/App/Http/Controllers/ContactController';
+import { index as work } from '@/actions/App/Http/Controllers/WorkController';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export default function FooterIntro() {
-    const { url } = usePage();
     const sectionRef = useRef<HTMLElement>(null);
     const line1Ref = useRef<HTMLParagraphElement>(null);
     const line2Ref = useRef<HTMLParagraphElement>(null);
@@ -109,7 +111,7 @@ export default function FooterIntro() {
             ctx?.revert();
             splitInstances.forEach((split) => split.revert());
         };
-    }, [url]);
+    }, []);
 
     return (
         <section
@@ -128,14 +130,23 @@ export default function FooterIntro() {
                     ref={buttonsRef}
                     className="flex flex-row gap-2 pt-5 text-sm md:gap-3 md:text-base"
                 >
-                    <button className="flex items-center justify-between gap-2 rounded-full border border-white/30 px-3 py-3 font-light text-white transition-all duration-300 hover:bg-white/10 md:px-6">
+                    <Link
+                        href={work()}
+                        className="flex items-center justify-between gap-2 rounded-full border border-white/30 px-3 py-3 font-light text-white transition-all duration-300 hover:bg-white/10 md:px-6"
+                    >
                         Find Your Program
                         <ArrowRight className="h-4 w-4" />
-                    </button>
-                    <button className="flex items-center justify-between gap-2 rounded-full border border-white/30 px-3 py-3 font-light text-white transition-all duration-300 hover:bg-white/10 md:px-6">
-                        Let&apos;s Talk
-                        <ArrowRight className="h-4 w-4" />
-                    </button>
+                    </Link>
+                    
+                    <MagneticButton strength={0.4} className="inline-block">
+                        <Link
+                            href={contact()}
+                            className="flex items-center justify-between gap-2 rounded-full border border-white/30 px-3 py-3 font-light text-white transition-all duration-300 hover:bg-white/10 md:px-6"
+                        >
+                            Let&apos;s Talk
+                            <ArrowRight className="h-4 w-4" />
+                        </Link>
+                    </MagneticButton>
                 </div>
             </div>
         </section>
