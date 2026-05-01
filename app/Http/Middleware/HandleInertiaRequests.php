@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Category;
+use App\Settings\GeneralSettings;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -28,6 +29,7 @@ class HandleInertiaRequests extends Middleware
                 ->get(['title', 'slug'])
                 ->map(fn (Category $c) => ['name' => $c->title, 'slug' => $c->slug])
                 ->values(),
+            'socialMedia' => fn () => app(GeneralSettings::class)->social_media ?? [],
         ];
     }
 }

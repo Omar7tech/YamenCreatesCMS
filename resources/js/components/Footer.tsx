@@ -7,10 +7,15 @@ interface FooterCategory {
     slug: string;
 }
 
+interface SocialMediaItem {
+    name: string;
+    link: string;
+}
+
 const currentYear = new Date().getFullYear();
 
 export default function Footer() {
-    const { footerCategories } = usePage<{ footerCategories: FooterCategory[] }>().props;
+    const { footerCategories, socialMedia } = usePage<{ footerCategories: FooterCategory[]; socialMedia: SocialMediaItem[] }>().props;
     return (
         <footer className="relative flex flex-col items-center justify-center space-y-5 px-5 text-center md:px-10 lg:px-40">
             <div>
@@ -107,28 +112,19 @@ export default function Footer() {
                                 hello@yamencreates.com
                             </a>
                         </li>
-                        <li>
-                            <a
-                                aria-label="Visit Yamen Creates on Instagram"
-                                href="https://www.instagram.com/yamencreates/"
-                                target="_blank"
-                                rel="noreferrer"
-                                className="transition-colors hover:text-white/80"
-                            >
-                                Instagram
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                aria-label="Visit Yamen Creates on LinkedIn"
-                                href="https://www.linkedin.com/company/yamen-creates/posts/?feedView=all"
-                                target="_blank"
-                                rel="noreferrer"
-                                className="transition-colors hover:text-white/80"
-                            >
-                                LinkedIn
-                            </a>
-                        </li>
+                        {socialMedia.map((item) => (
+                            <li key={item.name}>
+                                <a
+                                    aria-label={`Visit Yamen Creates on ${item.name}`}
+                                    href={item.link}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="transition-colors hover:text-white/80"
+                                >
+                                    {item.name}
+                                </a>
+                            </li>
+                        ))}
                     </ul>
                 </FooterCard>
             </div>
