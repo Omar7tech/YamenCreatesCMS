@@ -17,22 +17,15 @@ class TaskFactory extends Factory
     {
         $status = $this->faker->randomElement(['todo', 'in_progress', 'completed']);
         $priority = $this->faker->randomElement(['low', 'medium', 'high']);
-        $progress = match($status) {
-            'todo' => $this->faker->numberBetween(0, 20),
-            'in_progress' => $this->faker->numberBetween(20, 80),
-            'completed' => 100,
-        };
 
         return [
             'title' => $this->faker->sentence(3),
-            'description' => '<p>' . $this->faker->paragraph() . '</p><ul><li>' . $this->faker->sentence() . '</li><li>' . $this->faker->sentence() . '</li></ul>',
+            'description' => $this->faker->sentence(10),
             'status' => $status,
             'priority' => $priority,
-            'assignee' => $this->faker->optional(0.7)->name(),
-            'tags' => $this->faker->optional(0.8)->randomElements(['bug', 'feature', 'enhancement', 'design', 'urgent', 'backend', 'frontend'], $this->faker->numberBetween(1, 3)),
-            'due_date' => $this->faker->optional(0.6)->dateTimeBetween('now', '+30 days'),
-            'estimated_hours' => $this->faker->optional(0.5)->numberBetween(1, 40),
-            'progress' => $progress,
+            'tags' => $this->faker->optional(0.7)->randomElements(['bug', 'feature', 'enhancement', 'design'], $this->faker->numberBetween(1, 2)),
+            'due_date' => $this->faker->optional(0.5)->dateTimeBetween('now', '+14 days'),
+            'estimated_hours' => $this->faker->optional(0.4)->numberBetween(2, 16),
             'position' => $this->generatePositionForStatus($status),
         ];
     }
