@@ -16,12 +16,23 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         $status = $this->faker->randomElement(['todo', 'in_progress', 'completed']);
+        $priority = $this->faker->randomElement(['low', 'medium', 'high']);
+        $progress = match($status) {
+            'todo' => $this->faker->numberBetween(0, 20),
+            'in_progress' => $this->faker->numberBetween(20, 80),
+            'completed' => 100,
+        };
 
         return [
             'title' => $this->faker->sentence(3),
-            'description' => $this->faker->paragraph(),
+            'description' => '<p>' . $this->faker->paragraph() . '</p><ul><li>' . $this->faker->sentence() . '</li><li>' . $this->faker->sentence() . '</li></ul>',
             'status' => $status,
-            'due_date' => $this->faker->optional()->dateTimeBetween('now', '+30 days'),
+            'priority' => $priority,
+            'assignee' => $this->faker->optional(0.7)->name(),
+            'tags' => $this->faker->optional(0.8)->randomElements(['bug', 'feature', 'enhancement', 'design', 'urgent', 'backend', 'frontend'], $this->faker->numberBetween(1, 3)),
+            'due_date' => $this->faker->optional(0.6)->dateTimeBetween('now', '+30 days'),
+            'estimated_hours' => $this->faker->optional(0.5)->numberBetween(1, 40),
+            'progress' => $progress,
             'position' => $this->generatePositionForStatus($status),
         ];
     }

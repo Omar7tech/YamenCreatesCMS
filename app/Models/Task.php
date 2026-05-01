@@ -14,10 +14,18 @@ class Task extends Model
         'status',
         'due_date',
         'position',
+        'priority',
+        'tags',
+        'assignee',
+        'progress',
+        'estimated_hours',
     ];
 
     protected $casts = [
         'due_date' => 'date',
         'position' => 'decimal:10',
+        'tags' => 'array',
+        'progress' => 'integer',
+        'estimated_hours' => 'integer',
     ];
 }
