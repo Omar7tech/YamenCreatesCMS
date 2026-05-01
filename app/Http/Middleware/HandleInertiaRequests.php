@@ -30,6 +30,8 @@ class HandleInertiaRequests extends Middleware
                 ->map(fn (Category $c) => ['name' => $c->title, 'slug' => $c->slug])
                 ->values(),
             'socialMedia' => fn () => app(GeneralSettings::class)->social_media ?? [],
+            'contactEmail' => fn () => app(GeneralSettings::class)->contact_email ?? [],
+            'contactPhone' => fn () => app(GeneralSettings::class)->contact_phone ?? [],
         ];
     }
 }

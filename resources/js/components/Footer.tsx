@@ -15,7 +15,12 @@ interface SocialMediaItem {
 const currentYear = new Date().getFullYear();
 
 export default function Footer() {
-    const { footerCategories, socialMedia } = usePage<{ footerCategories: FooterCategory[]; socialMedia: SocialMediaItem[] }>().props;
+    const { footerCategories, socialMedia, contactEmail, contactPhone } = usePage<{ 
+        footerCategories: FooterCategory[]; 
+        socialMedia: SocialMediaItem[];
+        contactEmail: { email: string }[];
+        contactPhone: { phone: string }[];
+    }>().props;
     return (
         <footer className="relative flex flex-col items-center justify-center space-y-5 px-5 text-center md:px-10 lg:px-40">
             <div>
@@ -96,22 +101,26 @@ export default function Footer() {
 
                 <FooterCard title="Contact" href="/contact">
                     <ul className="overflow-auto pt-5 text-[clamp(1.5rem,2vw,2rem)] font-extralight leading-[1.2]">
-                        <li>
-                            <a
-                                href="tel:+96170075077"
-                                className="transition-colors hover:text-white/80"
-                            >
-                                +961 70 075 077
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="mailto:hello@yamencreates.com"
-                                className="text-[clamp(1.5rem,1vw,1.6rem)] transition-colors hover:text-white/80"
-                            >
-                                hello@yamencreates.com
-                            </a>
-                        </li>
+                        {contactPhone.map((item) => (
+                            <li key={item.phone}>
+                                <a
+                                    href={`tel:${item.phone.replace(/\s/g, '')}`}
+                                    className="transition-colors hover:text-white/80"
+                                >
+                                    {item.phone}
+                                </a>
+                            </li>
+                        ))}
+                        {contactEmail.map((item) => (
+                            <li key={item.email}>
+                                <a
+                                    href={`mailto:${item.email}`}
+                                    className="text-[clamp(1.5rem,1vw,1.6rem)] transition-colors hover:text-white/80"
+                                >
+                                    {item.email}
+                                </a>
+                            </li>
+                        ))}
                         {socialMedia.map((item) => (
                             <li key={item.name}>
                                 <a
