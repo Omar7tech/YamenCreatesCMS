@@ -135,13 +135,25 @@
         }
     })();
 
-    // Remove loader when page fully loads
+    // Remove loader when page fully loads with smooth animation
     window.addEventListener('load', () => {
         const loader = document.getElementById('app-loader');
-        if (loader) {
-            loader.style.transition = 'opacity 0.4s ease-out';
-            loader.style.opacity = '0';
-            setTimeout(() => loader.remove(), 400);
+        const content = document.getElementById('loader-content');
+
+        if (loader && content) {
+            // Animate content scale down + fade
+            content.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            content.style.transform = 'scale(0.85)';
+            content.style.opacity = '0';
+
+            // Fade out background slightly after
+            setTimeout(() => {
+                loader.style.transition = 'opacity 0.3s ease-out';
+                loader.style.opacity = '0';
+            }, 200);
+
+            // Remove from DOM
+            setTimeout(() => loader.remove(), 600);
         }
     });
 </script>
