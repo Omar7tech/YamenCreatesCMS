@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class SpreadsheetResource extends Resource
 {
@@ -23,6 +24,8 @@ class SpreadsheetResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTableCells;
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    protected static UnitEnum|string|null $navigationGroup = 'Studio';
 
     public static function form(Schema $schema): Schema
     {

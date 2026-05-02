@@ -20,12 +20,14 @@ use Illuminate\Database\Eloquent\Builder;
 use Relaticle\Flowforge\Board;
 use Relaticle\Flowforge\BoardPage;
 use Relaticle\Flowforge\Column;
+use UnitEnum;
 
 class TaskBoard extends BoardPage
 {
     protected static string|null|\BackedEnum $navigationIcon = 'heroicon-o-view-columns';
     protected static ?string $navigationLabel = 'Task Board';
     protected static ?string $title = 'Task Board';
+    protected static UnitEnum|string|null $navigationGroup = 'Studio';
 
     public function getMaxContentWidth(): ?string
     {
