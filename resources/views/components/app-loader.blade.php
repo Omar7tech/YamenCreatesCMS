@@ -1,13 +1,13 @@
 <!-- Branded Loading Screen - Set DISABLE_LOADER=true in .env to disable -->
 @if(!env('DISABLE_LOADER', false))
-<div id="app-loader">
-    <div id="loader-content">
-        <img src="/logo/yamenlogo.svg" alt="Yamen Creates" id="loader-logo" />
+<div id="app-loader" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#2b2b2b;">
+    <div id="loader-content" style="display:flex;flex-direction:column;align-items:center;gap:2rem;">
+        <img src="/logo/yamenlogo.svg" alt="Yamen Creates" id="loader-logo" style="height:1.75rem;width:auto;opacity:0;filter:drop-shadow(0 2px 8px rgba(255,255,255,0.1));" />
 
         <!-- Minimal Branded Spinner -->
-        <svg id="loader-spinner" viewBox="0 0 50 50">
-            <circle class="spinner-track" cx="25" cy="25" r="20"></circle>
-            <circle class="spinner-progress" cx="25" cy="25" r="20"></circle>
+        <svg id="loader-spinner" viewBox="0 0 50 50" style="width:48px;height:48px;opacity:0;">
+            <circle class="spinner-track" cx="25" cy="25" r="20" style="fill:none;stroke:rgba(255,255,255,0.08);stroke-width:2;"></circle>
+            <circle class="spinner-progress" cx="25" cy="25" r="20" style="fill:none;stroke:rgba(255,255,255,0.9);stroke-width:2;stroke-linecap:round;stroke-dasharray:126;stroke-dashoffset:126;transform-origin:center;"></circle>
         </svg>
     </div>
 </div>
@@ -112,10 +112,35 @@
 </style>
 
 <script>
+    // Show loader IMMEDIATELY (works even if CSS not loaded)
+    (function() {
+        const logo = document.getElementById('loader-logo');
+        const spinner = document.getElementById('loader-spinner');
+
+        // Immediate visibility with JS animation (no CSS dependency)
+        if (logo) {
+            logo.style.transition = 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+            logo.style.transform = 'translateY(12px)';
+            setTimeout(() => {
+                logo.style.opacity = '1';
+                logo.style.transform = 'translateY(0)';
+            }, 50);
+        }
+
+        if (spinner) {
+            spinner.style.transition = 'opacity 0.4s ease-out';
+            setTimeout(() => {
+                spinner.style.opacity = '1';
+            }, 250);
+        }
+    })();
+
+    // Remove loader when page fully loads
     window.addEventListener('load', () => {
         const loader = document.getElementById('app-loader');
         if (loader) {
-            loader.style.animation = 'fadeOut 0.4s ease-out forwards';
+            loader.style.transition = 'opacity 0.4s ease-out';
+            loader.style.opacity = '0';
             setTimeout(() => loader.remove(), 400);
         }
     });
