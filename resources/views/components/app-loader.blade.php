@@ -4,18 +4,11 @@
     <div id="loader-content">
         <img src="/logo/yamenlogo.svg" alt="Yamen Creates" id="loader-logo" />
 
-        <!-- Creative Spinner -->
-        <div id="loader-spinner">
-            <div class="spinner-ring spinner-ring-1">
-                <div class="spinner-dot"></div>
-            </div>
-            <div class="spinner-ring spinner-ring-2">
-                <div class="spinner-dot"></div>
-            </div>
-            <div class="spinner-ring spinner-ring-3">
-                <div class="spinner-dot"></div>
-            </div>
-        </div>
+        <!-- Minimal Branded Spinner -->
+        <svg id="loader-spinner" viewBox="0 0 50 50">
+            <circle class="spinner-track" cx="25" cy="25" r="20"></circle>
+            <circle class="spinner-progress" cx="25" cy="25" r="20"></circle>
+        </svg>
     </div>
 </div>
 
@@ -38,80 +31,58 @@
     }
 
     #loader-logo {
-        height: 2rem;
+        height: 1.75rem;
         width: auto;
         opacity: 0;
-        transform: translateY(16px);
-        animation: fadeInUp 0.6s ease-out forwards;
+        animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.1));
     }
 
     #loader-spinner {
-        position: relative;
-        height: 20px;
-        width: 20px;
+        width: 48px;
+        height: 48px;
         opacity: 0;
-        animation: fadeIn 0.4s ease-out 0.3s forwards;
+        animation: fadeIn 0.4s ease-out 0.2s forwards;
     }
 
-    .spinner-ring {
-        position: absolute;
-        inset: 0;
+    .spinner-track {
+        fill: none;
+        stroke: rgba(255, 255, 255, 0.08);
+        stroke-width: 2;
     }
 
-    .spinner-ring-1 {
-        animation: spin 1.5s linear infinite;
+    .spinner-progress {
+        fill: none;
+        stroke: rgba(255, 255, 255, 0.9);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-dasharray: 126;
+        stroke-dashoffset: 126;
+        transform-origin: center;
+        animation: progress 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
 
-    .spinner-ring-2 {
-        animation: spin 1.5s linear infinite 0.3s;
-    }
-
-    .spinner-ring-3 {
-        animation: spin 1.5s linear infinite 0.6s;
-    }
-
-    .spinner-dot {
-        position: absolute;
-        left: 50%;
-        top: 0;
-        height: 4px;
-        width: 4px;
-        transform: translateX(-50%);
-        border-radius: 50%;
-    }
-
-    .spinner-ring-1 .spinner-dot {
-        background: rgba(255, 255, 255, 0.9);
-    }
-
-    .spinner-ring-2 .spinner-dot {
-        background: rgba(255, 255, 255, 0.6);
-    }
-
-    .spinner-ring-3 .spinner-dot {
-        background: rgba(255, 255, 255, 0.3);
-    }
-
-    /* Responsive - larger on desktop */
+    /* Responsive - slightly larger on desktop */
     @media (min-width: 768px) {
         #loader-logo {
-            height: 2.5rem;
+            height: 2rem;
         }
 
         #loader-spinner {
-            height: 24px;
-            width: 24px;
-        }
-
-        .spinner-dot {
-            height: 6px;
-            width: 6px;
+            width: 52px;
+            height: 52px;
         }
     }
 
     @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(16px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     @keyframes fadeIn {
@@ -119,9 +90,19 @@
         to { opacity: 1; }
     }
 
-    @keyframes spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+    @keyframes progress {
+        0% {
+            stroke-dashoffset: 126;
+            transform: rotate(0deg);
+        }
+        50% {
+            stroke-dashoffset: 32;
+            transform: rotate(540deg);
+        }
+        100% {
+            stroke-dashoffset: 126;
+            transform: rotate(1080deg);
+        }
     }
 
     @keyframes fadeOut {
