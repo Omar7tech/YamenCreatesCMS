@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7d37f4b78eae8871860c08ca59407876",
+    "content-hash": "f8bce5423c9b6c33149f078ff1299196",
     "packages": [
         {
             "name": "awcodes/light-switch",
@@ -4181,6 +4181,84 @@
                 }
             ],
             "time": "2026-01-02T08:56:05+00:00"
+        },
+        {
+            "name": "muhammadkazimsadiq/filament-canvas",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MuhammadKazimSadiq/filament-canvas.git",
+                "reference": "56151fe20dcbc91f37adc0503ae7d2d55971291a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MuhammadKazimSadiq/filament-canvas/zipball/56151fe20dcbc91f37adc0503ae7d2d55971291a",
+                "reference": "56151fe20dcbc91f37adc0503ae7d2d55971291a",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^5.0",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.15.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^8.0",
+                "orchestra/testbench": "^9.0|^10.0",
+                "pestphp/pest": "^3.7|^4.0",
+                "pestphp/pest-plugin-arch": "^3.0|^4.0",
+                "pestphp/pest-plugin-laravel": "^3.0|^4.0",
+                "pestphp/pest-plugin-livewire": "^3.0|^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "FilamentCanvas": "MuhammadKazimSadiq\\FilamentCanvas\\Facades\\FilamentCanvas"
+                    },
+                    "providers": [
+                        "MuhammadKazimSadiq\\FilamentCanvas\\FilamentCanvasServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MuhammadKazimSadiq\\FilamentCanvas\\": "src/",
+                    "MuhammadKazimSadiq\\FilamentCanvas\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muhammad Kazim",
+                    "email": "md.kazimsadiq@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Canvas for FilamentPhp",
+            "homepage": "https://github.com/muhammadkazimsadiq/filament-canvas",
+            "keywords": [
+                "MuhammadKazimSadiq",
+                "filament",
+                "filament-canvas",
+                "filament-plugin",
+                "filamentphp",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/muhammadkazimsadiq/filament-canvas/issues",
+                "source": "https://github.com/muhammadkazimsadiq/filament-canvas"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/MuhammadKazimSadiq",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-03-02T14:34:07+00:00"
         },
         {
             "name": "nesbot/carbon",

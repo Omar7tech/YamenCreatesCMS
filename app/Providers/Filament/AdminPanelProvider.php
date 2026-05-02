@@ -24,6 +24,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Awcodes\LightSwitch\LightSwitchPlugin;
 use MmesDesign\FilamentFileManager\FileManagerPlugin;
+use MuhammadKazimSadiq\FilamentCanvas\FilamentCanvasPlugin;
 use Qalainau\UniverSheet\UniverSheetPlugin;
 
 class AdminPanelProvider extends PanelProvider
@@ -86,7 +87,8 @@ class AdminPanelProvider extends PanelProvider
                 LightSwitchPlugin::make(),
                 MobileBottomNav::make(),
                 UniverSheetPlugin::make(),
-                FileManagerPlugin::make()
+                FileManagerPlugin::make(),
+                FilamentCanvasPlugin::make()
             ]);
     }
 }

@@ -19,6 +19,7 @@
         "laravel/wayfinder": "^0.1.14",
         "livewire/livewire": "^4.2",
         "mmes-design/filament-file-manager": "^1.6",
+        "muhammadkazimsadiq/filament-canvas": "^1.0",
         "qalainau/filament-univer-sheet": "^1.1",
         "relaticle/flowforge": "^4.0",
         "spatie/laravel-medialibrary": "^11.21",
