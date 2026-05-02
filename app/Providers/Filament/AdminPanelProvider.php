@@ -26,6 +26,7 @@ use Awcodes\LightSwitch\LightSwitchPlugin;
 use MmesDesign\FilamentFileManager\FileManagerPlugin;
 use MuhammadKazimSadiq\FilamentCanvas\FilamentCanvasPlugin;
 use Qalainau\UniverSheet\UniverSheetPlugin;
+use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -88,7 +89,10 @@ class AdminPanelProvider extends PanelProvider
                 MobileBottomNav::make(),
                 UniverSheetPlugin::make(),
                 FileManagerPlugin::make(),
-                FilamentCanvasPlugin::make()
+                FilamentCanvasPlugin::make(),
+                FilamentFullCalendarPlugin::make()
+                    ->selectable()
+                    ->editable()
             ]);
     }
 }

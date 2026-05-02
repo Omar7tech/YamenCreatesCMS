@@ -6,6 +6,8 @@
 @source '../../vendor/mmes-design/filament-file-manager';
 @source "../../../../vendor/relaticle/flowforge/resources/views/**/*.blade.php";
 @source '../../../../vendor/muhammadkazimsadiq/filament-canvas/resources/**/*.blade.php';
+@source '../../../../vendor/saade/filament-fullcalendar/resources/views/**/*.blade.php';
+@import '../../../../vendor/saade/filament-fullcalendar/resources/css/filament-fullcalendar.css';
 
 .fi-header-heading {
   @apply text-3xl md:text-4xl font-light leading-tight tracking-tight;
