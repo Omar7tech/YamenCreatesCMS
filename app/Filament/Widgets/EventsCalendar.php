@@ -18,16 +18,26 @@ class EventsCalendar extends FullCalendarWidget
             ->where('starts_at', '>=', $fetchInfo['start'])
             ->where('ends_at', '<=', $fetchInfo['end'])
             ->get()
-            ->map(fn (Event $event) => [
-                'id' => $event->id,
-                'title' => $event->title,
-                'start' => $event->starts_at,
-                'end' => $event->ends_at,
-                'allDay' => $event->all_day,
-                'backgroundColor' => $event->background_color,
-                'borderColor' => $event->background_color,
-                'textColor' => $event->text_color,
-            ])
+            ->map(function (Event $event) {
+                $start = $event->starts_at->toDateString();
+                $end = $event->ends_at->toDateString();
+
+                // Ensure end is at least 1 day after start for proper display
+                if ($start === $end) {
+                    $end = $event->ends_at->addDay()->toDateString();
+                }
+
+                return [
+                    'id' => $event->id,
+                    'title' => $event->title,
+                    'start' => $start,
+                    'end' => $end,
+                    'allDay' => true,
+                    'backgroundColor' => $event->background_color,
+                    'borderColor' => $event->background_color,
+                    'textColor' => $event->text_color,
+                ];
+            })
             ->toArray();
     }
 
@@ -36,6 +46,8 @@ class EventsCalendar extends FullCalendarWidget
         return [
             'editable' => true,
             'selectable' => true,
+            'eventDurationEditable' => true,
+            'eventResizableFromStart' => true,
             'headerToolbar' => [
                 'left' => 'prev,next today',
                 'center' => 'title',
@@ -45,6 +57,41 @@ class EventsCalendar extends FullCalendarWidget
             'firstDay' => 1,
             'displayEventTime' => false,
         ];
+    }
+
+    public function eventDidMount(): string
+    {
+        return <<<JS
+            function({ event, el }) {
+                el.style.cursor = 'pointer';
+            }
+        JS;
+    }
+
+    public function eventResize($info): bool
+    {
+        $start = \Carbon\Carbon::parse($info['event']['start'])->toDateString();
+        $end = \Carbon\Carbon::parse($info['event']['end'] ?? $info['event']['start'])->subDay()->toDateString();
+
+        Event::find($info['event']['id'])->update([
+            'starts_at' => $start,
+            'ends_at' => $end,
+        ]);
+
+        return true;
+    }
+
+    public function eventDrop($info): bool
+    {
+        $start = \Carbon\Carbon::parse($info['event']['start'])->toDateString();
+        $end = \Carbon\Carbon::parse($info['event']['end'] ?? $info['event']['start'])->subDay()->toDateString();
+
+        Event::find($info['event']['id'])->update([
+            'starts_at' => $start,
+            'ends_at' => $end,
+        ]);
+
+        return true;
     }
 
     protected function headerActions(): array
