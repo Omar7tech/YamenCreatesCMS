@@ -14,6 +14,7 @@
         "filament/spatie-laravel-settings-plugin": "~5.0",
         "hammadzafar05/mobile-bottom-nav": "^1.1",
         "inertiajs/inertia-laravel": "^3.0",
+        "lara-zeus/qr": "^3.0",
         "laravel/framework": "^13.0",
         "laravel/tinker": "^3.0",
         "laravel/wayfinder": "^0.1.14",
