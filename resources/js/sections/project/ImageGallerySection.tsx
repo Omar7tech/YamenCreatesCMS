@@ -1,3 +1,4 @@
+import { motion } from 'motion/react';
 import ImageWithLoader from '@/components/ImageWithLoader';
 import type { ProjectSection } from '@/types/project';
 
@@ -9,7 +10,13 @@ export default function ImageGallerySection({
     section,
 }: ImageGallerySectionProps) {
     return (
-        <div className="py-8 md:py-12">
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-10%' }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="py-8 md:py-12"
+        >
             {section.title && (
                 <h2 className="mb-8 text-2xl font-bold text-white md:text-3xl">
                     {section.title}
@@ -29,6 +36,6 @@ export default function ImageGallerySection({
                     </div>
                 ))}
             </div>
-        </div>
+        </motion.div>
     );
 }
