@@ -9,7 +9,7 @@ export default function LeftImageTextSection({
     section,
 }: LeftImageTextSectionProps) {
     return (
-        <div className="py-12 md:py-16">
+        <div className="py-8 md:py-12">
             <div className="grid gap-8 md:grid-cols-2 md:gap-12">
                 <div className="relative aspect-square overflow-hidden rounded-lg md:rounded-3xl">
                     {section.image && (

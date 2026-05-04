@@ -61,7 +61,7 @@ export default function Project({ project }: ProjectProps) {
                 </div>
 
                 {/* Sections */}
-                <div className="mt-16 space-y-20 md:mt-24 md:space-y-32">
+                <div className="mt-8 space-y-12 md:mt-16 md:space-y-20">
                     {project.sections.map((section) => {
                         switch (section.type) {
                             case 'text_only':

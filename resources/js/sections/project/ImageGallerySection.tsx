@@ -9,7 +9,7 @@ export default function ImageGallerySection({
     section,
 }: ImageGallerySectionProps) {
     return (
-        <div className="py-12 md:py-16">
+        <div className="py-8 md:py-12">
             {section.title && (
                 <h2 className="mb-8 text-2xl font-bold text-white md:text-3xl">
                     {section.title}
