@@ -54,3 +54,77 @@ textarea {
     border-radius: 100% 100% 0 0;
     transform: rotate(-1.5deg);
 }
+
+/* Rich Content Prose Styles */
+.prose {
+    max-width: 65ch;
+}
+
+.prose-invert {
+    color: #d1d5db;
+}
+
+.prose h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    line-height: 1.3333333;
+    color: #fff;
+}
+
+.prose h3 {
+    font-size: 1.25em;
+    font-weight: 600;
+    margin-top: 1.6em;
+    margin-bottom: 0.6em;
+    line-height: 1.6;
+    color: #fff;
+}
+
+.prose p {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    line-height: 1.75;
+}
+
+.prose a {
+    color: #a78bfa;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.prose a:hover {
+    color: #c4b5fd;
+}
+
+.prose strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+.prose ul,
+.prose ol {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    padding-left: 1.625em;
+}
+
+.prose ul {
+    list-style-type: disc;
+}
+
+.prose ol {
+    list-style-type: decimal;
+}
+
+.prose li {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.75;
+}
+
+.prose li > p {
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+}

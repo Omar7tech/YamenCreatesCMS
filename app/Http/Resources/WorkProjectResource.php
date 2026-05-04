@@ -32,8 +32,11 @@ class WorkProjectResource extends JsonResource
         return [
             'id' => $this->slug,
             'title' => $this->title,
+            'slug' => $this->slug,
             'mediaType' => $this->media_type->value,
             'mediaSrc' => $mediaSrc,
+            'isInternal' => $this->is_internal,
+            'externalUrl' => $this->external_url,
         ];
     }
 }

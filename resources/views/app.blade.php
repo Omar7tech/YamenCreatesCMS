@@ -64,13 +64,13 @@
     <x-app-loader />
     <x-inertia::app />
 </body>
-<script src="https://cdn.jsdelivr.net/npm/kursor@0.0.14/dist/kursor.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/kursor@0.0.14/dist/kursor.js"></script>
 <script>
     new kursor({
         type: 1,
         removeDefaultCursor: true,
         color: '#FFFFFF'
     })
-</script>
+</script> -->
 
 </html>

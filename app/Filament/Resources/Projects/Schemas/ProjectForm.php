@@ -93,6 +93,28 @@ class ProjectForm
                                         $get('media_type') === 'video'
                                         JS),
                             ]),
+
+                        Tab::make('project_type')
+                            ->label('Project Type')
+                            ->icon('heroicon-o-link')
+                            ->schema([
+                                Toggle::make('is_internal')
+                                    ->label('Internal Project Page')
+                                    ->helperText('If enabled, project opens internal detail page. If disabled, project links to external URL.')
+                                    ->default(true)
+                                    ->inline(false)
+                                    ->live(),
+
+                                TextInput::make('external_url')
+                                    ->label('External URL')
+                                    ->url()
+                                    ->placeholder('https://example.com/project')
+                                    ->helperText('Project will link to this URL when clicked')
+                                    ->requiredIf('is_internal', false)
+                                    ->visibleJs(<<<'JS'
+                                        $get('is_internal') === false
+                                        JS),
+                            ]),
                     ])
                     ->columnSpanFull(),
             ]);

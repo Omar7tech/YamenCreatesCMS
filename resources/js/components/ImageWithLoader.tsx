@@ -3,17 +3,45 @@ import { useState } from 'react';
 import type { ProgramImage } from '@/types/program';
 
 interface ImageWithLoaderProps {
-    images: ProgramImage[];
+    images?: ProgramImage[];
+    src?: string;
+    alt?: string;
+    className?: string;
 }
 
-export default function ImageWithLoader({ images }: ImageWithLoaderProps) {
+export default function ImageWithLoader({
+    images,
+    src,
+    alt,
+    className,
+}: ImageWithLoaderProps) {
     const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+    const [isSingleLoaded, setIsSingleLoaded] = useState(false);
 
     const handleImageLoad = (index: number) => {
         setLoadedImages((previous) => new Set(previous).add(index));
     };
 
-    if (images.length === 0) return null;
+    if (src) {
+        return (
+            <>
+                {!isSingleLoaded && (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/10 backdrop-blur-sm">
+                        <div className="h-8 w-8 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                    </div>
+                )}
+                <img
+                    src={src}
+                    alt={alt || ''}
+                    className={className}
+                    loading="lazy"
+                    onLoad={() => setIsSingleLoaded(true)}
+                />
+            </>
+        );
+    }
+
+    if (!images || images.length === 0) return null;
 
     return (
         <div className="mt-6 grid grid-cols-2 gap-3 md:mt-8 md:grid-cols-4 md:gap-10">

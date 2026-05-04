@@ -1,4 +1,4 @@
-import { router } from '@inertiajs/react';
+import { router, Link } from '@inertiajs/react';
 import { useState } from 'react';
 
 import { index } from '@/actions/App/Http/Controllers/WorkController';
@@ -39,7 +39,7 @@ export default function OurWorkSection({
 
     return (
         <div className="space-y-8 px-5 md:px-20 lg:px-40">
-            <h1 className="font-special-gothic-expanded text-[clamp(1.5rem,11vw,15rem)] uppercase">
+            <h1 className="font-special-gothic-expanded text-[clamp(1.5rem,11vw,15rem)] uppercase text-white">
                 Our Work
             </h1>
 
@@ -87,6 +87,10 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({ project, loaded, onLoad }: ProjectCardProps) {
+    // Increased px-2 -> px-4 and py-1 -> py-1.5 for mobile
+    // Increased md:px-2.5 -> md:px-5 and md:py-1.5 -> md:py-2 for desktop
+    const btnClasses = "absolute right-2 top-2 z-30 inline-flex items-center justify-center cursor-pointer rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-[10px] font-light text-white backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:border-white/50 md:right-4 md:top-4 md:px-6 md:py-2.5 md:text-xs";
+
     return (
         <div className="group relative aspect-square overflow-hidden rounded-lg border border-white/20 transition-all duration-500 hover:-translate-y-1 hover:border-purple-500/50 hover:shadow-[0_12px_35px_rgba(147,51,234,0.4)] md:rounded-3xl">
             {project.mediaSrc ? (
@@ -120,12 +124,20 @@ function ProjectCard({ project, loaded, onLoad }: ProjectCardProps) {
                 <div className="h-full w-full bg-white/5" />
             )}
 
-            <button
-                type="button"
-                className="absolute right-2 top-2 z-30 cursor-pointer rounded-full border border-white/30 bg-white/10 px-2 py-1 text-[10px] font-light text-white backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:border-white/50 md:right-3 md:top-3 md:px-2.5 md:py-1.5 md:text-xs"
-            >
-                View More
-            </button>
+            {project.isInternal ? (
+                <Link href={`/work/${project.slug}`} className={btnClasses}>
+                    View More
+                </Link>
+            ) : (
+                <a 
+                    href={project.externalUrl || '#'} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className={btnClasses}
+                >
+                    View More
+                </a>
+            )}
 
             <div className="pointer-events-none absolute inset-0 flex items-end bg-linear-to-t from-purple-900/40 via-black/30 to-transparent p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                 <h3 className="text-lg font-semibold text-white">
