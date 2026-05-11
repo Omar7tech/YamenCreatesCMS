@@ -105,6 +105,7 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                             backgroundImage: 'linear-gradient(#2B2B2B, #2B2B2B), linear-gradient(to bottom, rgba(244, 148, 254, 0.9) 0%, rgba(244, 148, 254, 0.85) 20%, rgba(244, 148, 254, 0.75) 30%, rgba(230, 180, 254, 0.6) 45%, rgba(240, 210, 254, 0.45) 55%, rgba(250, 230, 254, 0.3) 70%, rgba(255, 255, 255, 0.12) 85%, rgba(255, 255, 255, 0.02) 100%)',
                                             backgroundOrigin: 'border-box',
                                             backgroundClip: 'padding-box, border-box',
+                                            boxShadow: '4px 4px 12px rgba(0, 0, 0, 0.4)',
                                         }}
                                     >
                                         <span className="text-2xl md:text-3xl lg:text-5xl font-bold text-white">
