@@ -194,10 +194,10 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                 <div className={`flex flex-col justify-center min-w-0 flex-1 text-content ${!currentDirection ? 'pl-4 md:pl-6 lg:pl-8' : ''}`}>
                                     {!isToggled ? (
                                         <>
-                                            <h3 className="text-xl md:text-2xl lg:text-5xl font-light text-white tracking-tight leading-tight uppercase">
+                                            <h3 className="text-2xl md:text-3xl lg:text-6xl font-light text-white tracking-tight leading-none uppercase">
                                                 {member.name}
                                             </h3>
-                                            <p className="text-xs md:text-sm lg:text-lg text-zinc-400 mt-1">
+                                            <p className="text-sm md:text-base lg:text-xl text-zinc-400 mt-1">
                                                 {member.position}
                                             </p>
                                         </>
