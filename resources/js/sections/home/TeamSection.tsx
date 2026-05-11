@@ -141,9 +141,10 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                     items-center gap-3 md:gap-4 lg:gap-6
                                     p-px md:p-0.5 lg:p-1.5
                                     rounded-full
-                                    transition-all duration-700 ease-in-out
+                                    transition-all duration-300 ease-out
                                     group
                                     relative
+                                    hover:scale-[1.01] hover:-translate-y-0.5 hover:drop-shadow-[0_6px_12px_rgba(244,148,254,0.15)]
                                     ${member.description && member.description.trim() ? 'cursor-pointer' : 'cursor-default'}
                                 `}
                                 style={{
