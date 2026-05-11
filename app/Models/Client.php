@@ -14,4 +14,10 @@ class Client extends Model implements HasMedia
     /** @use HasFactory<\Database\Factories\ClientFactory> */
     use HasFactory;
     use InteractsWithMedia;
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('logo')
+            ->singleFile();
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Clients\Schemas;
 
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
@@ -14,6 +15,10 @@ class ClientForm
             ->components([
                 TextInput::make('name')
                     ->required(),
+                SpatieMediaLibraryFileUpload::make('logo')
+                    ->collection('logo')
+                    ->acceptedFileTypes(['image/png'])
+                    ->maxSize(2048),
                 TextInput::make('sort')
                     ->required()
                     ->numeric()
