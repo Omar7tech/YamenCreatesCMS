@@ -13,11 +13,20 @@ class ClientForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required(),
+                    ->label('Client Name')
+                    ->required()
+                    ->placeholder('Enter client name'),
+
                 SpatieMediaLibraryFileUpload::make('logo')
+                    ->label('Client Logo')
                     ->collection('logo')
+                    ->image()
                     ->acceptedFileTypes(['image/png'])
-                    ->maxSize(2048),
+                    ->maxSize(2048)
+                    ->downloadable()
+                    ->openable()
+                    ->previewable()
+                    ->helperText('Upload PNG logo (max 2MB)'),
             ]);
     }
 }
