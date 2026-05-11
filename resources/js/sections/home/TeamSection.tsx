@@ -1,6 +1,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,6 +36,42 @@ export default function TeamSection({ team }: TeamSectionProps) {
     const titleRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+    const [toggledCards, setToggledCards] = useState<boolean[]>(
+        new Array(team?.length || 0).fill(false)
+    );
+
+    const handleCardClick = (index: number) => {
+        const card = cardsRef.current[index];
+        if (!card) return;
+
+        const textContent = card.querySelector('.text-content');
+        if (!textContent) return;
+
+        const tl = gsap.timeline();
+
+        // Fade out current content
+        tl.to(textContent, {
+            opacity: 0,
+            duration: 0.25,
+            ease: 'power2.inOut',
+        });
+
+        // Change state (circle swaps via flex-direction)
+        tl.call(() => {
+            setToggledCards((prev) => {
+                const newState = [...prev];
+                newState[index] = !newState[index];
+                return newState;
+            });
+        }, null, '+=0.15');
+
+        // Fade in new content
+        tl.to(textContent, {
+            opacity: 1,
+            duration: 0.35,
+            ease: 'power2.inOut',
+        }, '-=0.1');
+    };
 
     useEffect(() => {
         // Animations disabled
@@ -61,7 +97,9 @@ export default function TeamSection({ team }: TeamSectionProps) {
                 <div className="space-y-6 md:space-y-8">
                     {team.map((member, index) => {
                         const isCircleLeft = index % 2 === 0;
+                        const isToggled = toggledCards[index];
                         const roleAbbr = getRoleAbbreviation(member.position);
+                        const currentDirection = isToggled ? !isCircleLeft : isCircleLeft;
 
                         return (
                             <div
@@ -69,13 +107,15 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                 ref={(el) => {
                                     cardsRef.current[index] = el;
                                 }}
+                                onClick={() => handleCardClick(index)}
                                 className={`
-                                    flex ${isCircleLeft ? 'flex-row' : 'flex-row-reverse'}
+                                    flex ${currentDirection ? 'flex-row' : 'flex-row-reverse'}
                                     items-center gap-3 md:gap-4 lg:gap-6
                                     p-px md:p-0.5 lg:p-1.5
                                     rounded-full
-                                    transition-all duration-300
+                                    transition-all duration-700 ease-in-out
                                     group
+                                    cursor-pointer
                                 `}
                                 style={{
                                     border: '5px solid transparent',
@@ -83,16 +123,16 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                     backgroundImage: 'linear-gradient(#2B2B2B, #2B2B2B), linear-gradient(to bottom, rgba(244, 148, 254, 0.9) 0%, rgba(244, 148, 254, 0.85) 20%, rgba(244, 148, 254, 0.75) 30%, rgba(230, 180, 254, 0.6) 45%, rgba(240, 210, 254, 0.45) 55%, rgba(250, 230, 254, 0.3) 70%, rgba(255, 255, 255, 0.12) 85%, rgba(255, 255, 255, 0.02) 100%)',
                                     backgroundOrigin: 'border-box',
                                     backgroundClip: 'padding-box, border-box',
+                                    overflow: 'hidden',
                                 }}
                             >
                                 {/* Role Circle */}
-                                <div className="flex-shrink-0">
+                                <div className="flex-shrink-0 circle-wrapper">
                                     <div
                                         className="
                                             w-24 h-24 md:w-28 md:h-28 lg:w-40 lg:h-40
                                             rounded-full
                                             flex items-center justify-center
-                                            transition-transform duration-200
                                         "
                                         style={{
                                             border: '3px solid transparent',
@@ -100,6 +140,7 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                             backgroundOrigin: 'border-box',
                                             backgroundClip: 'padding-box, border-box',
                                             boxShadow: '5px 5px 16px rgba(0, 0, 0, 0.5)',
+                                            willChange: 'transform',
                                         }}
                                     >
                                         <span className="text-2xl md:text-3xl lg:text-5xl font-bold text-white">
@@ -109,13 +150,21 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                 </div>
 
                                 {/* Text Content */}
-                                <div className={`flex flex-col justify-center min-w-0 flex-1 ${!isCircleLeft ? 'pl-4 md:pl-6 lg:pl-8' : ''}`}>
-                                    <h3 className="text-xl md:text-2xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
-                                        {member.name}
-                                    </h3>
-                                    <p className="text-xs md:text-sm lg:text-lg text-zinc-400 mt-1">
-                                        {member.position}
-                                    </p>
+                                <div className={`flex flex-col justify-center min-w-0 flex-1 text-content ${!currentDirection ? 'pl-4 md:pl-6 lg:pl-8' : ''}`}>
+                                    {!isToggled ? (
+                                        <>
+                                            <h3 className="text-xl md:text-2xl lg:text-5xl font-light text-white tracking-tight leading-tight uppercase">
+                                                {member.name}
+                                            </h3>
+                                            <p className="text-xs md:text-sm lg:text-lg text-zinc-400 mt-1">
+                                                {member.position}
+                                            </p>
+                                        </>
+                                    ) : (
+                                        <p className="text-sm md:text-base lg:text-xl text-zinc-300 leading-relaxed">
+                                            {member.description || 'No description available'}
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                         );
