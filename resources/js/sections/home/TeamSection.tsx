@@ -35,7 +35,6 @@ function getRoleAbbreviation(position: string): string {
 export default function TeamSection({ team }: TeamSectionProps) {
     const sectionRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
-    const subtitleRef = useRef<HTMLParagraphElement>(null);
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
     const [toggledCards, setToggledCards] = useState<boolean[]>(
         new Array(team?.length || 0).fill(false)

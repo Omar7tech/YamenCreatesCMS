@@ -86,7 +86,7 @@ return;
             button.removeEventListener('mouseleave', handleMouseLeave);
             gsap.killTweensOf(button);
         };
-    }, [strength]);
+    }, [strength, isMobile]);
 
     return (
         <div ref={buttonRef} className={className}>
