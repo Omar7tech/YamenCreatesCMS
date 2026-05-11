@@ -48,19 +48,13 @@ export default function TeamSection({ team }: TeamSectionProps) {
         <div ref={sectionRef} className="px-5 md:px-10 lg:px-20 py-32">
             <div className="max-w-4xl mx-auto">
                 {/* Header */}
-                <div className="mb-16 text-center max-w-3xl mx-auto space-y-4">
+                <div className="mb-16 text-center max-w-4xl mx-auto">
                     <h2
                         ref={titleRef}
-                        className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground"
+                        className="text-6xl md:text-8xl lg:text-9xl font-bold text-foreground"
                     >
-                        Meet Our Team
+                        Creators
                     </h2>
-                    <p
-                        ref={subtitleRef}
-                        className="text-base md:text-lg text-foreground/60"
-                    >
-                        The creative minds behind every project
-                    </p>
                 </div>
 
                 {/* Cards */}
