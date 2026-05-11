@@ -129,15 +129,16 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                 }}
                                 className={`
                                     flex ${isCircleLeft ? 'flex-row' : 'flex-row-reverse'}
-                                    items-center gap-3 md:gap-4
-                                    p-3 md:p-4 lg:p-5
+                                    items-center gap-3 md:gap-4 lg:gap-6
+                                    p-1 md:p-1.5 lg:p-3
                                     rounded-full
                                     transition-all duration-300
                                     group
                                 `}
                                 style={{
-                                    border: '3px solid transparent',
-                                    backgroundImage: 'linear-gradient(#2B2B2B, #2B2B2B), linear-gradient(to bottom, rgba(168, 85, 247, 0.7), rgba(168, 85, 247, 0))',
+                                    border: '5px solid transparent',
+                                    borderBottomWidth: '2px',
+                                    backgroundImage: 'linear-gradient(#2B2B2B, #2B2B2B), linear-gradient(to bottom, rgba(244, 148, 254, 0.8) 0%, rgba(244, 148, 254, 0.8) 50%, rgba(255, 255, 255, 0.6) 100%)',
                                     backgroundOrigin: 'border-box',
                                     backgroundClip: 'padding-box, border-box',
                                 }}
@@ -146,30 +147,30 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                 <div className="flex-shrink-0">
                                     <div
                                         className="
-                                            w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32
+                                            w-24 h-24 md:w-28 md:h-28 lg:w-40 lg:h-40
                                             rounded-full
                                             flex items-center justify-center
                                             transition-transform duration-200
                                         "
                                         style={{
-                                            border: '3px solid transparent',
-                                            backgroundImage: 'linear-gradient(#2B2B2B, #2B2B2B), linear-gradient(to bottom, rgba(168, 85, 247, 0.7), rgba(168, 85, 247, 0))',
+                                            border: '2px solid transparent',
+                                            backgroundImage: 'linear-gradient(#2B2B2B, #2B2B2B), linear-gradient(to bottom, rgba(244, 148, 254, 0.8) 0%, rgba(244, 148, 254, 0.8) 50%, rgba(255, 255, 255, 0.6) 100%)',
                                             backgroundOrigin: 'border-box',
                                             backgroundClip: 'padding-box, border-box',
                                         }}
                                     >
-                                        <span className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+                                        <span className="text-2xl md:text-3xl lg:text-5xl font-bold text-white">
                                             {roleAbbr}
                                         </span>
                                     </div>
                                 </div>
 
                                 {/* Text Content */}
-                                <div className="flex flex-col justify-center min-w-0 flex-1">
-                                    <h3 className="text-xl md:text-2xl lg:text-4xl font-bold text-white tracking-tight leading-tight">
+                                <div className={`flex flex-col justify-center min-w-0 flex-1 ${!isCircleLeft ? 'pl-4 md:pl-6 lg:pl-8' : ''}`}>
+                                    <h3 className="text-xl md:text-2xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
                                         {member.name}
                                     </h3>
-                                    <p className="text-xs md:text-sm lg:text-base text-zinc-400 mt-1">
+                                    <p className="text-xs md:text-sm lg:text-lg text-zinc-400 mt-1">
                                         {member.position}
                                     </p>
                                 </div>
