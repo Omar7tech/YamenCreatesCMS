@@ -1,8 +1,9 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Flip } from 'gsap/Flip';
 import { useEffect, useRef, useState } from 'react';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, Flip);
 
 interface TeamMember {
     id: number;
@@ -48,52 +49,37 @@ export default function TeamSection({ team }: TeamSectionProps) {
         const circle = card.querySelector('.circle-wrapper');
         if (!textContent || !circle) return;
 
-        const isToggled = toggledCards[index];
-        const isCircleLeft = index % 2 === 0;
-        const currentDirection = isToggled ? !isCircleLeft : isCircleLeft;
-
-        // Calculate movement distance
-        const cardWidth = card.offsetWidth;
-        const circleWidth = (circle as HTMLElement).offsetWidth;
-        const gap = 24;
-        const distance = cardWidth - circleWidth - (gap * 2);
-        const moveDistance = currentDirection ? distance : -distance;
-
-        const tl = gsap.timeline();
-
-        // Fade out text
-        tl.to(textContent, {
+        // Step 1: Fade out text
+        gsap.to(textContent, {
             opacity: 0,
-            duration: 0.3,
+            duration: 0.25,
             ease: 'power2.inOut',
-        });
+            onComplete: () => {
+                // Step 2: Capture circle position before state change
+                const state = Flip.getState(circle);
 
-        // Animate circle sliding to the other side
-        tl.to(circle, {
-            x: moveDistance,
-            duration: 0.7,
-            ease: 'power1.inOut'
-        }, '-=0.15');
+                // Step 3: Change React state (this changes flex-direction)
+                setToggledCards((prev) => {
+                    const newState = [...prev];
+                    newState[index] = !newState[index];
+                    return newState;
+                });
 
-        // Change state (circle keeps x transform, maintaining visual position)
-        tl.call(() => {
-            setToggledCards((prev) => {
-                const newState = [...prev];
-                newState[index] = !newState[index];
-                return newState;
-            });
-        });
-
-        // Minimal delay for DOM to settle
-        tl.to({}, { duration: 0.02 });
-
-        // Fade in text and clear circle transform simultaneously
-        tl.to(textContent, {
-            opacity: 1,
-            duration: 0.3,
-            ease: 'power2.inOut',
-            onStart: () => {
-                gsap.set(circle, { clearProps: 'x' });
+                // Step 4: Wait for React to render, then animate circle
+                requestAnimationFrame(() => {
+                    Flip.from(state, {
+                        duration: 0.6,
+                        ease: 'power1.out',
+                        onComplete: () => {
+                            // Step 5: Fade in new text content
+                            gsap.to(textContent, {
+                                opacity: 1,
+                                duration: 0.25,
+                                ease: 'power2.inOut',
+                            });
+                        }
+                    });
+                });
             }
         });
     };
