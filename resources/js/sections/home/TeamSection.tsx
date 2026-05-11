@@ -38,60 +38,8 @@ export default function TeamSection({ team }: TeamSectionProps) {
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
     useEffect(() => {
-        if (!team || team.length === 0) return;
-        if (typeof window === 'undefined') return;
-
-        const isMobile = window.innerWidth < 768;
-        if (isMobile) return;
-
-        const ctx = gsap.context(() => {
-            // Title fade in
-            if (titleRef.current) {
-                gsap.from(titleRef.current, {
-                    scrollTrigger: {
-                        trigger: titleRef.current,
-                        start: 'top 80%',
-                        end: 'top 50%',
-                        scrub: 1,
-                    },
-                    opacity: 0,
-                    y: 30,
-                });
-            }
-
-            // Subtitle fade in
-            if (subtitleRef.current) {
-                gsap.from(subtitleRef.current, {
-                    scrollTrigger: {
-                        trigger: subtitleRef.current,
-                        start: 'top 80%',
-                        end: 'top 50%',
-                        scrub: 1,
-                    },
-                    opacity: 0,
-                    y: 20,
-                });
-            }
-
-            // Cards animation with scale and fade
-            cardsRef.current.forEach((card, index) => {
-                if (!card) return;
-
-                gsap.from(card, {
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 90%',
-                        end: 'top 60%',
-                        scrub: 1,
-                    },
-                    opacity: 0,
-                    y: 60,
-                    scale: 0.95,
-                });
-            });
-        }, sectionRef);
-
-        return () => ctx.revert();
+        // Animations disabled
+        return;
     }, [team]);
 
     if (!team || team.length === 0) return null;
@@ -130,7 +78,7 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                 className={`
                                     flex ${isCircleLeft ? 'flex-row' : 'flex-row-reverse'}
                                     items-center gap-3 md:gap-4 lg:gap-6
-                                    p-1 md:p-1.5 lg:p-3
+                                    p-px md:p-0.5 lg:p-1.5
                                     rounded-full
                                     transition-all duration-300
                                     group
@@ -138,7 +86,7 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                 style={{
                                     border: '5px solid transparent',
                                     borderBottomWidth: '2px',
-                                    backgroundImage: 'linear-gradient(#2B2B2B, #2B2B2B), linear-gradient(to bottom, rgba(244, 148, 254, 0.8) 0%, rgba(244, 148, 254, 0.8) 50%, rgba(255, 255, 255, 0.6) 100%)',
+                                    backgroundImage: 'linear-gradient(#2B2B2B, #2B2B2B), linear-gradient(to bottom, rgba(244, 148, 254, 0.9) 0%, rgba(244, 148, 254, 0.85) 20%, rgba(244, 148, 254, 0.75) 30%, rgba(230, 180, 254, 0.6) 45%, rgba(240, 210, 254, 0.45) 55%, rgba(250, 230, 254, 0.3) 70%, rgba(255, 255, 255, 0.12) 85%, rgba(255, 255, 255, 0.02) 100%)',
                                     backgroundOrigin: 'border-box',
                                     backgroundClip: 'padding-box, border-box',
                                 }}
@@ -153,8 +101,8 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                             transition-transform duration-200
                                         "
                                         style={{
-                                            border: '2px solid transparent',
-                                            backgroundImage: 'linear-gradient(#2B2B2B, #2B2B2B), linear-gradient(to bottom, rgba(244, 148, 254, 0.8) 0%, rgba(244, 148, 254, 0.8) 50%, rgba(255, 255, 255, 0.6) 100%)',
+                                            border: '3px solid transparent',
+                                            backgroundImage: 'linear-gradient(#2B2B2B, #2B2B2B), linear-gradient(to bottom, rgba(244, 148, 254, 0.9) 0%, rgba(244, 148, 254, 0.85) 20%, rgba(244, 148, 254, 0.75) 30%, rgba(230, 180, 254, 0.6) 45%, rgba(240, 210, 254, 0.45) 55%, rgba(250, 230, 254, 0.3) 70%, rgba(255, 255, 255, 0.12) 85%, rgba(255, 255, 255, 0.02) 100%)',
                                             backgroundOrigin: 'border-box',
                                             backgroundClip: 'padding-box, border-box',
                                         }}
