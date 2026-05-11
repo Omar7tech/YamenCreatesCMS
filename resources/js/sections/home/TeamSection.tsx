@@ -40,6 +40,21 @@ export default function TeamSection({ team }: TeamSectionProps) {
     const [toggledCards, setToggledCards] = useState<boolean[]>(
         new Array(team?.length || 0).fill(false)
     );
+    const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        setMousePos({
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top
+        });
+        setHoveredCard(index);
+    };
+
+    const handleMouseLeave = () => {
+        setHoveredCard(null);
+    };
 
     const handleCardClick = (index: number) => {
         const card = cardsRef.current[index];
@@ -118,7 +133,9 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                 ref={(el) => {
                                     cardsRef.current[index] = el;
                                 }}
-                                onClick={() => handleCardClick(index)}
+                                {...(member.description && member.description.trim() ? { onClick: () => handleCardClick(index) } : {})}
+                                onMouseMove={(e) => member.description && member.description.trim() && handleMouseMove(e, index)}
+                                onMouseLeave={handleMouseLeave}
                                 className={`
                                     flex ${currentDirection ? 'flex-row' : 'flex-row-reverse'}
                                     items-center gap-3 md:gap-4 lg:gap-6
@@ -126,7 +143,8 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                     rounded-full
                                     transition-all duration-700 ease-in-out
                                     group
-                                    cursor-pointer
+                                    relative
+                                    ${member.description && member.description.trim() ? 'cursor-pointer' : 'cursor-default'}
                                 `}
                                 style={{
                                     border: '5px solid transparent',
@@ -134,9 +152,21 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                     backgroundImage: 'linear-gradient(#2B2B2B, #2B2B2B), linear-gradient(to bottom, rgba(244, 148, 254, 0.9) 0%, rgba(244, 148, 254, 0.85) 20%, rgba(244, 148, 254, 0.75) 30%, rgba(230, 180, 254, 0.6) 45%, rgba(240, 210, 254, 0.45) 55%, rgba(250, 230, 254, 0.3) 70%, rgba(255, 255, 255, 0.12) 85%, rgba(255, 255, 255, 0.02) 100%)',
                                     backgroundOrigin: 'border-box',
                                     backgroundClip: 'padding-box, border-box',
-                                    overflow: 'hidden',
                                 }}
                             >
+                                {/* Tooltip - only show if description exists and card is hovered */}
+                                {member.description && member.description.trim() && hoveredCard === index && (
+                                    <div
+                                        className="absolute bg-zinc-800/95 backdrop-blur-sm text-white text-xs md:text-sm px-3 py-2 rounded-lg pointer-events-none whitespace-nowrap z-50 shadow-lg"
+                                        style={{
+                                            left: `${mousePos.x}px`,
+                                            top: `${mousePos.y - 45}px`,
+                                            transform: 'translateX(-50%)',
+                                        }}
+                                    >
+                                        Click to know about {member.name}
+                                    </div>
+                                )}
                                 {/* Role Circle */}
                                 <div className="flex-shrink-0 circle-wrapper">
                                     <div
@@ -172,7 +202,7 @@ export default function TeamSection({ team }: TeamSectionProps) {
                                             </p>
                                         </>
                                     ) : (
-                                        <p className="text-sm md:text-base lg:text-xl text-zinc-300 leading-relaxed">
+                                        <p className="text-sm md:text-base lg:text-xl text-zinc-300 leading-relaxed px-6 md:px-8 lg:px-12">
                                             {member.description || 'No description available'}
                                         </p>
                                     )}
