@@ -21,6 +21,8 @@ class ClientForm
                     ->label('Client Logo')
                     ->collection('logo')
                     ->image()
+                    ->disk('public')
+                    ->visibility('public')
                     ->acceptedFileTypes(['image/png'])
                     ->maxSize(2048)
                     ->downloadable()

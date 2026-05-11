@@ -1,5 +1,6 @@
 import { Head } from '@inertiajs/react';
 
+import ClientsSection from '@/sections/home/ClientsSection';
 import HeroSection from '@/sections/home/HeroSection';
 import HowWeWorkSection from '@/sections/home/HowWeWorkSection';
 import OurBrandEquationSection from '@/sections/home/OurBrandEquationSection';
@@ -15,11 +16,18 @@ interface RecentlyCreatedItem {
     image_3: string;
 }
 
-interface WelcomeProps {
-    recentlyCreated: RecentlyCreatedItem[];
+interface ClientLogo {
+    id: number;
+    name: string;
+    logo: string;
 }
 
-export default function Welcome({ recentlyCreated }: WelcomeProps) {
+interface WelcomeProps {
+    recentlyCreated: RecentlyCreatedItem[];
+    clients: ClientLogo[];
+}
+
+export default function Welcome({ recentlyCreated, clients }: WelcomeProps) {
     return (
         <>
             <Head title="Home" />
@@ -43,8 +51,11 @@ export default function Welcome({ recentlyCreated }: WelcomeProps) {
                 <section id="services">
                     <ServicesSection />
                 </section>
-                <section id="clients">
+                <section id="recently-created">
                     <RecentlyCreatedSection items={recentlyCreated} />
+                </section>
+                <section id="clients">
+                    <ClientsSection clients={clients} />
                 </section>
             </div>
         </>

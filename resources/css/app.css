@@ -128,3 +128,41 @@ textarea {
     margin-top: 0.75em;
     margin-bottom: 0.75em;
 }
+
+/* Logo Marquee */
+@keyframes logo-marquee-scroll {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(calc(-1 * var(--logo-marquee-distance, 0px)), 0, 0);
+    }
+}
+
+.logo-marquee {
+    --logo-marquee-gap: 32px;
+    --logo-marquee-duration: 18s;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.logo-marquee__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: logo-marquee-scroll var(--logo-marquee-duration) linear infinite;
+}
+
+.logo-marquee--pause:hover .logo-marquee__track {
+    animation-play-state: paused;
+}
+
+.logo-marquee__sequence {
+    display: flex;
+}
+
+.logo-marquee__item {
+    flex: 0 0 auto;
+    padding-inline: calc(var(--logo-marquee-gap) / 2);
+}

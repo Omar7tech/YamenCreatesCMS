@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\RecentlyCreated;
 use Inertia\Inertia;
 
@@ -21,8 +22,19 @@ class HomeController extends Controller
                     ?: $item->getFirstMediaUrl(RecentlyCreated::IMAGE_3),
             ]);
 
+        $clients = Client::where('is_active', true)
+            ->orderBy('sort')
+            ->get()
+            ->map(fn (Client $client) => [
+                'id' => $client->id,
+                'name' => $client->name,
+                'logo' => $client->getFirstMediaUrl('logo'),
+            ])
+            ->filter(fn ($client) => ! empty($client['logo']));
+
         return Inertia::render('welcome', [
             'recentlyCreated' => $recentlyCreated,
+            'clients' => $clients,
         ]);
     }
 }
