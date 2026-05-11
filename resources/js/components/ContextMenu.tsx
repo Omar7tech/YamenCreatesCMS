@@ -79,7 +79,9 @@ export default function ContextMenu() {
         const close = () => setIsVisible(false);
 
         const handleClick = (e: MouseEvent) => {
-            if (!(e.target as HTMLElement).closest('.context-menu')) close();
+            if (!(e.target as HTMLElement).closest('.context-menu')) {
+close();
+}
         };
 
         document.addEventListener('contextmenu', handleContextMenu);
@@ -93,7 +95,9 @@ export default function ContextMenu() {
         };
     }, []);
 
-    if (!isVisible) return null;
+    if (!isVisible) {
+return null;
+}
 
     return (
         <div

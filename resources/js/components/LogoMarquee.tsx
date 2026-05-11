@@ -29,17 +29,28 @@ export default function LogoMarquee({
     const [containerWidth, setContainerWidth] = useState(0);
 
     useEffect(() => {
-        if (typeof window === 'undefined') return;
+        if (typeof window === 'undefined') {
+return;
+}
 
         const container = containerRef.current;
         const sequence = sequenceRef.current;
-        if (!container || !sequence) return;
+
+        if (!container || !sequence) {
+return;
+}
 
         const update = () => {
             const cw = container.getBoundingClientRect().width;
             const sw = sequence.getBoundingClientRect().width;
-            if (Number.isFinite(cw)) setContainerWidth(Math.ceil(cw));
-            if (Number.isFinite(sw)) setSequenceWidth(Math.ceil(sw));
+
+            if (Number.isFinite(cw)) {
+setContainerWidth(Math.ceil(cw));
+}
+
+            if (Number.isFinite(sw)) {
+setSequenceWidth(Math.ceil(sw));
+}
         };
 
         update();
@@ -47,6 +58,7 @@ export default function LogoMarquee({
         if (!('ResizeObserver' in window)) {
             const w = window as unknown as Window;
             w.addEventListener('resize', update);
+
             return () => w.removeEventListener('resize', update);
         }
 
@@ -58,9 +70,12 @@ export default function LogoMarquee({
     }, [items, gapPx]);
 
     const copies = useMemo(() => {
-        if (sequenceWidth <= 0 || containerWidth <= 0) return 2;
+        if (sequenceWidth <= 0 || containerWidth <= 0) {
+return 2;
+}
 
         const minCopiesToFill = Math.ceil(containerWidth / sequenceWidth);
+
         return Math.max(2, minCopiesToFill + 2);
     }, [sequenceWidth, containerWidth]);
 
@@ -69,7 +84,9 @@ export default function LogoMarquee({
         [copies],
     );
 
-    if (!items || items.length === 0) return null;
+    if (!items || items.length === 0) {
+return null;
+}
 
     return (
         <div

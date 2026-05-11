@@ -4,8 +4,8 @@ import { index as contact } from '@/actions/App/Http/Controllers/ContactControll
 import { index as work } from '@/actions/App/Http/Controllers/WorkController';
 import AnimatedDescription from '@/components/AnimatedDescription';
 import DecryptedText from '@/components/DecryptedText';
-import MagneticButton from '@/components/MagneticButton';
 import MagicBento from '@/components/MagicBento';
+import MagneticButton from '@/components/MagneticButton';
 
 const heroLines = ['We Work With', 'Founders, CEOs,', '& Leadership Teams'];
 

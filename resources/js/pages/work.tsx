@@ -4,8 +4,8 @@ import HeroSection from '@/sections/work/HeroSection';
 import OurWorkSection from '@/sections/work/OurWorkSection';
 import ProgramsSection from '@/sections/work/ProgramsSection';
 import VideoSection from '@/sections/work/VideoSection';
-import type { WorkCategory, WorkProject } from '@/types/project';
 import type { WorkProgramsSectionData } from '@/types/program';
+import type { WorkCategory, WorkProject } from '@/types/project';
 
 interface WorkProps {
     programsSection: WorkProgramsSectionData;

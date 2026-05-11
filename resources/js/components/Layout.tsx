@@ -1,7 +1,8 @@
 import { router } from '@inertiajs/react';
-import { useEffect, type ReactNode } from 'react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect  } from 'react';
+import type {ReactNode} from 'react';
 
 import ContextMenu from '@/components/ContextMenu';
 import Footer from '@/components/Footer';
@@ -12,9 +13,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 function scrollToHash() {
     const hash = window.location.hash;
-    if (!hash) return;
+
+    if (!hash) {
+return;
+}
 
     const el = document.querySelector(hash);
+
     if (el) {
         setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 50);
     }
@@ -27,6 +32,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
         // Handle hash after every Inertia navigation
         const remove = router.on('navigate', scrollToHash);
+
         return () => remove();
     }, []);
 

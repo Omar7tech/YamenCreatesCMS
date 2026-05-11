@@ -7,6 +7,7 @@ export default function Contact() {
         contactEmail: { email: string }[];
         contactPhone: { phone: string }[];
     }>().props;
+
     return (
         <>
             <Head title="Contact" />

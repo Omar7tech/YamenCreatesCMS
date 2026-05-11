@@ -1,5 +1,6 @@
 import gsap from 'gsap';
-import { useRef, useEffect, useState, type ReactNode, type MouseEvent } from 'react';
+import { useRef, useEffect, useState   } from 'react';
+import type {ReactNode, MouseEvent} from 'react';
 
 interface MagneticButtonProps {
     children: ReactNode;
@@ -28,7 +29,10 @@ export default function MagneticButton({
 
     useEffect(() => {
         const button = buttonRef.current;
-        if (!button || isMobile) return;
+
+        if (!button || isMobile) {
+return;
+}
 
         const handleMouseMove = (e: MouseEvent) => {
             const rect = button.getBoundingClientRect();

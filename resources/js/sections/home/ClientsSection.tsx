@@ -11,7 +11,9 @@ interface ClientsSectionProps {
 }
 
 export default function ClientsSection({ clients }: ClientsSectionProps) {
-    if (!clients || clients.length === 0) return null;
+    if (!clients || clients.length === 0) {
+return null;
+}
 
     return (
         <div>

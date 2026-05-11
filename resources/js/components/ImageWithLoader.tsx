@@ -41,7 +41,9 @@ export default function ImageWithLoader({
         );
     }
 
-    if (!images || images.length === 0) return null;
+    if (!images || images.length === 0) {
+return null;
+}
 
     return (
         <div className="mt-6 grid grid-cols-2 gap-3 md:mt-8 md:grid-cols-4 md:gap-10">

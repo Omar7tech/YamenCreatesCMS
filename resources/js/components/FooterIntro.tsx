@@ -5,10 +5,10 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { ArrowRight } from 'lucide-react';
-import MagneticButton from '@/components/MagneticButton';
 import { useEffect, useRef } from 'react';
 import { index as contact } from '@/actions/App/Http/Controllers/ContactController';
 import { index as work } from '@/actions/App/Http/Controllers/WorkController';
+import MagneticButton from '@/components/MagneticButton';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 

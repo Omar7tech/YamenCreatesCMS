@@ -18,10 +18,14 @@ export default function OurWorkSection({
     const [isLoading, setIsLoading] = useState(false);
     const [loadedMedia, setLoadedMedia] = useState<Set<string>>(new Set());
 
-    if (categories.length === 0) return null;
+    if (categories.length === 0) {
+return null;
+}
 
     const handleCategoryChange = (slug: string) => {
-        if (slug === activeCategory || isLoading) return;
+        if (slug === activeCategory || isLoading) {
+return;
+}
 
         setIsLoading(true);
         router.visit(index.url({ query: { category: slug } }), {

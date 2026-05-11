@@ -21,6 +21,7 @@ export default function Footer() {
         contactEmail: { email: string }[];
         contactPhone: { phone: string }[];
     }>().props;
+
     return (
         <footer className="relative flex flex-col items-center justify-center space-y-5 px-5 text-center md:px-10 lg:px-40">
             <div>

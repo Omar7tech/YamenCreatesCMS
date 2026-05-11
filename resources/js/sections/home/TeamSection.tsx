@@ -1,6 +1,6 @@
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Flip } from 'gsap/Flip';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useEffect, useRef, useState } from 'react';
 
 gsap.registerPlugin(ScrollTrigger, Flip);
@@ -58,11 +58,17 @@ export default function TeamSection({ team }: TeamSectionProps) {
 
     const handleCardClick = (index: number) => {
         const card = cardsRef.current[index];
-        if (!card) return;
+
+        if (!card) {
+return;
+}
 
         const textContent = card.querySelector('.text-content');
         const circle = card.querySelector('.circle-wrapper');
-        if (!textContent || !circle) return;
+
+        if (!textContent || !circle) {
+return;
+}
 
         // Step 1: Fade out text
         gsap.to(textContent, {
@@ -77,6 +83,7 @@ export default function TeamSection({ team }: TeamSectionProps) {
                 setToggledCards((prev) => {
                     const newState = [...prev];
                     newState[index] = !newState[index];
+
                     return newState;
                 });
 
@@ -104,7 +111,9 @@ export default function TeamSection({ team }: TeamSectionProps) {
         return;
     }, [team]);
 
-    if (!team || team.length === 0) return null;
+    if (!team || team.length === 0) {
+return null;
+}
 
     return (
         <div ref={sectionRef} className="px-5 md:px-10 lg:px-20 py-32">
