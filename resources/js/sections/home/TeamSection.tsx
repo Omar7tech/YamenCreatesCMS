@@ -72,7 +72,7 @@ export default function TeamSection({ team }: TeamSectionProps) {
         tl.to(circle, {
             x: moveDistance,
             duration: 0.7,
-            ease: 'power2.inOut'
+            ease: 'power1.inOut'
         }, '-=0.15');
 
         // Change state (circle keeps x transform, maintaining visual position)
@@ -84,8 +84,8 @@ export default function TeamSection({ team }: TeamSectionProps) {
             });
         });
 
-        // Small delay for DOM to settle
-        tl.to({}, { duration: 0.08 });
+        // Minimal delay for DOM to settle
+        tl.to({}, { duration: 0.02 });
 
         // Fade in text and clear circle transform simultaneously
         tl.to(textContent, {
