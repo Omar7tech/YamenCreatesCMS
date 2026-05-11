@@ -45,32 +45,57 @@ export default function TeamSection({ team }: TeamSectionProps) {
         if (!card) return;
 
         const textContent = card.querySelector('.text-content');
-        if (!textContent) return;
+        const circle = card.querySelector('.circle-wrapper');
+        if (!textContent || !circle) return;
+
+        const isToggled = toggledCards[index];
+        const isCircleLeft = index % 2 === 0;
+        const currentDirection = isToggled ? !isCircleLeft : isCircleLeft;
+
+        // Calculate movement distance
+        const cardWidth = card.offsetWidth;
+        const circleWidth = (circle as HTMLElement).offsetWidth;
+        const gap = 24;
+        const distance = cardWidth - circleWidth - (gap * 2);
+        const moveDistance = currentDirection ? distance : -distance;
 
         const tl = gsap.timeline();
 
-        // Fade out current content
+        // Fade out text
         tl.to(textContent, {
             opacity: 0,
-            duration: 0.25,
+            duration: 0.3,
             ease: 'power2.inOut',
         });
 
-        // Change state (circle swaps via flex-direction)
+        // Animate circle sliding to the other side
+        tl.to(circle, {
+            x: moveDistance,
+            duration: 0.7,
+            ease: 'power2.inOut'
+        }, '-=0.15');
+
+        // Change state (circle keeps x transform, maintaining visual position)
         tl.call(() => {
             setToggledCards((prev) => {
                 const newState = [...prev];
                 newState[index] = !newState[index];
                 return newState;
             });
-        }, null, '+=0.15');
+        });
 
-        // Fade in new content
+        // Small delay for DOM to settle
+        tl.to({}, { duration: 0.08 });
+
+        // Fade in text and clear circle transform simultaneously
         tl.to(textContent, {
             opacity: 1,
-            duration: 0.35,
+            duration: 0.3,
             ease: 'power2.inOut',
-        }, '-=0.1');
+            onStart: () => {
+                gsap.set(circle, { clearProps: 'x' });
+            }
+        });
     };
 
     useEffect(() => {
