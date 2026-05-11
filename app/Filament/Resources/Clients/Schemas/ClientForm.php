@@ -25,6 +25,7 @@ class ClientForm
                     ->maxSize(2048)
                     ->downloadable()
                     ->openable()
+                    ->required()
                     ->previewable()
                     ->helperText('Upload PNG logo (max 2MB)'),
             ]);
