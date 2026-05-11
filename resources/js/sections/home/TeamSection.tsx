@@ -1,0 +1,183 @@
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef } from 'react';
+
+gsap.registerPlugin(ScrollTrigger);
+
+interface TeamMember {
+    id: number;
+    name: string;
+    position: string;
+    description?: string;
+}
+
+interface TeamSectionProps {
+    team: TeamMember[];
+}
+
+/**
+ * Extracts role abbreviation from position string
+ * Examples: "Chief Executive Officer" → "CEO", "Software Engineer" → "SWE"
+ */
+function getRoleAbbreviation(position: string): string {
+    const words = position.trim().split(/\s+/);
+
+    if (words.length >= 2) {
+        // Multi-word: take first letter of each word
+        return words.map(word => word[0]).join('').toUpperCase();
+    }
+
+    // Single word: take first 2-3 letters
+    return position.slice(0, 3).toUpperCase();
+}
+
+export default function TeamSection({ team }: TeamSectionProps) {
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const subtitleRef = useRef<HTMLParagraphElement>(null);
+    const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+    useEffect(() => {
+        if (!team || team.length === 0) return;
+        if (typeof window === 'undefined') return;
+
+        const isMobile = window.innerWidth < 768;
+        if (isMobile) return;
+
+        const ctx = gsap.context(() => {
+            // Title fade in
+            if (titleRef.current) {
+                gsap.from(titleRef.current, {
+                    scrollTrigger: {
+                        trigger: titleRef.current,
+                        start: 'top 80%',
+                        end: 'top 50%',
+                        scrub: 1,
+                    },
+                    opacity: 0,
+                    y: 30,
+                });
+            }
+
+            // Subtitle fade in
+            if (subtitleRef.current) {
+                gsap.from(subtitleRef.current, {
+                    scrollTrigger: {
+                        trigger: subtitleRef.current,
+                        start: 'top 80%',
+                        end: 'top 50%',
+                        scrub: 1,
+                    },
+                    opacity: 0,
+                    y: 20,
+                });
+            }
+
+            // Cards animation with scale and fade
+            cardsRef.current.forEach((card, index) => {
+                if (!card) return;
+
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 90%',
+                        end: 'top 60%',
+                        scrub: 1,
+                    },
+                    opacity: 0,
+                    y: 60,
+                    scale: 0.95,
+                });
+            });
+        }, sectionRef);
+
+        return () => ctx.revert();
+    }, [team]);
+
+    if (!team || team.length === 0) return null;
+
+    return (
+        <div ref={sectionRef} className="px-5 md:px-10 lg:px-20 py-32">
+            <div className="max-w-4xl mx-auto">
+                {/* Header */}
+                <div className="mb-16 text-center max-w-3xl mx-auto space-y-4">
+                    <h2
+                        ref={titleRef}
+                        className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground"
+                    >
+                        Meet Our Team
+                    </h2>
+                    <p
+                        ref={subtitleRef}
+                        className="text-base md:text-lg text-foreground/60"
+                    >
+                        The creative minds behind every project
+                    </p>
+                </div>
+
+                {/* Cards */}
+                <div className="space-y-6 md:space-y-8">
+                    {team.map((member, index) => {
+                        const isCircleLeft = index % 2 === 0;
+                        const roleAbbr = getRoleAbbreviation(member.position);
+
+                        return (
+                            <div
+                                key={member.id}
+                                ref={(el) => {
+                                    cardsRef.current[index] = el;
+                                }}
+                                className={`
+                                    flex ${isCircleLeft ? 'flex-row' : 'flex-row-reverse'}
+                                    items-center gap-3 md:gap-4
+                                    p-3 md:p-4 lg:p-5
+                                    rounded-full
+                                    transition-all duration-300
+                                    group
+                                `}
+                                style={{
+                                    border: '3px solid transparent',
+                                    backgroundImage: 'linear-gradient(#2B2B2B, #2B2B2B), linear-gradient(to bottom, rgba(168, 85, 247, 0.7), rgba(168, 85, 247, 0))',
+                                    backgroundOrigin: 'border-box',
+                                    backgroundClip: 'padding-box, border-box',
+                                }}
+                            >
+                                {/* Role Circle */}
+                                <div className="flex-shrink-0">
+                                    <div
+                                        className="
+                                            w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32
+                                            rounded-full
+                                            flex items-center justify-center
+                                            transition-transform duration-200
+                                        "
+                                        style={{
+                                            border: '3px solid transparent',
+                                            backgroundImage: 'linear-gradient(#2B2B2B, #2B2B2B), linear-gradient(to bottom, rgba(168, 85, 247, 0.7), rgba(168, 85, 247, 0))',
+                                            backgroundOrigin: 'border-box',
+                                            backgroundClip: 'padding-box, border-box',
+                                        }}
+                                    >
+                                        <span className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+                                            {roleAbbr}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Text Content */}
+                                <div className="flex flex-col justify-center min-w-0 flex-1">
+                                    <h3 className="text-xl md:text-2xl lg:text-4xl font-bold text-white tracking-tight leading-tight">
+                                        {member.name}
+                                    </h3>
+                                    <p className="text-xs md:text-sm lg:text-base text-zinc-400 mt-1">
+                                        {member.position}
+                                    </p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        </div>
+    );
+}

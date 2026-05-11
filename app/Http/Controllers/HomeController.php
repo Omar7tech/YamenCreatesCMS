@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\RecentlyCreated;
+use App\Models\Team;
 use Inertia\Inertia;
 
 class HomeController extends Controller
@@ -32,9 +33,20 @@ class HomeController extends Controller
             ])
             ->filter(fn ($client) => ! empty($client['logo']));
 
+        $team = Team::where('is_active', true)
+            ->orderBy('sort')
+            ->get()
+            ->map(fn (Team $member) => [
+                'id' => $member->id,
+                'name' => $member->name,
+                'position' => $member->position,
+                'description' => $member->description,
+            ]);
+
         return Inertia::render('welcome', [
             'recentlyCreated' => $recentlyCreated,
             'clients' => $clients,
+            'team' => $team,
         ]);
     }
 }

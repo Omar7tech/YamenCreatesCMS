@@ -6,6 +6,7 @@ import HowWeWorkSection from '@/sections/home/HowWeWorkSection';
 import OurBrandEquationSection from '@/sections/home/OurBrandEquationSection';
 import RecentlyCreatedSection from '@/sections/home/RecentlyCreatedSection';
 import ServicesSection from '@/sections/home/ServicesSection';
+import TeamSection from '@/sections/home/TeamSection';
 import WeBelieveSection from '@/sections/home/WeBelieveSection';
 import WeCoCreateSection from '@/sections/home/WeCoCreateSection';
 
@@ -22,12 +23,24 @@ interface ClientLogo {
     logo: string;
 }
 
+interface TeamMember {
+    id: number;
+    name: string;
+    position: string;
+    description?: string;
+}
+
 interface WelcomeProps {
     recentlyCreated: RecentlyCreatedItem[];
     clients: ClientLogo[];
+    team: TeamMember[];
 }
 
-export default function Welcome({ recentlyCreated, clients }: WelcomeProps) {
+export default function Welcome({
+    recentlyCreated,
+    clients,
+    team,
+}: WelcomeProps) {
     return (
         <>
             <Head title="Home" />
@@ -56,6 +69,9 @@ export default function Welcome({ recentlyCreated, clients }: WelcomeProps) {
                 </section>
                 <section id="clients">
                     <ClientsSection clients={clients} />
+                </section>
+                <section id="team">
+                    <TeamSection team={team} />
                 </section>
             </div>
         </>
