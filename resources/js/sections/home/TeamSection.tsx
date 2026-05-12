@@ -152,7 +152,7 @@ return null;
                                     transition-all duration-300 ease-out
                                     group
                                     relative
-                                    hover:scale-[1.01] hover:-translate-y-0.5 hover:drop-shadow-[0_6px_12px_rgba(244,148,254,0.15)]
+                                    hover:drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]
                                     ${member.description && member.description.trim() ? 'cursor-pointer' : 'cursor-default'}
                                 `}
                                 style={{
