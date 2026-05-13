@@ -92,6 +92,21 @@ export default function Contact() {
                             </div>
                             <div>
                                 <label
+                                    htmlFor="phone"
+                                    className="mb-2 block text-sm font-medium text-white/80"
+                                >
+                                    Phone
+                                </label>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    className="w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-white/50 transition-colors focus:border-white/40 focus:outline-none"
+                                    placeholder="Your phone number"
+                                />
+                            </div>
+                            <div>
+                                <label
                                     htmlFor="message"
                                     className="mb-2 block text-sm font-medium text-white/80"
                                 >
