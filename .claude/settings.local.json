@@ -5,5 +5,9 @@
       "Bash(php artisan:*)",
       "mcp__plugin_laravel-boost_laravel-boost__application-info"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "laravel-boost"
+  ],
+  "enableAllProjectMcpServers": true
 }
