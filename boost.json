@@ -1,7 +1,6 @@
 {
     "agents": [
-        "cursor",
-        "codex"
+        "claude_code"
     ],
     "guidelines": true,
     "mcp": true,
