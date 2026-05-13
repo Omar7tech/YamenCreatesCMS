@@ -1,7 +1,7 @@
 import { Head, usePage } from '@inertiajs/react';
 import { Form } from '@inertiajs/react';
 import { Mail, Phone, CheckCircle } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import AnimatedDescription from '@/components/AnimatedDescription';
 
 const STORAGE_KEY = 'contact_submission_count';
@@ -20,14 +20,11 @@ export default function Contact() {
         contactPhone: { phone: string }[];
     }>().props;
 
-    const [submissionCount, setSubmissionCount] = useState(0);
+    const [submissionCount, setSubmissionCount] = useState(() => {
+        return parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
+    });
     const [showSuccess, setShowSuccess] = useState(false);
     const [frontendErrors, setFrontendErrors] = useState<ValidationErrors>({});
-
-    useEffect(() => {
-        const count = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
-        setSubmissionCount(count);
-    }, []);
 
     const isLimitReached = submissionCount >= MAX_SUBMISSIONS;
 
@@ -72,19 +69,24 @@ export default function Contact() {
         return errors;
     };
 
-    const handleBeforeSubmit = (visit: any) => {
+    const handleBeforeSubmit = () => {
         const form = document.querySelector('form') as HTMLFormElement;
-        if (!form) return true;
+
+        if (!form) {
+return true;
+}
 
         const formData = new FormData(form);
         const errors = validateForm(formData);
 
         if (Object.keys(errors).length > 0) {
             setFrontendErrors(errors);
+
             return false;
         }
 
         setFrontendErrors({});
+
         return true;
     };
 
@@ -176,6 +178,7 @@ export default function Contact() {
                             >
                                 {({ errors: backendErrors, processing }) => {
                                     const errors = { ...frontendErrors, ...backendErrors };
+
                                     return (
                                         <div className="space-y-5">
                                             <div>
