@@ -234,7 +234,7 @@ export default function Nav() {
                 <img
                     src={logoPath}
                     alt="Yamen Creates logo"
-                    className="group-hover:brightness-20 w-[170px] transition-all duration-300 group-hover:grayscale sm:w-[220px]"
+                    className="group-hover:brightness-20 w-[190px] transition-all duration-300 group-hover:grayscale sm:w-[220px]"
                 />
             </Link>
 
@@ -271,7 +271,7 @@ export default function Nav() {
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-menu"
                 onClick={() => setMobileMenuOpen((open) => !open)}
-                className="relative z-60 sm:hidden rounded-full border border-white/15 bg-white/10 px-2 py-2 text-2xl font-light shadow-[0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-xl transition-all duration-300 hover:scale-[1.03] hover:border-white/30 hover:bg-white/14 hover:text-white"
+                className="relative z-60 sm:hidden rounded-full border border-white/15 bg-white/10 px-3.5 py-3 text-2xl font-light shadow-[0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-xl transition-all duration-300 hover:scale-[1.03] hover:border-white/30 hover:bg-white/14 hover:text-white"
             >
                 <span
                     ref={mobileButtonIconRef}
