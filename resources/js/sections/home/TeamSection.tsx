@@ -116,9 +116,9 @@ return null;
 
     return (
         <div ref={sectionRef} className="px-5 md:px-10 lg:px-20 py-32">
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-4xl md:mx-auto">
                 {/* Header */}
-                <div className="mb-16 text-center max-w-4xl mx-auto">
+                <div className="mb-16 text-left md:text-center max-w-4xl md:mx-auto">
                     <h2
                         ref={titleRef}
                         className="text-6xl md:text-8xl lg:text-9xl font-bold text-foreground"
@@ -127,8 +127,30 @@ return null;
                     </h2>
                 </div>
 
-                {/* Cards */}
-                <div className="space-y-6 md:space-y-8">
+                {/* Mobile Layout (Minimalist Editorial Stack) */}
+                <div className="flex flex-col gap-12 md:hidden">
+                    {team.map((member) => {
+                        return (
+                            <div key={member.id} className="flex flex-col space-y-3">
+                                <div>
+                                    <h3 className="text-4xl font-light text-white uppercase tracking-tight leading-none">
+                                        {member.name}
+                                    </h3>
+                                    <p className="text-zinc-500 text-xs font-mono uppercase tracking-[0.2em] mt-2">
+                                        {member.position}
+                                    </p>
+                                </div>
+
+                                <p className="text-zinc-400 text-sm leading-relaxed font-light">
+                                    {member.description || 'Creative professional contributing to the YamenCreates vision.'}
+                                </p>
+                            </div>
+                        );
+                    })}
+                </div>
+
+                {/* Desktop Layout (Original Pill Design) */}
+                <div className="hidden md:block space-y-6 md:space-y-8">
                     {team.map((member, index) => {
                         const isCircleLeft = index % 2 === 0;
                         const isToggled = toggledCards[index];
@@ -145,10 +167,10 @@ return null;
                                 onMouseMove={(e) => member.description && member.description.trim() && handleMouseMove(e, index)}
                                 onMouseLeave={handleMouseLeave}
                                 className={`
-                                    flex ${currentDirection ? 'flex-row' : 'flex-row-reverse'}
-                                    items-center gap-3 md:gap-4 lg:gap-6
-                                    p-px md:p-0.5 lg:p-1.5
-                                    rounded-full
+                                    flex md:flex-row ${currentDirection ? 'md:flex-row' : 'md:flex-row-reverse'}
+                                    items-center gap-4 md:gap-4 lg:gap-6
+                                    p-1 lg:p-1.5
+                                    md:rounded-full
                                     transition-all duration-300 ease-out
                                     group
                                     relative
@@ -180,7 +202,7 @@ return null;
                                 <div className="flex-shrink-0 circle-wrapper">
                                     <div
                                         className="
-                                            w-24 h-24 md:w-28 md:h-28 lg:w-40 lg:h-40
+                                            w-28 h-28 lg:w-40 lg:h-40
                                             rounded-full
                                             flex items-center justify-center
                                         "
@@ -193,25 +215,25 @@ return null;
                                             willChange: 'transform',
                                         }}
                                     >
-                                        <span className="text-2xl md:text-3xl lg:text-5xl font-bold text-white">
+                                        <span className="text-3xl lg:text-5xl font-bold text-white">
                                             {roleAbbr}
                                         </span>
                                     </div>
                                 </div>
 
                                 {/* Text Content */}
-                                <div className={`flex flex-col justify-center min-w-0 flex-1 text-content ${!currentDirection ? 'pl-4 md:pl-6 lg:pl-8' : ''}`}>
+                                <div className={`flex flex-col justify-center min-w-0 flex-1 text-content text-left px-6 md:px-10 lg:px-14 ${currentDirection ? 'md:pl-2 lg:pl-4' : 'md:pr-2 lg:pr-4'}`}>
                                     {!isToggled ? (
                                         <>
-                                            <h3 className="text-2xl md:text-3xl lg:text-6xl font-light text-white tracking-tight leading-none uppercase">
+                                            <h3 className="text-2xl lg:text-6xl font-light text-white tracking-tight leading-none uppercase">
                                                 {member.name}
                                             </h3>
-                                            <p className="text-sm md:text-base lg:text-xl text-zinc-400 mt-1">
+                                            <p className="text-sm lg:text-xl text-zinc-400 mt-1">
                                                 {member.position}
                                             </p>
                                         </>
                                     ) : (
-                                        <p className="text-sm md:text-base lg:text-xl text-zinc-300 leading-relaxed px-6 md:px-8 lg:px-12">
+                                        <p className="text-sm lg:text-xl text-zinc-300 leading-relaxed">
                                             {member.description || 'No description available'}
                                         </p>
                                     )}
