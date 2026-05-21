@@ -1,6 +1,6 @@
 {
-  "_AnimatedDescription-BzzvozaZ.js": {
-    "file": "assets/AnimatedDescription-BzzvozaZ.js",
+  "_AnimatedDescription-DlazzeNw.js": {
+    "file": "assets/AnimatedDescription-DlazzeNw.js",
     "name": "AnimatedDescription",
     "imports": [
       "_jsx-runtime-rw34JKwJ.js",
@@ -33,7 +33,7 @@
     "name": "jsx-runtime"
   },
   "resources/css/app.css": {
-    "file": "assets/app-IAKVjged.css",
+    "file": "assets/app-Bv-VCzf5.css",
     "name": "app",
     "names": [
       "app.css"
@@ -51,7 +51,7 @@
     "isEntry": true
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-DqpUAvjN.js",
+    "file": "assets/app-BY4ojraU.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
@@ -68,18 +68,18 @@
     ]
   },
   "resources/js/pages/contact.tsx": {
-    "file": "assets/contact-D60wNG3A.js",
+    "file": "assets/contact-Dz_RfCO_.js",
     "name": "contact",
     "src": "resources/js/pages/contact.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_jsx-runtime-rw34JKwJ.js",
       "_createLucideIcon-ZSii_00f.js",
-      "_AnimatedDescription-BzzvozaZ.js"
+      "_AnimatedDescription-DlazzeNw.js"
     ]
   },
   "resources/js/pages/project.tsx": {
-    "file": "assets/project-D7OQn6zG.js",
+    "file": "assets/project-CO8kBLf0.js",
     "name": "project",
     "src": "resources/js/pages/project.tsx",
     "isDynamicEntry": true,
@@ -90,7 +90,7 @@
     ]
   },
   "resources/js/pages/welcome.tsx": {
-    "file": "assets/welcome-BXCbP4Ek.js",
+    "file": "assets/welcome-BnUY6z5Z.js",
     "name": "welcome",
     "src": "resources/js/pages/welcome.tsx",
     "isDynamicEntry": true,
@@ -98,7 +98,7 @@
       "_jsx-runtime-rw34JKwJ.js",
       "resources/js/app.tsx",
       "_WorkController-BtdbjGOW.js",
-      "_AnimatedDescription-BzzvozaZ.js"
+      "_AnimatedDescription-DlazzeNw.js"
     ]
   },
   "resources/js/pages/work.tsx": {
