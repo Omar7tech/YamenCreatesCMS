@@ -30,12 +30,12 @@ export default function Project({ project }: ProjectProps) {
                                 {project.category.name}
                             </span>
                         </div>
-                        <h1 className="font-special-gothic-expanded text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] font-extrabold uppercase">
+                        <h1 className="text-[clamp(2.5rem,4vw,4.5rem)] leading-[0.9] font-extrabold uppercase">
                             {project.title}
                         </h1>
                     </div>
 
-                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-white/5 md:rounded-3xl">
+                    <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl bg-white/5 md:rounded-3xl">
                         {mediaSrc && (
                             isVideo ? (
                                 <video

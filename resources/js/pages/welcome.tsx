@@ -58,15 +58,16 @@ export default function Welcome({
                 <section id="co-create">
                     <WeCoCreateSection />
                 </section>
+                <section id="recently-created">
+                    <RecentlyCreatedSection items={recentlyCreated} />
+                </section>
                 <section id="how-we-work">
                     <HowWeWorkSection />
                 </section>
                 <section id="services">
                     <ServicesSection />
                 </section>
-                <section id="recently-created">
-                    <RecentlyCreatedSection items={recentlyCreated} />
-                </section>
+                
                 <section id="clients">
                     <ClientsSection clients={clients} />
                 </section>

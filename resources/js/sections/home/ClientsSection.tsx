@@ -33,7 +33,7 @@ return null;
                         <img
                             src={client.logo}
                             alt={client.name}
-                            className="h-12 md:h-18 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                            className="h-15 md:h-18 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
                             loading="lazy"
                         />
                     ),

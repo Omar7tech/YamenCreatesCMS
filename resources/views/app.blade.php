@@ -57,7 +57,7 @@
     <x-inertia::head>
         <title data-inertia>{{ config('app.name', 'YC') }}</title>
     </x-inertia::head>
-    <link rel="stylesheet" href="https://unpkg.com/kursor/dist/kursor.css">
+  <!--   <link rel="stylesheet" href="https://unpkg.com/kursor/dist/kursor.css"> -->
 </head>
 
 <body class="antialiased" style="background:#2b2b2b;color:#ededed;">

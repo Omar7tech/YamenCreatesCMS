@@ -119,9 +119,9 @@ return null;
                 <div className="mb-16 text-left md:text-center max-w-4xl md:mx-auto">
                     <h2
                         ref={titleRef}
-                        className="text-6xl md:text-8xl lg:text-9xl font-bold text-foreground"
+                        className="text-5xl md:text-8xl lg:text-9xl font-bold text-foreground"
                     >
-                        Creators
+                        YC Creators
                     </h2>
                 </div>
 
@@ -131,7 +131,7 @@ return null;
                         return (
                             <div key={member.id} className="flex flex-col space-y-3">
                                 <div>
-                                    <h3 className="text-4xl font-light text-white uppercase tracking-tight leading-none">
+                                    <h3 className="text-4xl font-bold text-white uppercase tracking-tight leading-none">
                                         {member.name}
                                     </h3>
                                     <p className="text-zinc-500 text-xs font-mono uppercase tracking-[0.2em] mt-2">

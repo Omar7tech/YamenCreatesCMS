@@ -33,27 +33,27 @@ const MOBILE_BREAKPOINT = 768;
 const cardData: BentoCardProps[] = [
     {
         color: 'transparent',
-        image: 'https://picsum.photos/seed/yamen-1/600/600',
+        image: '/bento/1.jpg',
     },
     {
         color: 'transparent',
-        image: 'https://picsum.photos/seed/yamen-2/900/600',
+        image: '/bento/2.jpg',
     },
     {
         color: 'transparent',
-        image: 'https://picsum.photos/seed/yamen-3/900/600',
+        image: '/bento/3.jpg',
     },
     {
         color: 'transparent',
-        image: 'https://picsum.photos/seed/yamen-4/600/600',
+        image: '/bento/4.jpg',
     },
     {
         color: 'transparent',
-        image: 'https://picsum.photos/seed/yamen-5/600/600',
+        image: '/bento/5.jpg',
     },
     {
         color: 'transparent',
-        image: 'https://picsum.photos/seed/yamen-6/900/600',
+        image: '/bento/6.jpg',
     },
 ];
 
