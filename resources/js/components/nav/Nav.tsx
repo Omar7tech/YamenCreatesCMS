@@ -93,6 +93,13 @@ export default function Nav() {
                         filter: 'blur(0px)',
                         duration: 0.56,
                         ease: 'expo.out',
+                        // Safari drops backdrop-filter while a transform/filter is present.
+                        // Clear them once open so the glass samples the background at rest.
+                        onComplete: () => {
+                            gsap.set(panelElement, {
+                                clearProps: 'transform,filter',
+                            });
+                        },
                     },
                     0,
                 )
@@ -227,7 +234,7 @@ export default function Nav() {
             <Link
                 href={home()}
                 aria-label="Go to homepage"
-                className="group relative z-[60] rounded-full border-2 border-white/[.145] bg-white/10 px-4 py-3 text-2xl font-light backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-gray-300 hover:bg-gray-100"
+                className="group relative z-[60] rounded-full border-2 border-white/[.145] bg-white/10 px-4 py-3 text-2xl font-light backdrop-blur-sm transition-all duration-300 hover:border-gray-300 hover:bg-gray-100"
                 viewTransition
                 prefetch
             >
@@ -243,7 +250,7 @@ export default function Nav() {
                     <li key={item.route.url}>
                         <Link
                             href={item.route}
-                            className={`rounded-full border-2 px-4 py-2 text-2xl font-light backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-white/5 hover:bg-white/10 hover:text-zinc-300 ${
+                            className={`rounded-full border-2 px-4 py-2 text-2xl font-light backdrop-blur-sm transition-all duration-300 hover:border-white/5 hover:bg-white/10 hover:text-zinc-300 ${
                                 isActive(item.route.url)
                                     ? 'border-white/20 bg-white/15 text-white'
                                     : 'border-white/[.145] bg-white/5 text-white/90'
@@ -271,7 +278,7 @@ export default function Nav() {
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-menu"
                 onClick={() => setMobileMenuOpen((open) => !open)}
-                className="relative z-60 sm:hidden rounded-full border border-white/15 bg-white/10 px-3.5 py-3 text-2xl font-light shadow-[0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-xl transition-all duration-300 hover:scale-[1.03] hover:border-white/30 hover:bg-white/14 hover:text-white"
+                className="relative z-60 sm:hidden rounded-full border border-white/15 bg-white/10 px-3.5 py-3 text-2xl font-light shadow-[0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-xl transition-all duration-300 hover:border-white/30 hover:bg-white/14 hover:text-white"
             >
                 <span
                     ref={mobileButtonIconRef}

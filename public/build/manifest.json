@@ -1,6 +1,6 @@
 {
-  "_AnimatedDescription-CIK7uqqc.js": {
-    "file": "assets/AnimatedDescription-CIK7uqqc.js",
+  "_AnimatedDescription-8X2WnPq0.js": {
+    "file": "assets/AnimatedDescription-8X2WnPq0.js",
     "name": "AnimatedDescription",
     "imports": [
       "_jsx-runtime-5boyRdEN.js",
@@ -19,7 +19,7 @@
     "name": "jsx-runtime"
   },
   "resources/css/app.css": {
-    "file": "assets/app-3XDPqZSd.css",
+    "file": "assets/app-Dao_Any5.css",
     "name": "app",
     "names": [
       "app.css"
@@ -37,7 +37,7 @@
     "isEntry": true
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-BnfdVETx.js",
+    "file": "assets/app-DkCB67cB.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
@@ -52,18 +52,18 @@
     ]
   },
   "resources/js/pages/contact.tsx": {
-    "file": "assets/contact-tHSUVBLj.js",
+    "file": "assets/contact-BLLCHEzo.js",
     "name": "contact",
     "src": "resources/js/pages/contact.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_jsx-runtime-5boyRdEN.js",
       "resources/js/app.tsx",
-      "_AnimatedDescription-CIK7uqqc.js"
+      "_AnimatedDescription-8X2WnPq0.js"
     ]
   },
   "resources/js/pages/project.tsx": {
-    "file": "assets/project-BKgEveCo.js",
+    "file": "assets/project-Br63yYOE.js",
     "name": "project",
     "src": "resources/js/pages/project.tsx",
     "isDynamicEntry": true,
@@ -74,18 +74,18 @@
     ]
   },
   "resources/js/pages/welcome.tsx": {
-    "file": "assets/welcome-sxjyNt45.js",
+    "file": "assets/welcome-BsPy0rHo.js",
     "name": "welcome",
     "src": "resources/js/pages/welcome.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_jsx-runtime-5boyRdEN.js",
       "resources/js/app.tsx",
-      "_AnimatedDescription-CIK7uqqc.js"
+      "_AnimatedDescription-8X2WnPq0.js"
     ]
   },
   "resources/js/pages/work.tsx": {
-    "file": "assets/work-Dk1eUp2c.js",
+    "file": "assets/work-BXogU-9o.js",
     "name": "work",
     "src": "resources/js/pages/work.tsx",
     "isDynamicEntry": true,
