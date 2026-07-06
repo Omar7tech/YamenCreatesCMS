@@ -1,35 +1,21 @@
 {
-  "_AnimatedDescription-DlazzeNw.js": {
-    "file": "assets/AnimatedDescription-DlazzeNw.js",
+  "_AnimatedDescription-CIK7uqqc.js": {
+    "file": "assets/AnimatedDescription-CIK7uqqc.js",
     "name": "AnimatedDescription",
     "imports": [
-      "_jsx-runtime-rw34JKwJ.js",
+      "_jsx-runtime-5boyRdEN.js",
       "resources/js/app.tsx"
     ]
   },
-  "_ImageWithLoader-KMRXB5fc.js": {
-    "file": "assets/ImageWithLoader-KMRXB5fc.js",
+  "_ImageWithLoader-CffDbTen.js": {
+    "file": "assets/ImageWithLoader-CffDbTen.js",
     "name": "ImageWithLoader",
     "imports": [
-      "_jsx-runtime-rw34JKwJ.js"
+      "_jsx-runtime-5boyRdEN.js"
     ]
   },
-  "_WorkController-BtdbjGOW.js": {
-    "file": "assets/WorkController-BtdbjGOW.js",
-    "name": "WorkController",
-    "imports": [
-      "_createLucideIcon-ZSii_00f.js"
-    ]
-  },
-  "_createLucideIcon-ZSii_00f.js": {
-    "file": "assets/createLucideIcon-ZSii_00f.js",
-    "name": "createLucideIcon",
-    "imports": [
-      "_jsx-runtime-rw34JKwJ.js"
-    ]
-  },
-  "_jsx-runtime-rw34JKwJ.js": {
-    "file": "assets/jsx-runtime-rw34JKwJ.js",
+  "_jsx-runtime-5boyRdEN.js": {
+    "file": "assets/jsx-runtime-5boyRdEN.js",
     "name": "jsx-runtime"
   },
   "resources/css/app.css": {
@@ -51,14 +37,12 @@
     "isEntry": true
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-BY4ojraU.js",
+    "file": "assets/app-BnfdVETx.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
     "imports": [
-      "_jsx-runtime-rw34JKwJ.js",
-      "_WorkController-BtdbjGOW.js",
-      "_createLucideIcon-ZSii_00f.js"
+      "_jsx-runtime-5boyRdEN.js"
     ],
     "dynamicImports": [
       "resources/js/pages/contact.tsx",
@@ -68,49 +52,47 @@
     ]
   },
   "resources/js/pages/contact.tsx": {
-    "file": "assets/contact-Dz_RfCO_.js",
+    "file": "assets/contact-tHSUVBLj.js",
     "name": "contact",
     "src": "resources/js/pages/contact.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-runtime-rw34JKwJ.js",
-      "_createLucideIcon-ZSii_00f.js",
-      "_AnimatedDescription-DlazzeNw.js"
+      "_jsx-runtime-5boyRdEN.js",
+      "resources/js/app.tsx",
+      "_AnimatedDescription-CIK7uqqc.js"
     ]
   },
   "resources/js/pages/project.tsx": {
-    "file": "assets/project-CO8kBLf0.js",
+    "file": "assets/project-BKgEveCo.js",
     "name": "project",
     "src": "resources/js/pages/project.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-runtime-rw34JKwJ.js",
+      "_jsx-runtime-5boyRdEN.js",
       "resources/js/app.tsx",
-      "_ImageWithLoader-KMRXB5fc.js"
+      "_ImageWithLoader-CffDbTen.js"
     ]
   },
   "resources/js/pages/welcome.tsx": {
-    "file": "assets/welcome-BnUY6z5Z.js",
+    "file": "assets/welcome-sxjyNt45.js",
     "name": "welcome",
     "src": "resources/js/pages/welcome.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-runtime-rw34JKwJ.js",
+      "_jsx-runtime-5boyRdEN.js",
       "resources/js/app.tsx",
-      "_WorkController-BtdbjGOW.js",
-      "_AnimatedDescription-DlazzeNw.js"
+      "_AnimatedDescription-CIK7uqqc.js"
     ]
   },
   "resources/js/pages/work.tsx": {
-    "file": "assets/work-BtOptXkm.js",
+    "file": "assets/work-Dk1eUp2c.js",
     "name": "work",
     "src": "resources/js/pages/work.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-runtime-rw34JKwJ.js",
-      "_WorkController-BtdbjGOW.js",
-      "_createLucideIcon-ZSii_00f.js",
-      "_ImageWithLoader-KMRXB5fc.js"
+      "_jsx-runtime-5boyRdEN.js",
+      "resources/js/app.tsx",
+      "_ImageWithLoader-CffDbTen.js"
     ]
   }
 }
